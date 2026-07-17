@@ -1,0 +1,1355 @@
+{
+  "updatedAt": "2026-07-06T18:04:59.713Z",
+  "vatRate": 0.21,
+  "pipes": {
+    "staal": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.00587,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-26-9-mm",
+        "sku": "57448"
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.00822,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-33-7-mm",
+        "sku": "57449"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.010539999999999999,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-42-4-mm",
+        "sku": "57450"
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.01298,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-48-3-mm",
+        "sku": "57451"
+      }
+    },
+    "groen-outdoor": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.00587,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-26-9-mm",
+        "sku": "57448"
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.00822,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-33-7-mm",
+        "sku": "57449"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.010539999999999999,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-42-4-mm",
+        "sku": "57450"
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.01298,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-48-3-mm",
+        "sku": "57451"
+      }
+    },
+    "zwart-outdoor": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.00587,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-26-9-mm",
+        "sku": "57448"
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.00822,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-33-7-mm",
+        "sku": "57449"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.010539999999999999,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-42-4-mm",
+        "sku": "57450"
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.01298,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-48-3-mm",
+        "sku": "57451"
+      }
+    },
+    "zwart": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.00822,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-33-7-mm",
+        "sku": "57449"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.010539999999999999,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-42-4-mm",
+        "sku": "57450"
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.01298,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-48-3-mm",
+        "sku": "57451"
+      }
+    },
+    "wit": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.00822,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-33-7-mm",
+        "sku": "57449"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.010539999999999999,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-42-4-mm",
+        "sku": "57450"
+      }
+    },
+    "beige": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.00822,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-33-7-mm",
+        "sku": "57449"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.010539999999999999,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-42-4-mm",
+        "sku": "57450"
+      }
+    },
+    "aluminium": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.00822,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-33-7-mm",
+        "sku": "57449"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.010539999999999999,
+        "productUrl": "https://bouwbuis.nl/steigerbuis-42-4-mm",
+        "sku": "57450"
+      }
+    }
+  },
+  "fittings": {
+    "kniestuk-90": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "33.7": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "42.4": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "48.3": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "33.7": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "42.4": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "48.3": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.94,
+          "productUrl": "https://bouwbuis.nl/kniestuk-zwart-33-7-mm",
+          "sku": "57587"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.94,
+          "productUrl": "https://bouwbuis.nl/kniestuk-zwart-33-7-mm",
+          "sku": "57587"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.94,
+          "productUrl": "https://bouwbuis.nl/kniestuk-zwart-33-7-mm",
+          "sku": "57587"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.94,
+          "productUrl": "https://bouwbuis.nl/kniestuk-zwart-33-7-mm",
+          "sku": "57587"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 6.94,
+          "productUrl": "https://bouwbuis.nl/kniestuk-zwart-33-7-mm",
+          "sku": "57587"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.94,
+          "productUrl": "https://bouwbuis.nl/kniestuk-zwart-33-7-mm",
+          "sku": "57587"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.94,
+          "productUrl": "https://bouwbuis.nl/kniestuk-zwart-33-7-mm",
+          "sku": "57587"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.94,
+          "productUrl": "https://bouwbuis.nl/kniestuk-zwart-33-7-mm",
+          "sku": "57587"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "33.7": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "42.4": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "48.3": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "33.7": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "42.4": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "48.3": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "33.7": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "42.4": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        },
+        "48.3": {
+          "unitPriceExVat": 4.82,
+          "productUrl": "https://bouwbuis.nl/kniestuk-33-7-mm",
+          "sku": "57530"
+        }
+      }
+    },
+    "t-kort": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "48.3": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "48.3": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "48.3": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "48.3": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "48.3": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "48.3": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        },
+        "48.3": {
+          "unitPriceExVat": 3.95,
+          "productUrl": "https://bouwbuis.nl/kort-t-stuk-33-7-mm",
+          "sku": "57491"
+        }
+      }
+    },
+    "t-lang": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.52,
+          "productUrl": "https://bouwbuis.nl/lang-t-stuk-33-7-mm",
+          "sku": "57718"
+        }
+      }
+    },
+    "kruisstuk": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.74,
+          "productUrl": "https://bouwbuis.nl/kruisstuk-33-7-mm",
+          "sku": "57714"
+        }
+      }
+    },
+    "vierweg-kruisstuk": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "33.7": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "42.4": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "48.3": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "33.7": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "42.4": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "48.3": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "33.7": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "42.4": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "48.3": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "33.7": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "42.4": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "48.3": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "33.7": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "42.4": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        },
+        "48.3": {
+          "unitPriceExVat": 13.21,
+          "productUrl": "https://bouwbuis.nl/centraal-kruisstuk-33-7-mm",
+          "sku": "57716"
+        }
+      }
+    },
+    "3-weg-hoek": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.81,
+          "productUrl": "https://bouwbuis.nl/hoekstuk-doorlopende-staander-33-7-mm",
+          "sku": "57492"
+        }
+      }
+    },
+    "drieweg-kniestuk": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "33.7": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "42.4": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "48.3": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "33.7": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "42.4": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "48.3": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "33.7": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "42.4": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "48.3": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "33.7": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "42.4": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "48.3": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "33.7": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "42.4": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        },
+        "48.3": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://bouwbuis.nl/3-weg-hoekstuk-33-7-mm",
+          "sku": "57760"
+        }
+      }
+    },
+    "voetplaat-rond": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.86,
+          "productUrl": "https://bouwbuis.nl/ronde-wand-plafond-voetplaat-33-7-mm",
+          "sku": "57494"
+        }
+      }
+    },
+    "koppelstuk": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "33.7": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "42.4": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "48.3": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "33.7": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "42.4": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "48.3": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "33.7": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "42.4": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "48.3": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "33.7": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "42.4": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "48.3": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "33.7": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "42.4": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        },
+        "48.3": {
+          "unitPriceExVat": 4.69,
+          "productUrl": "https://bouwbuis.nl/recht-verbindingsstuk-uitwendig-33-7-mm",
+          "sku": "57735"
+        }
+      }
+    }
+  }
+}

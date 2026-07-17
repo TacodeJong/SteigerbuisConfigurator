@@ -1,0 +1,1021 @@
+{
+  "updatedAt": "2026-07-06T18:00:04.369Z",
+  "vatRate": 0.21,
+  "pipes": {
+    "staal": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.00428,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-26-9-mm/"
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.00592,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-33-7-mm/"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.0077599999999999995,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-42-4-mm/"
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.009779999999999999,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-48-3-mm/"
+      }
+    },
+    "groen-outdoor": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.00592,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-33-7-mm/"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.0077599999999999995,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-42-4-mm/"
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.009779999999999999,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-48-3-mm/"
+      }
+    },
+    "zwart-outdoor": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.00592,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-33-7-mm/"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.0077599999999999995,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-42-4-mm/"
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.009779999999999999,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-48-3-mm/"
+      }
+    },
+    "zwart": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.00855,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/zwart/steigerbuis-zwart-33-7-mm/"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.01119,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/zwart/steigerbuis-zwart-42-4-mm/"
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.01316,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/zwart/steigerbuis-zwart-48-3-mm/"
+      }
+    },
+    "wit": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.00592,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-33-7-mm/"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.0077599999999999995,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-42-4-mm/"
+      }
+    },
+    "beige": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.00592,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-33-7-mm/"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.0077599999999999995,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/staal/steigerbuis-staal-42-4-mm/"
+      }
+    },
+    "aluminium": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.00852,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/aluminium/aluminium-steigerbuis-33-7-mm/"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.00622,
+        "productUrl": "https://buiskoppelen.nl/steigerbuizen/aluminium/aluminium-steigerbuis-42-4-mm/"
+      }
+    }
+  },
+  "fittings": {
+    "kniestuk-90": {
+      "staal": {
+        "42.4": {
+          "unitPriceExVat": 16,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-ral-gecoat-42-4-mm/",
+          "sku": "AN7915-C-RAL"
+        },
+        "48.3": {
+          "unitPriceExVat": 15.25,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-wit-48-3-mm/",
+          "sku": "AN7916-C-9016"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 10.32,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-graden-zwart-gecoat-26-9-mm/",
+          "sku": "AN8016-C-9005O"
+        },
+        "33.7": {
+          "unitPriceExVat": 11.62,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-zwart-gecoat-33-7-mm/",
+          "sku": "AN7917-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 14.58,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-graden-zwart-gecoat-42-4-mm/",
+          "sku": "AN7915-C-9005O"
+        },
+        "48.3": {
+          "unitPriceExVat": 15.25,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-wit-48-3-mm/",
+          "sku": "AN7916-C-9016"
+        }
+      },
+      "zwart-outdoor": {
+        "48.3": {
+          "unitPriceExVat": 16.5,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7916-C-9005O"
+        }
+      },
+      "zwart": {
+        "48.3": {
+          "unitPriceExVat": 16.5,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7916-C-9005O"
+        }
+      },
+      "wit": {
+        "42.4": {
+          "unitPriceExVat": 16,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-ral-gecoat-42-4-mm/",
+          "sku": "AN7915-C-RAL"
+        },
+        "48.3": {
+          "unitPriceExVat": 15.25,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-wit-48-3-mm/",
+          "sku": "AN7916-C-9016"
+        }
+      },
+      "beige": {
+        "42.4": {
+          "unitPriceExVat": 16,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-ral-gecoat-42-4-mm/",
+          "sku": "AN7915-C-RAL"
+        },
+        "48.3": {
+          "unitPriceExVat": 15.25,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-wit-48-3-mm/",
+          "sku": "AN7916-C-9016"
+        }
+      },
+      "aluminium": {
+        "42.4": {
+          "unitPriceExVat": 16,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-ral-gecoat-42-4-mm/",
+          "sku": "AN7915-C-RAL"
+        },
+        "48.3": {
+          "unitPriceExVat": 15.25,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kniestuk-90-wit-48-3-mm/",
+          "sku": "AN7916-C-9016"
+        }
+      }
+    },
+    "t-kort": {
+      "staal": {
+        "42.4": {
+          "unitPriceExVat": 16.71,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-t-stuk-met-zij-uitgang-wit-42-4-mm/",
+          "sku": "AN8006-C-9016"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 11.34,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-t-stuk-met-zij-uitgang-zwart-gecoat-26-9-mm/",
+          "sku": "AN8009-C-9005O"
+        },
+        "33.7": {
+          "unitPriceExVat": 14.04,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-t-stuk-met-zij-uitgang-zwart-gecoat-33-7-mm/",
+          "sku": "AN8008-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 17.82,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-t-stuk-met-zij-uitgang-zwart-gecoat-42-4-mm/",
+          "sku": "AN8006-C-9005O"
+        }
+      },
+      "zwart-outdoor": {
+        "48.3": {
+          "unitPriceExVat": 19.62,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-t-stuk-met-zij-uitgang-zwart-buitencoating-48-3-mm/",
+          "sku": "AN8007-C-9005O"
+        }
+      },
+      "zwart": {
+        "48.3": {
+          "unitPriceExVat": 19.62,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-t-stuk-met-zij-uitgang-zwart-buitencoating-48-3-mm/",
+          "sku": "AN8007-C-9005O"
+        }
+      },
+      "wit": {
+        "42.4": {
+          "unitPriceExVat": 16.71,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-t-stuk-met-zij-uitgang-wit-42-4-mm/",
+          "sku": "AN8006-C-9016"
+        }
+      },
+      "beige": {
+        "42.4": {
+          "unitPriceExVat": 16.71,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-t-stuk-met-zij-uitgang-wit-42-4-mm/",
+          "sku": "AN8006-C-9016"
+        }
+      },
+      "aluminium": {
+        "42.4": {
+          "unitPriceExVat": 16.71,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-t-stuk-met-zij-uitgang-wit-42-4-mm/",
+          "sku": "AN8006-C-9016"
+        }
+      }
+    },
+    "t-lang": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 10.48,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-wit-26-9-mm/",
+          "sku": "AN7914-C-9016"
+        },
+        "42.4": {
+          "unitPriceExVat": 15.55,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-wit-42-4-mm/",
+          "sku": "AN7911-C-9016"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 10.48,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-wit-26-9-mm/",
+          "sku": "AN7914-C-9016"
+        },
+        "33.7": {
+          "unitPriceExVat": 12.84,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-zwart-gecoat-33-7-mm/",
+          "sku": "AN7913-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 16.66,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-zwart-gecoat-42-4-mm/",
+          "sku": "AN7911-C-9005O"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 11.38,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-zwart-buitencoating-26-9-mm/",
+          "sku": "AN7914-C-9005O"
+        },
+        "48.3": {
+          "unitPriceExVat": 19.16,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7912-C-9005O"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 11.38,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-zwart-buitencoating-26-9-mm/",
+          "sku": "AN7914-C-9005O"
+        },
+        "48.3": {
+          "unitPriceExVat": 19.16,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7912-C-9005O"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 10.48,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-wit-26-9-mm/",
+          "sku": "AN7914-C-9016"
+        },
+        "42.4": {
+          "unitPriceExVat": 15.55,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-wit-42-4-mm/",
+          "sku": "AN7911-C-9016"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 10.48,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-wit-26-9-mm/",
+          "sku": "AN7914-C-9016"
+        },
+        "42.4": {
+          "unitPriceExVat": 15.55,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-wit-42-4-mm/",
+          "sku": "AN7911-C-9016"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 10.48,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-wit-26-9-mm/",
+          "sku": "AN7914-C-9016"
+        },
+        "42.4": {
+          "unitPriceExVat": 15.55,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-lang-t-stuk-wit-42-4-mm/",
+          "sku": "AN7911-C-9016"
+        }
+      }
+    },
+    "3-weg-hoek": {
+      "staal": {
+        "42.4": {
+          "unitPriceExVat": 14.88,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-verstelbaar-hoekstuk-ral-kleur-gecoat-42-4-mm/",
+          "sku": "AN7949-C-RAL"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 10.46,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-hoekstuk-doorlopende-staander-zwart-gecoat-26-9-mm/",
+          "sku": "AN7948-C-9005O"
+        },
+        "33.7": {
+          "unitPriceExVat": 13.04,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-hoekstuk-doorlopende-staander-zwart-gecoat-33-7-mm/",
+          "sku": "AN5214-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 15.28,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-hoekstuk-doorlopende-staander-zwart-gecoat-42-4-mm/",
+          "sku": "AN7945-C-9005O"
+        }
+      },
+      "zwart-outdoor": {
+        "48.3": {
+          "unitPriceExVat": 17.68,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-hoekstuk-doorlopende-staander-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7946-C-9005O"
+        }
+      },
+      "zwart": {
+        "48.3": {
+          "unitPriceExVat": 17.68,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-hoekstuk-doorlopende-staander-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7946-C-9005O"
+        }
+      },
+      "wit": {
+        "42.4": {
+          "unitPriceExVat": 14.88,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-verstelbaar-hoekstuk-ral-kleur-gecoat-42-4-mm/",
+          "sku": "AN7949-C-RAL"
+        }
+      },
+      "beige": {
+        "42.4": {
+          "unitPriceExVat": 14.88,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-verstelbaar-hoekstuk-ral-kleur-gecoat-42-4-mm/",
+          "sku": "AN7949-C-RAL"
+        }
+      },
+      "aluminium": {
+        "42.4": {
+          "unitPriceExVat": 14.88,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-verstelbaar-hoekstuk-ral-kleur-gecoat-42-4-mm/",
+          "sku": "AN7949-C-RAL"
+        }
+      }
+    },
+    "drieweg-kniestuk": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 8.2,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-vintage-brown-26-9-mm/",
+          "sku": "AN10511"
+        },
+        "33.7": {
+          "unitPriceExVat": 7.62,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-vintage-brown-33-7-mm/",
+          "sku": "AN10512"
+        },
+        "42.4": {
+          "unitPriceExVat": 18.14,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-ral-kleur-gecoat-42-4-mm/",
+          "sku": "AN7941-C-RAL"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 11.64,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-zwart-gecoat-26-9-mm/",
+          "sku": "AN7944-C-9005O"
+        },
+        "33.7": {
+          "unitPriceExVat": 13.04,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-zwart-gecoat-33-7-mm/",
+          "sku": "AN7943-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 16.72,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-zwart-gecoat-42-4-mm/",
+          "sku": "AN7941-C-9005O"
+        }
+      },
+      "zwart-outdoor": {
+        "48.3": {
+          "unitPriceExVat": 19.42,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7942-C-9005O"
+        }
+      },
+      "zwart": {
+        "48.3": {
+          "unitPriceExVat": 19.42,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7942-C-9005O"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 8.2,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-vintage-brown-26-9-mm/",
+          "sku": "AN10511"
+        },
+        "33.7": {
+          "unitPriceExVat": 7.62,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-vintage-brown-33-7-mm/",
+          "sku": "AN10512"
+        },
+        "42.4": {
+          "unitPriceExVat": 18.14,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-ral-kleur-gecoat-42-4-mm/",
+          "sku": "AN7941-C-RAL"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 8.2,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-vintage-brown-26-9-mm/",
+          "sku": "AN10511"
+        },
+        "33.7": {
+          "unitPriceExVat": 7.62,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-vintage-brown-33-7-mm/",
+          "sku": "AN10512"
+        },
+        "42.4": {
+          "unitPriceExVat": 18.14,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-ral-kleur-gecoat-42-4-mm/",
+          "sku": "AN7941-C-RAL"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 8.2,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-vintage-brown-26-9-mm/",
+          "sku": "AN10511"
+        },
+        "33.7": {
+          "unitPriceExVat": 7.62,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-vintage-brown-33-7-mm/",
+          "sku": "AN10512"
+        },
+        "42.4": {
+          "unitPriceExVat": 18.14,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-drieweg-kniestuk-ral-kleur-gecoat-42-4-mm/",
+          "sku": "AN7941-C-RAL"
+        }
+      }
+    },
+    "voetplaat-rond": {
+      "staal": {
+        "42.4": {
+          "unitPriceExVat": 16.2,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-met-doorloop-ral-gecoat-42-4-mm/",
+          "sku": "AN10280-C-RAL"
+        },
+        "48.3": {
+          "unitPriceExVat": 16.47,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-wit-48-3-mm/",
+          "sku": "AN9405-C-9016"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 9.82,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-met-doorloop-zwart-gecoat-26-9-mm/",
+          "sku": "AN9413-C-9005O"
+        },
+        "33.7": {
+          "unitPriceExVat": 11.74,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-met-doorloop-zwart-gecoat-33-7-mm/",
+          "sku": "AN9416-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 14.78,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-met-doorloop-zwart-gecoat-42-4-mm/",
+          "sku": "AN10280-C-9005O"
+        },
+        "48.3": {
+          "unitPriceExVat": 16.47,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-wit-48-3-mm/",
+          "sku": "AN9405-C-9016"
+        }
+      },
+      "zwart-outdoor": {
+        "48.3": {
+          "unitPriceExVat": 17.72,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-zwart-buitencoating-48-3-mm/",
+          "sku": "AN9405-C-9005O"
+        }
+      },
+      "zwart": {
+        "48.3": {
+          "unitPriceExVat": 17.72,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-zwart-buitencoating-48-3-mm/",
+          "sku": "AN9405-C-9005O"
+        }
+      },
+      "wit": {
+        "42.4": {
+          "unitPriceExVat": 16.2,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-met-doorloop-ral-gecoat-42-4-mm/",
+          "sku": "AN10280-C-RAL"
+        },
+        "48.3": {
+          "unitPriceExVat": 16.47,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-wit-48-3-mm/",
+          "sku": "AN9405-C-9016"
+        }
+      },
+      "beige": {
+        "42.4": {
+          "unitPriceExVat": 16.2,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-met-doorloop-ral-gecoat-42-4-mm/",
+          "sku": "AN10280-C-RAL"
+        },
+        "48.3": {
+          "unitPriceExVat": 16.47,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-wit-48-3-mm/",
+          "sku": "AN9405-C-9016"
+        }
+      },
+      "aluminium": {
+        "42.4": {
+          "unitPriceExVat": 14.78,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-met-doorloop-zwart-gecoat-42-4-mm/",
+          "sku": "AN10280-C-9005O"
+        },
+        "48.3": {
+          "unitPriceExVat": 16.47,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-rond-wit-48-3-mm/",
+          "sku": "AN9405-C-9016"
+        }
+      }
+    },
+    "kruisstuk": {
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 10.5,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kruisstuk-in-1-vlak-zwart-gecoat-26-9-mm/",
+          "sku": "AN8013-C-9005O"
+        },
+        "33.7": {
+          "unitPriceExVat": 12.84,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kruisstuk-in-1-vlak-zwart-gecoat-33-7-mm/",
+          "sku": "AN8012-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 16.2,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kruisstuk-in-1-vlak-zwart-gecoat-42-4-mm/",
+          "sku": "AN8010-C-9005O"
+        }
+      },
+      "zwart-outdoor": {
+        "48.3": {
+          "unitPriceExVat": 17.72,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kruisstuk-in-1-vlak-zwart-buitencoating-48-3-mm/",
+          "sku": "AN8011-C-9005O"
+        }
+      },
+      "zwart": {
+        "48.3": {
+          "unitPriceExVat": 17.72,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-kruisstuk-in-1-vlak-zwart-buitencoating-48-3-mm/",
+          "sku": "AN8011-C-9005O"
+        }
+      }
+    },
+    "koppelstuk": {
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 10.6,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-koppelstuk-zwart-gecoat-26-9-mm/",
+          "sku": "AN7924-C-9005O"
+        },
+        "33.7": {
+          "unitPriceExVat": 12.36,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-koppelstuk-zwart-gecoat-33-7-mm/",
+          "sku": "AN7923-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 14.06,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-koppelstuk-zwart-gecoat-42-4-mm/",
+          "sku": "AN7921-C-9005O"
+        }
+      },
+      "zwart-outdoor": {
+        "48.3": {
+          "unitPriceExVat": 15.34,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-koppelstuk-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7922-C-9005O"
+        }
+      },
+      "zwart": {
+        "48.3": {
+          "unitPriceExVat": 15.34,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-koppelstuk-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7922-C-9005O"
+        }
+      },
+      "aluminium": {
+        "48.3": {
+          "unitPriceExVat": 15.34,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-koppelstuk-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7922-C-9005O"
+        }
+      }
+    },
+    "vierweg-kruisstuk": {
+      "zwart-outdoor": {
+        "42.4": {
+          "unitPriceExVat": 20.72,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-4-weg-kruisstuk-zwart-424-mm/",
+          "sku": "AN9527"
+        },
+        "48.3": {
+          "unitPriceExVat": 22.07,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-4-weg-kruisstuk-zwart-483-mm/",
+          "sku": "AN9528"
+        }
+      },
+      "zwart": {
+        "42.4": {
+          "unitPriceExVat": 20.72,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-4-weg-kruisstuk-zwart-424-mm/",
+          "sku": "AN9527"
+        },
+        "48.3": {
+          "unitPriceExVat": 22.07,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-4-weg-kruisstuk-zwart-483-mm/",
+          "sku": "AN9528"
+        }
+      }
+    },
+    "afdekdop": {
+      "staal": {
+        "33.7": {
+          "unitPriceExVat": 3.89,
+          "productUrl": "https://buiskoppelen.nl/steigerbuis-inslagdop-metaal-vintage-brown-33-7-mm/",
+          "sku": "AN10560"
+        }
+      },
+      "groen-outdoor": {
+        "33.7": {
+          "unitPriceExVat": 3.89,
+          "productUrl": "https://buiskoppelen.nl/steigerbuis-inslagdop-metaal-vintage-brown-33-7-mm/",
+          "sku": "AN10560"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.53,
+          "productUrl": "https://buiskoppelen.nl/inslagdop-metaal-zwart-26-9-mm/",
+          "sku": "AN9828"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.58,
+          "productUrl": "https://buiskoppelen.nl/inslagdop-metaal-zwart-337-mm/",
+          "sku": "AN9720"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.98,
+          "productUrl": "https://buiskoppelen.nl/inslagdop-metaal-42-4-mm-zwart/",
+          "sku": "AN9830"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.11,
+          "productUrl": "https://buiskoppelen.nl/inslagdop-metaal-zwart-483-mm/",
+          "sku": "AN9831"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 3.53,
+          "productUrl": "https://buiskoppelen.nl/inslagdop-metaal-zwart-26-9-mm/",
+          "sku": "AN9828"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.58,
+          "productUrl": "https://buiskoppelen.nl/inslagdop-metaal-zwart-337-mm/",
+          "sku": "AN9720"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.98,
+          "productUrl": "https://buiskoppelen.nl/inslagdop-metaal-42-4-mm-zwart/",
+          "sku": "AN9830"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.11,
+          "productUrl": "https://buiskoppelen.nl/inslagdop-metaal-zwart-483-mm/",
+          "sku": "AN9831"
+        }
+      },
+      "wit": {
+        "33.7": {
+          "unitPriceExVat": 3.89,
+          "productUrl": "https://buiskoppelen.nl/steigerbuis-inslagdop-metaal-vintage-brown-33-7-mm/",
+          "sku": "AN10560"
+        }
+      },
+      "beige": {
+        "33.7": {
+          "unitPriceExVat": 3.89,
+          "productUrl": "https://buiskoppelen.nl/steigerbuis-inslagdop-metaal-vintage-brown-33-7-mm/",
+          "sku": "AN10560"
+        }
+      },
+      "aluminium": {
+        "33.7": {
+          "unitPriceExVat": 3.89,
+          "productUrl": "https://buiskoppelen.nl/steigerbuis-inslagdop-metaal-vintage-brown-33-7-mm/",
+          "sku": "AN10560"
+        }
+      }
+    },
+    "scharnierhuls": {
+      "staal": {
+        "42.4": {
+          "unitPriceExVat": 5.43,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-huls-t-b-v-scharnierstuk-424-mm/",
+          "sku": "AN9790"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.12,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-huls-t-b-v-scharnierstuk-483-mm/",
+          "sku": "AN9791"
+        }
+      },
+      "groen-outdoor": {
+        "42.4": {
+          "unitPriceExVat": 5.43,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-huls-t-b-v-scharnierstuk-424-mm/",
+          "sku": "AN9790"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.12,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-huls-t-b-v-scharnierstuk-483-mm/",
+          "sku": "AN9791"
+        }
+      },
+      "wit": {
+        "42.4": {
+          "unitPriceExVat": 5.43,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-huls-t-b-v-scharnierstuk-424-mm/",
+          "sku": "AN9790"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.12,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-huls-t-b-v-scharnierstuk-483-mm/",
+          "sku": "AN9791"
+        }
+      },
+      "beige": {
+        "42.4": {
+          "unitPriceExVat": 5.43,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-huls-t-b-v-scharnierstuk-424-mm/",
+          "sku": "AN9790"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.12,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-huls-t-b-v-scharnierstuk-483-mm/",
+          "sku": "AN9791"
+        }
+      }
+    },
+    "dubbelscharnier-recht": {
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 10.9,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-dubbele-lip-zwart-gecoat-26-9-mm/",
+          "sku": "AN9616-C-9005O"
+        },
+        "33.7": {
+          "unitPriceExVat": 11.62,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-dubbele-lip-zwart-gecoat-33-7-mm/",
+          "sku": "AN9037-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 14.52,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-dubbele-lip-zwart-gecoat-42-4-mm/",
+          "sku": "AN9620-C-9005O"
+        }
+      },
+      "zwart-outdoor": {
+        "48.3": {
+          "unitPriceExVat": 15.58,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-dubbele-lip-zwart-buitencoating-48-3-mm/",
+          "sku": "AN9622-C-9005O"
+        }
+      },
+      "zwart": {
+        "48.3": {
+          "unitPriceExVat": 15.58,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-dubbele-lip-zwart-buitencoating-48-3-mm/",
+          "sku": "AN9622-C-9005O"
+        }
+      },
+      "aluminium": {
+        "48.3": {
+          "unitPriceExVat": 15.58,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-dubbele-lip-zwart-buitencoating-48-3-mm/",
+          "sku": "AN9622-C-9005O"
+        }
+      }
+    },
+    "scharnieroog": {
+      "staal": {
+        "42.4": {
+          "unitPriceExVat": 14,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-dubbel-ral-kleur-gecoat-42-4-mm/",
+          "sku": "AN9579-C-RAL"
+        },
+        "48.3": {
+          "unitPriceExVat": 12.43,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-wit-48-3-mm/",
+          "sku": "AN7984-C-9016"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 9.78,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-dubbel-zwart-gecoat-26-9-mm/",
+          "sku": "AN9575-C-9005O"
+        },
+        "33.7": {
+          "unitPriceExVat": 11.2,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-dubbel-zwart-gecoat-33-7-mm/",
+          "sku": "AN9577-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 12.58,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-dubbel-zwart-gecoat-42-4-mm/",
+          "sku": "AN9579-C-9005O"
+        },
+        "48.3": {
+          "unitPriceExVat": 12.43,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-wit-48-3-mm/",
+          "sku": "AN7984-C-9016"
+        }
+      },
+      "zwart-outdoor": {
+        "48.3": {
+          "unitPriceExVat": 13.5,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-dubbel-zwart-buitencoating-48-3-mm/",
+          "sku": "AN9581-C-9005O"
+        }
+      },
+      "zwart": {
+        "48.3": {
+          "unitPriceExVat": 13.5,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-dubbel-zwart-buitencoating-48-3-mm/",
+          "sku": "AN9581-C-9005O"
+        }
+      },
+      "wit": {
+        "42.4": {
+          "unitPriceExVat": 14,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-dubbel-ral-kleur-gecoat-42-4-mm/",
+          "sku": "AN9579-C-RAL"
+        },
+        "48.3": {
+          "unitPriceExVat": 12.43,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-wit-48-3-mm/",
+          "sku": "AN7984-C-9016"
+        }
+      },
+      "beige": {
+        "42.4": {
+          "unitPriceExVat": 14,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-dubbel-ral-kleur-gecoat-42-4-mm/",
+          "sku": "AN9579-C-RAL"
+        },
+        "48.3": {
+          "unitPriceExVat": 12.43,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-wit-48-3-mm/",
+          "sku": "AN7984-C-9016"
+        }
+      },
+      "aluminium": {
+        "42.4": {
+          "unitPriceExVat": 12.58,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-dubbel-zwart-gecoat-42-4-mm/",
+          "sku": "AN9579-C-9005O"
+        },
+        "48.3": {
+          "unitPriceExVat": 12.43,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-oogdeel-scharnierstuk-wit-48-3-mm/",
+          "sku": "AN7984-C-9016"
+        }
+      }
+    },
+    "voetplaat-vierkant": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 12.28,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-wit-26-9-mm/",
+          "sku": "AN7935-C-9016"
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 13.18,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-zwart-gecoat-26-9-mm/",
+          "sku": "AN7935-C-9005O"
+        },
+        "33.7": {
+          "unitPriceExVat": 15.96,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-zwart-gecoat-33-7-mm/",
+          "sku": "AN7934-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 19.3,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-zwart-gecoat-42-4-mm/",
+          "sku": "AN7932-C-9005O"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 13.18,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-zwart-gecoat-26-9-mm/",
+          "sku": "AN7935-C-9005O"
+        },
+        "33.7": {
+          "unitPriceExVat": 15.96,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-zwart-gecoat-33-7-mm/",
+          "sku": "AN7934-C-9005O"
+        },
+        "42.4": {
+          "unitPriceExVat": 19.3,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-zwart-gecoat-42-4-mm/",
+          "sku": "AN7932-C-9005O"
+        },
+        "48.3": {
+          "unitPriceExVat": 21.4,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7933-C-9005O"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 12.28,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-wit-26-9-mm/",
+          "sku": "AN7935-C-9016"
+        },
+        "48.3": {
+          "unitPriceExVat": 21.4,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-zwart-buitencoating-48-3-mm/",
+          "sku": "AN7933-C-9005O"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 12.28,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-wit-26-9-mm/",
+          "sku": "AN7935-C-9016"
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 12.28,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-wit-26-9-mm/",
+          "sku": "AN7935-C-9016"
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 12.28,
+          "productUrl": "https://buiskoppelen.nl/buiskoppeling-voetplaat-ovaal-wit-26-9-mm/",
+          "sku": "AN7935-C-9016"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,790 @@
+{
+  "updatedAt": "2026-07-06T17:59:25.138Z",
+  "vatRate": 0.21,
+  "pipes": {
+    "groen-outdoor": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.01193,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/stalen-buis-outdoor-zwart-33-7-x-3-25-mm-1",
+        "sku": "Outgr33mat"
+      }
+    },
+    "zwart-outdoor": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.01193,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/stalen-buis-outdoor-zwart-33-7-x-3-25-mm",
+        "sku": "Outbl33mat"
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.01776,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/stalen-buis-outdoor-zwart-48-3-x-3-25-mm",
+        "sku": "Outbl48mat"
+      }
+    },
+    "staal": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.00483,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/steigerbuis-staal-o-26-9-mm-zinkkleurig-zijdeglans-max-6-meter",
+        "sku": "B-075-235"
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.0069,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/steigerbuis-staal-o-33-7-mm-zinkkleurig-zijdeglans-max-6-meter",
+        "sku": "B-100-265"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.00906,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/steigerbuis-staal-o-42-4-mm-zinkkleurig-zijdeglans-max-6-meter",
+        "sku": "B-125-265"
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.01081,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/steigerbuis-staal-o-48-3-mm-zinkkleurig-zijdeglans-max-6-meter",
+        "sku": "B-150-320"
+      }
+    },
+    "zwart": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.00943,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/steigerbuis-zwart-o-33-7-mm-mat-max-3-meter",
+        "sku": "BL33Mat"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.0115,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/steigerbuis-zwart-o-42-4-mm-mat-max-3-meter",
+        "sku": "BL42Mat"
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.01375,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/steigerbuis-zwart-o-48-3-mm-mat-max-3-meter",
+        "sku": "BL48Mat"
+      }
+    },
+    "wit": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.01232,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/steigerbuis-wit-o-33-7-mm-mat-max-3-meter",
+        "sku": "WH33-Mat"
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.01375,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/steigerbuis-wit-o-42-4-mm-mat-max-3-meter",
+        "sku": "WH42-Mat"
+      }
+    },
+    "beige": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.01232,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/steigerbuis-wit-o-33-7-mm-mat-max-3-meter-1",
+        "sku": "BE33"
+      }
+    },
+    "aluminium": {
+      "33.7": {
+        "unitPricePerMmExVat": 0.01235,
+        "productUrl": "https://www.steigerbuisgroothandel.nl/alum-buis-outdoor-zwart-33-x-3-mm",
+        "sku": "Outalu33mat"
+      }
+    }
+  },
+  "fittings": {
+    "kniestuk-90": {
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.69,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kniestuk-outdoor-groen-33-7-mm",
+          "sku": "outgr125-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.69,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kniestuk-outdoor-groen-33-7-mm",
+          "sku": "outgr125-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.69,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kniestuk-outdoor-groen-33-7-mm",
+          "sku": "outgr125-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.69,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kniestuk-outdoor-groen-33-7-mm",
+          "sku": "outgr125-B34"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.69,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kniestuk-outdoor-zwart",
+          "sku": "Outbl125-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.69,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kniestuk-outdoor-zwart",
+          "sku": "Outbl125-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.69,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kniestuk-outdoor-zwart",
+          "sku": "Outbl125-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.69,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kniestuk-outdoor-zwart",
+          "sku": "Outbl125-B34"
+        }
+      },
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 3.48,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-zink",
+          "sku": "T-125B"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.48,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-zink",
+          "sku": "T-125B"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.48,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-zink",
+          "sku": "T-125B"
+        },
+        "48.3": {
+          "unitPriceExVat": 3.48,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-zink",
+          "sku": "T-125B"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 4.2,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-zwart-gelakt",
+          "sku": "BL125-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 4.2,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-zwart-gelakt",
+          "sku": "BL125-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 4.2,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-zwart-gelakt",
+          "sku": "BL125-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 4.2,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-zwart-gelakt",
+          "sku": "BL125-B34"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 6.11,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH125-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.11,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH125-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.11,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH125-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.11,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH125-B34"
+        }
+      }
+    },
+    "t-kort": {
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 5.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kort-t-stuk-outdoor-groen-33-7-mm-h",
+          "sku": "outgr101-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kort-t-stuk-outdoor-groen-33-7-mm-h",
+          "sku": "outgr101-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kort-t-stuk-outdoor-groen-33-7-mm-h",
+          "sku": "outgr101-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kort-t-stuk-outdoor-groen-33-7-mm-h",
+          "sku": "outgr101-B34"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 5.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kort-t-stuk-outdoor-zwart",
+          "sku": "Outbl101-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kort-t-stuk-outdoor-zwart",
+          "sku": "Outbl101-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kort-t-stuk-outdoor-zwart",
+          "sku": "Outbl101-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kort-t-stuk-outdoor-zwart",
+          "sku": "Outbl101-B34"
+        }
+      },
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 2.5,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-zink",
+          "sku": "T-101B"
+        },
+        "33.7": {
+          "unitPriceExVat": 2.5,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-zink",
+          "sku": "T-101B"
+        },
+        "42.4": {
+          "unitPriceExVat": 2.5,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-zink",
+          "sku": "T-101B"
+        },
+        "48.3": {
+          "unitPriceExVat": 2.5,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-zink",
+          "sku": "T-101B"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 3.5,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-zwart-gelakt",
+          "sku": "BL101-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.5,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-zwart-gelakt",
+          "sku": "BL101-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.5,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-zwart-gelakt",
+          "sku": "BL101-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 3.5,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-zwart-gelakt",
+          "sku": "BL101-B34"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH101-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH101-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH101-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kort-t-stuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH101-B34"
+        }
+      }
+    },
+    "t-lang": {
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 8.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/lang-t-stuk-outdoor-groen-33-7-mm",
+          "sku": "outgr104-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 8.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/lang-t-stuk-outdoor-groen-33-7-mm",
+          "sku": "outgr104-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 8.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/lang-t-stuk-outdoor-groen-33-7-mm",
+          "sku": "outgr104-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 8.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/lang-t-stuk-outdoor-groen-33-7-mm",
+          "sku": "outgr104-B34"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 8.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/lang-t-stuk-outdoor-zwart",
+          "sku": "Outbl104-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 8.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/lang-t-stuk-outdoor-zwart",
+          "sku": "Outbl104-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 8.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/lang-t-stuk-outdoor-zwart",
+          "sku": "Outbl104-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 8.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/lang-t-stuk-outdoor-zwart",
+          "sku": "Outbl104-B34"
+        }
+      },
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 3.86,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-zink",
+          "sku": "T-104B"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.86,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-zink",
+          "sku": "T-104B"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.86,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-zink",
+          "sku": "T-104B"
+        },
+        "48.3": {
+          "unitPriceExVat": 3.86,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-zink",
+          "sku": "T-104B"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 5.31,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-zwart-gelakt",
+          "sku": "BL104-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.31,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-zwart-gelakt",
+          "sku": "BL104-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.31,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-zwart-gelakt",
+          "sku": "BL104-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.31,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-zwart-gelakt",
+          "sku": "BL104-B34"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 7.74,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH104-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 7.74,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH104-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 7.74,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH104-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 7.74,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-lang-t-stuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH104-B34"
+        }
+      }
+    },
+    "kruisstuk": {
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 7.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-outdoor-groen-33-7-mm",
+          "sku": "outgr119-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 7.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-outdoor-groen-33-7-mm",
+          "sku": "outgr119-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 7.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-outdoor-groen-33-7-mm",
+          "sku": "outgr119-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 7.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-outdoor-groen-33-7-mm",
+          "sku": "outgr119-B34"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 7.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-outdoor-zwart",
+          "sku": "Outbl119-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 7.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-outdoor-zwart",
+          "sku": "Outbl119-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 7.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-outdoor-zwart",
+          "sku": "Outbl119-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 7.99,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-outdoor-zwart",
+          "sku": "Outbl119-B34"
+        }
+      },
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 16.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-zink",
+          "sku": "T-130B"
+        },
+        "33.7": {
+          "unitPriceExVat": 16.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-zink",
+          "sku": "T-130B"
+        },
+        "42.4": {
+          "unitPriceExVat": 16.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-zink",
+          "sku": "T-130B"
+        },
+        "48.3": {
+          "unitPriceExVat": 16.35,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-zink",
+          "sku": "T-130B"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 3.83,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-zwart-gelakt",
+          "sku": "BL161-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 3.83,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-zwart-gelakt",
+          "sku": "BL161-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 3.83,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-zwart-gelakt",
+          "sku": "BL161-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 3.83,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-zwart-gelakt",
+          "sku": "BL161-B34"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 7.21,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH119-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 7.21,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH119-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 7.21,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH119-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 7.21,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kruisstuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH119-B34"
+        }
+      }
+    },
+    "vierweg-kruisstuk": {
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-90-grad-outdoor-groen-33-7-mm",
+          "sku": "outgr161-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-90-grad-outdoor-groen-33-7-mm",
+          "sku": "outgr161-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-90-grad-outdoor-groen-33-7-mm",
+          "sku": "outgr161-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-90-grad-outdoor-groen-33-7-mm",
+          "sku": "outgr161-B34"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-90-grad-outdoor-zwart",
+          "sku": "Outbl161-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-90-grad-outdoor-zwart",
+          "sku": "Outbl161-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-90-grad-outdoor-zwart",
+          "sku": "Outbl161-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/kruisstuk-90-grad-outdoor-zwart",
+          "sku": "Outbl161-B34"
+        }
+      }
+    },
+    "3-weg-hoek": {
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 8.39,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/hoekstuk-doorl-st-outdoor-groen-33-7-mm",
+          "sku": "outgr116-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 8.39,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/hoekstuk-doorl-st-outdoor-groen-33-7-mm",
+          "sku": "outgr116-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 8.39,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/hoekstuk-doorl-st-outdoor-groen-33-7-mm",
+          "sku": "outgr116-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 8.39,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/hoekstuk-doorl-st-outdoor-groen-33-7-mm",
+          "sku": "outgr116-B34"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 8.39,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/hoekstuk-doorl-st-outdoor-zwart",
+          "sku": "Outbl116-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 8.39,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/hoekstuk-doorl-st-outdoor-zwart",
+          "sku": "Outbl116-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 8.39,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/hoekstuk-doorl-st-outdoor-zwart",
+          "sku": "Outbl116-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 8.39,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/hoekstuk-doorl-st-outdoor-zwart",
+          "sku": "Outbl116-B34"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 7.79,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-hoekstuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH116-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 7.79,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-hoekstuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH116-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 7.79,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-hoekstuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH116-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 7.79,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-hoekstuk-33-7-mm-wit-gelakt-staal",
+          "sku": "WH116-B34"
+        }
+      }
+    },
+    "drieweg-kniestuk": {
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 9.57,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/3-weg-kniestuk-outdoor-groen-33-7-mm",
+          "sku": "outgr128-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 9.57,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/3-weg-kniestuk-outdoor-groen-33-7-mm",
+          "sku": "outgr128-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 9.57,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/3-weg-kniestuk-outdoor-groen-33-7-mm",
+          "sku": "outgr128-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 9.57,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/3-weg-kniestuk-outdoor-groen-33-7-mm",
+          "sku": "outgr128-B34"
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 9.57,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/3-weg-kniestuk-outdoor-zwart",
+          "sku": "Outbl128-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 9.57,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/3-weg-kniestuk-outdoor-zwart",
+          "sku": "Outbl128-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 9.57,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/3-weg-kniestuk-outdoor-zwart",
+          "sku": "Outbl128-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 9.57,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/3-weg-kniestuk-outdoor-zwart",
+          "sku": "Outbl128-B34"
+        }
+      },
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 5.16,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-drieweg-kniestuk-33-7-mm-zink",
+          "sku": "T-128B"
+        },
+        "33.7": {
+          "unitPriceExVat": 5.16,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-drieweg-kniestuk-33-7-mm-zink",
+          "sku": "T-128B"
+        },
+        "42.4": {
+          "unitPriceExVat": 5.16,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-drieweg-kniestuk-33-7-mm-zink",
+          "sku": "T-128B"
+        },
+        "48.3": {
+          "unitPriceExVat": 5.16,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-drieweg-kniestuk-33-7-mm-zink",
+          "sku": "T-128B"
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 6.23,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-3-weg-33-7-mm-zwart-gelakt",
+          "sku": "BL128-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 6.23,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-3-weg-33-7-mm-zwart-gelakt",
+          "sku": "BL128-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 6.23,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-3-weg-33-7-mm-zwart-gelakt",
+          "sku": "BL128-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 6.23,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-3-weg-33-7-mm-zwart-gelakt",
+          "sku": "BL128-B34"
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 9.52,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-3-weg-33-7-mm-wit-gelakt-staal",
+          "sku": "WH128-B34"
+        },
+        "33.7": {
+          "unitPriceExVat": 9.52,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-3-weg-33-7-mm-wit-gelakt-staal",
+          "sku": "WH128-B34"
+        },
+        "42.4": {
+          "unitPriceExVat": 9.52,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-3-weg-33-7-mm-wit-gelakt-staal",
+          "sku": "WH128-B34"
+        },
+        "48.3": {
+          "unitPriceExVat": 9.52,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-kniestuk-3-weg-33-7-mm-wit-gelakt-staal",
+          "sku": "WH128-B34"
+        }
+      }
+    },
+    "afdekdop": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 2.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-afdekdop-33-7-mm-zink",
+          "sku": "T-136B"
+        },
+        "33.7": {
+          "unitPriceExVat": 2.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-afdekdop-33-7-mm-zink",
+          "sku": "T-136B"
+        },
+        "42.4": {
+          "unitPriceExVat": 2.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-afdekdop-33-7-mm-zink",
+          "sku": "T-136B"
+        },
+        "48.3": {
+          "unitPriceExVat": 2.32,
+          "productUrl": "https://www.steigerbuisgroothandel.nl/buiskoppeling-afdekdop-33-7-mm-zink",
+          "sku": "T-136B"
+        }
+      }
+    }
+  }
+}

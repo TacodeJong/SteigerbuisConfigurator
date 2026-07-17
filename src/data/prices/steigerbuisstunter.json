@@ -1,0 +1,2920 @@
+{
+  "updatedAt": "2026-07-06T18:03:00.326Z",
+  "vatRate": 0.21,
+  "pipes": {
+    "staal": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.0058,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-269-mm",
+        "sku": "STB-269",
+        "variantId": 31064869470295
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.00825,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-337-mm",
+        "sku": "STB-337",
+        "variantId": 31064869404759
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.0107,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-424-mm",
+        "sku": "STB-424",
+        "variantId": 31064801312855
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.0127,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-483-mm",
+        "sku": "STB-483",
+        "variantId": 31064869339223
+      }
+    },
+    "groen-outdoor": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.0058,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-269-mm",
+        "sku": "STB-269",
+        "variantId": 31064869470295
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.00825,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-337-mm",
+        "sku": "STB-337",
+        "variantId": 31064869404759
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.0107,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-424-mm",
+        "sku": "STB-424",
+        "variantId": 31064801312855
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.0127,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-483-mm",
+        "sku": "STB-483",
+        "variantId": 31064869339223
+      }
+    },
+    "zwart-outdoor": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.00975,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-zwart-269-mm",
+        "sku": "STBZ269",
+        "variantId": 30309811290199
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.01295,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-zwart-337-mm",
+        "sku": "STBZ337",
+        "variantId": 30309811322967
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.016649999999999998,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-zwart-424-mm",
+        "sku": "STBZ424",
+        "variantId": 30309811355735
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.018850000000000002,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-zwart-483-mm",
+        "sku": "STBZ483",
+        "variantId": 30309811388503
+      }
+    },
+    "zwart": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.00975,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-zwart-269-mm",
+        "sku": "STBZ269",
+        "variantId": 30309811290199
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.01295,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-zwart-337-mm",
+        "sku": "STBZ337",
+        "variantId": 30309811322967
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.016649999999999998,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-zwart-424-mm",
+        "sku": "STBZ424",
+        "variantId": 30309811355735
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.018850000000000002,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-zwart-483-mm",
+        "sku": "STBZ483",
+        "variantId": 30309811388503
+      }
+    },
+    "wit": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.0058,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-269-mm",
+        "sku": "STB-269",
+        "variantId": 31064869470295
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.00825,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-337-mm",
+        "sku": "STB-337",
+        "variantId": 31064869404759
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.0107,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-424-mm",
+        "sku": "STB-424",
+        "variantId": 31064801312855
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.0127,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-483-mm",
+        "sku": "STB-483",
+        "variantId": 31064869339223
+      }
+    },
+    "beige": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.0058,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-269-mm",
+        "sku": "STB-269",
+        "variantId": 31064869470295
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.00825,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-337-mm",
+        "sku": "STB-337",
+        "variantId": 31064869404759
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.0107,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-424-mm",
+        "sku": "STB-424",
+        "variantId": 31064801312855
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.0127,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-staal-483-mm",
+        "sku": "STB-483",
+        "variantId": 31064869339223
+      }
+    },
+    "aluminium": {
+      "26.9": {
+        "unitPricePerMmExVat": 0.006900000000000001,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-aluminium-269-mm",
+        "sku": "AB269",
+        "variantId": 31176166998103
+      },
+      "33.7": {
+        "unitPricePerMmExVat": 0.0103,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-aluminium-337-mm",
+        "sku": "AB337",
+        "variantId": 30309811028055
+      },
+      "42.4": {
+        "unitPricePerMmExVat": 0.0134,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-aluminium-42-mm",
+        "sku": "AB420",
+        "variantId": 30309811093591
+      },
+      "48.3": {
+        "unitPricePerMmExVat": 0.015300000000000001,
+        "productUrl": "https://www.steigerbuisstunter.nl/products/buis-aluminium-48-mm",
+        "sku": "AB480",
+        "variantId": 30309811159127
+      }
+    }
+  },
+  "fittings": {
+    "kniestuk-90": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795561559
+        },
+        "33.7": {
+          "unitPriceExVat": 4.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795594327
+        },
+        "42.4": {
+          "unitPriceExVat": 6.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795627095
+        },
+        "48.3": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795692631
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795561559
+        },
+        "33.7": {
+          "unitPriceExVat": 4.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795594327
+        },
+        "42.4": {
+          "unitPriceExVat": 6.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795627095
+        },
+        "48.3": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795692631
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805752407
+        },
+        "33.7": {
+          "unitPriceExVat": 6.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53093821251923
+        },
+        "42.4": {
+          "unitPriceExVat": 7.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805817943
+        },
+        "48.3": {
+          "unitPriceExVat": 8.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805850711
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805752407
+        },
+        "33.7": {
+          "unitPriceExVat": 6.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53093821251923
+        },
+        "42.4": {
+          "unitPriceExVat": 7.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805817943
+        },
+        "48.3": {
+          "unitPriceExVat": 8.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805850711
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795561559
+        },
+        "33.7": {
+          "unitPriceExVat": 4.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795594327
+        },
+        "42.4": {
+          "unitPriceExVat": 6.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795627095
+        },
+        "48.3": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795692631
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795561559
+        },
+        "33.7": {
+          "unitPriceExVat": 4.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795594327
+        },
+        "42.4": {
+          "unitPriceExVat": 6.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795627095
+        },
+        "48.3": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795692631
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805752407
+        },
+        "33.7": {
+          "unitPriceExVat": 4.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795594327
+        },
+        "42.4": {
+          "unitPriceExVat": 6.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795627095
+        },
+        "48.3": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-2-weg-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795692631
+        }
+      }
+    },
+    "t-kort": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 3.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794807895
+        },
+        "33.7": {
+          "unitPriceExVat": 3.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794840663
+        },
+        "42.4": {
+          "unitPriceExVat": 5.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794873431
+        },
+        "48.3": {
+          "unitPriceExVat": 6.05,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794906199
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794807895
+        },
+        "33.7": {
+          "unitPriceExVat": 3.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794840663
+        },
+        "42.4": {
+          "unitPriceExVat": 5.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794873431
+        },
+        "48.3": {
+          "unitPriceExVat": 6.05,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794906199
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 4.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805457495
+        },
+        "33.7": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53093820858707
+        },
+        "42.4": {
+          "unitPriceExVat": 7.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805523031
+        },
+        "48.3": {
+          "unitPriceExVat": 8.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805555799
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 4.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805457495
+        },
+        "33.7": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53093820858707
+        },
+        "42.4": {
+          "unitPriceExVat": 7.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805523031
+        },
+        "48.3": {
+          "unitPriceExVat": 8.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805555799
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 3.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794807895
+        },
+        "33.7": {
+          "unitPriceExVat": 3.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794840663
+        },
+        "42.4": {
+          "unitPriceExVat": 5.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794873431
+        },
+        "48.3": {
+          "unitPriceExVat": 6.05,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794906199
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 3.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794807895
+        },
+        "33.7": {
+          "unitPriceExVat": 3.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794840663
+        },
+        "42.4": {
+          "unitPriceExVat": 5.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794873431
+        },
+        "48.3": {
+          "unitPriceExVat": 6.05,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794906199
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 3.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794807895
+        },
+        "33.7": {
+          "unitPriceExVat": 3.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794840663
+        },
+        "42.4": {
+          "unitPriceExVat": 5.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794873431
+        },
+        "48.3": {
+          "unitPriceExVat": 6.05,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-kort-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309794906199
+        }
+      }
+    },
+    "t-lang": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795168343
+        },
+        "33.7": {
+          "unitPriceExVat": 5.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795201111
+        },
+        "42.4": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795233879
+        },
+        "48.3": {
+          "unitPriceExVat": 10.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795266647
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795168343
+        },
+        "33.7": {
+          "unitPriceExVat": 5.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795201111
+        },
+        "42.4": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795233879
+        },
+        "48.3": {
+          "unitPriceExVat": 10.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795266647
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 7.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805588567
+        },
+        "33.7": {
+          "unitPriceExVat": 8.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805621335
+        },
+        "42.4": {
+          "unitPriceExVat": 11.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805654103
+        },
+        "48.3": {
+          "unitPriceExVat": 14.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805686871
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 7.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805588567
+        },
+        "33.7": {
+          "unitPriceExVat": 8.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805621335
+        },
+        "42.4": {
+          "unitPriceExVat": 11.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805654103
+        },
+        "48.3": {
+          "unitPriceExVat": 14.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309805686871
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795168343
+        },
+        "33.7": {
+          "unitPriceExVat": 5.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795201111
+        },
+        "42.4": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795233879
+        },
+        "48.3": {
+          "unitPriceExVat": 10.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795266647
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795168343
+        },
+        "33.7": {
+          "unitPriceExVat": 5.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795201111
+        },
+        "42.4": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795233879
+        },
+        "48.3": {
+          "unitPriceExVat": 10.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795266647
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795168343
+        },
+        "33.7": {
+          "unitPriceExVat": 5.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795201111
+        },
+        "42.4": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795233879
+        },
+        "48.3": {
+          "unitPriceExVat": 10.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/t-stuk-lang-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309795266647
+        }
+      }
+    },
+    "kruisstuk": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797855319
+        },
+        "33.7": {
+          "unitPriceExVat": 5.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797888087
+        },
+        "42.4": {
+          "unitPriceExVat": 8.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797920855
+        },
+        "48.3": {
+          "unitPriceExVat": 9.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797953623
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797855319
+        },
+        "33.7": {
+          "unitPriceExVat": 5.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797888087
+        },
+        "42.4": {
+          "unitPriceExVat": 8.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797920855
+        },
+        "48.3": {
+          "unitPriceExVat": 9.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797953623
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807554647
+        },
+        "33.7": {
+          "unitPriceExVat": 7.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807587415
+        },
+        "42.4": {
+          "unitPriceExVat": 9.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807620183
+        },
+        "48.3": {
+          "unitPriceExVat": 12.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807652951
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 6.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807554647
+        },
+        "33.7": {
+          "unitPriceExVat": 7.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807587415
+        },
+        "42.4": {
+          "unitPriceExVat": 9.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807620183
+        },
+        "48.3": {
+          "unitPriceExVat": 12.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807652951
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797855319
+        },
+        "33.7": {
+          "unitPriceExVat": 5.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797888087
+        },
+        "42.4": {
+          "unitPriceExVat": 8.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797920855
+        },
+        "48.3": {
+          "unitPriceExVat": 9.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797953623
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797855319
+        },
+        "33.7": {
+          "unitPriceExVat": 5.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797888087
+        },
+        "42.4": {
+          "unitPriceExVat": 8.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797920855
+        },
+        "48.3": {
+          "unitPriceExVat": 9.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797953623
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797855319
+        },
+        "33.7": {
+          "unitPriceExVat": 5.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797888087
+        },
+        "42.4": {
+          "unitPriceExVat": 8.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797920855
+        },
+        "48.3": {
+          "unitPriceExVat": 9.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-1-vlak-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797953623
+        }
+      }
+    },
+    "vierweg-kruisstuk": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 6.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798641751
+        },
+        "33.7": {
+          "unitPriceExVat": 10.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798674519
+        },
+        "42.4": {
+          "unitPriceExVat": 15.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798707287
+        },
+        "48.3": {
+          "unitPriceExVat": 17.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798740055
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798641751
+        },
+        "33.7": {
+          "unitPriceExVat": 10.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798674519
+        },
+        "42.4": {
+          "unitPriceExVat": 15.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798707287
+        },
+        "48.3": {
+          "unitPriceExVat": 17.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798740055
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 11.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807816791
+        },
+        "33.7": {
+          "unitPriceExVat": 14.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807849559
+        },
+        "42.4": {
+          "unitPriceExVat": 21.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807882327
+        },
+        "48.3": {
+          "unitPriceExVat": 23.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807915095
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 11.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807816791
+        },
+        "33.7": {
+          "unitPriceExVat": 14.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807849559
+        },
+        "42.4": {
+          "unitPriceExVat": 21.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807882327
+        },
+        "48.3": {
+          "unitPriceExVat": 23.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807915095
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 6.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798641751
+        },
+        "33.7": {
+          "unitPriceExVat": 10.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798674519
+        },
+        "42.4": {
+          "unitPriceExVat": 15.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798707287
+        },
+        "48.3": {
+          "unitPriceExVat": 17.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798740055
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 6.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798641751
+        },
+        "33.7": {
+          "unitPriceExVat": 10.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798674519
+        },
+        "42.4": {
+          "unitPriceExVat": 15.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798707287
+        },
+        "48.3": {
+          "unitPriceExVat": 17.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798740055
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 6.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798641751
+        },
+        "33.7": {
+          "unitPriceExVat": 10.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798674519
+        },
+        "42.4": {
+          "unitPriceExVat": 15.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798707287
+        },
+        "48.3": {
+          "unitPriceExVat": 17.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kruisstuk-4-weg-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309798740055
+        }
+      }
+    },
+    "3-weg-hoek": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 4.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797625943
+        },
+        "33.7": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797658711
+        },
+        "42.4": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797691479
+        },
+        "48.3": {
+          "unitPriceExVat": 8.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797724247
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 4.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797625943
+        },
+        "33.7": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797658711
+        },
+        "42.4": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797691479
+        },
+        "48.3": {
+          "unitPriceExVat": 8.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797724247
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807194199
+        },
+        "33.7": {
+          "unitPriceExVat": 7.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807226967
+        },
+        "42.4": {
+          "unitPriceExVat": 9.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807456343
+        },
+        "48.3": {
+          "unitPriceExVat": 11.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807489111
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 6.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807194199
+        },
+        "33.7": {
+          "unitPriceExVat": 7.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807226967
+        },
+        "42.4": {
+          "unitPriceExVat": 9.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807456343
+        },
+        "48.3": {
+          "unitPriceExVat": 11.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807489111
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 4.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797625943
+        },
+        "33.7": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797658711
+        },
+        "42.4": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797691479
+        },
+        "48.3": {
+          "unitPriceExVat": 8.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797724247
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 4.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797625943
+        },
+        "33.7": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797658711
+        },
+        "42.4": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797691479
+        },
+        "48.3": {
+          "unitPriceExVat": 8.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797724247
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 4.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797625943
+        },
+        "33.7": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797658711
+        },
+        "42.4": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797691479
+        },
+        "48.3": {
+          "unitPriceExVat": 8.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hoekstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797724247
+        }
+      }
+    },
+    "drieweg-kniestuk": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 4.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797396567
+        },
+        "33.7": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797429335
+        },
+        "42.4": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797462103
+        },
+        "48.3": {
+          "unitPriceExVat": 10.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797494871
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 4.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797396567
+        },
+        "33.7": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797429335
+        },
+        "42.4": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797462103
+        },
+        "48.3": {
+          "unitPriceExVat": 10.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797494871
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806997591
+        },
+        "33.7": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807030359
+        },
+        "42.4": {
+          "unitPriceExVat": 12.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807063127
+        },
+        "48.3": {
+          "unitPriceExVat": 16.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807095895
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 7.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806997591
+        },
+        "33.7": {
+          "unitPriceExVat": 8.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807030359
+        },
+        "42.4": {
+          "unitPriceExVat": 12.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807063127
+        },
+        "48.3": {
+          "unitPriceExVat": 16.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309807095895
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 4.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797396567
+        },
+        "33.7": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797429335
+        },
+        "42.4": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797462103
+        },
+        "48.3": {
+          "unitPriceExVat": 10.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797494871
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 4.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797396567
+        },
+        "33.7": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797429335
+        },
+        "42.4": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797462103
+        },
+        "48.3": {
+          "unitPriceExVat": 10.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797494871
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 4.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797396567
+        },
+        "33.7": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797429335
+        },
+        "42.4": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797462103
+        },
+        "48.3": {
+          "unitPriceExVat": 10.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/kniestuk-3-weg-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797494871
+        }
+      }
+    },
+    "voetplaat-rond": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796511831
+        },
+        "33.7": {
+          "unitPriceExVat": 4.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796544599
+        },
+        "42.4": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796577367
+        },
+        "48.3": {
+          "unitPriceExVat": 8.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796610135
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796511831
+        },
+        "33.7": {
+          "unitPriceExVat": 4.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796544599
+        },
+        "42.4": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796577367
+        },
+        "48.3": {
+          "unitPriceExVat": 8.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796610135
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806702679
+        },
+        "33.7": {
+          "unitPriceExVat": 5.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806735447
+        },
+        "42.4": {
+          "unitPriceExVat": 7.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806768215
+        },
+        "48.3": {
+          "unitPriceExVat": 10.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806800983
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806702679
+        },
+        "33.7": {
+          "unitPriceExVat": 5.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806735447
+        },
+        "42.4": {
+          "unitPriceExVat": 7.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806768215
+        },
+        "48.3": {
+          "unitPriceExVat": 10.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806800983
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796511831
+        },
+        "33.7": {
+          "unitPriceExVat": 4.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796544599
+        },
+        "42.4": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796577367
+        },
+        "48.3": {
+          "unitPriceExVat": 8.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796610135
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 3.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796511831
+        },
+        "33.7": {
+          "unitPriceExVat": 4.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796544599
+        },
+        "42.4": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796577367
+        },
+        "48.3": {
+          "unitPriceExVat": 8.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796610135
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806702679
+        },
+        "33.7": {
+          "unitPriceExVat": 4.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796544599
+        },
+        "42.4": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796577367
+        },
+        "48.3": {
+          "unitPriceExVat": 8.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-rond-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796610135
+        }
+      }
+    },
+    "koppelstuk": {
+      "staal": {
+        "33.7": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796020311
+        },
+        "42.4": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796053079
+        },
+        "48.3": {
+          "unitPriceExVat": 6.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796118615
+        }
+      },
+      "groen-outdoor": {
+        "33.7": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796020311
+        },
+        "42.4": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796053079
+        },
+        "48.3": {
+          "unitPriceExVat": 6.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796118615
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-inwendig-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806374999
+        },
+        "33.7": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-inwendig-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806407767
+        },
+        "42.4": {
+          "unitPriceExVat": 8.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806309463
+        },
+        "48.3": {
+          "unitPriceExVat": 9.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806342231
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-inwendig-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806374999
+        },
+        "33.7": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-inwendig-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806407767
+        },
+        "42.4": {
+          "unitPriceExVat": 8.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806309463
+        },
+        "48.3": {
+          "unitPriceExVat": 9.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806342231
+        }
+      },
+      "wit": {
+        "33.7": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796020311
+        },
+        "42.4": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796053079
+        },
+        "48.3": {
+          "unitPriceExVat": 6.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796118615
+        }
+      },
+      "beige": {
+        "33.7": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796020311
+        },
+        "42.4": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796053079
+        },
+        "48.3": {
+          "unitPriceExVat": 6.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796118615
+        }
+      },
+      "aluminium": {
+        "33.7": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796020311
+        },
+        "42.4": {
+          "unitPriceExVat": 5.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796053079
+        },
+        "48.3": {
+          "unitPriceExVat": 6.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/koppelstuk-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796118615
+        }
+      }
+    },
+    "afdekdop": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 0.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876235603
+        },
+        "33.7": {
+          "unitPriceExVat": 1.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876301139
+        },
+        "42.4": {
+          "unitPriceExVat": 1.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876366675
+        },
+        "48.3": {
+          "unitPriceExVat": 1.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876432211
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 0.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876235603
+        },
+        "33.7": {
+          "unitPriceExVat": 1.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876301139
+        },
+        "42.4": {
+          "unitPriceExVat": 1.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876366675
+        },
+        "48.3": {
+          "unitPriceExVat": 1.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876432211
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-metaal-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53155989848403
+        },
+        "33.7": {
+          "unitPriceExVat": 3.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-metaal-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53155991650643
+        },
+        "42.4": {
+          "unitPriceExVat": 4.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-metaal-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53155991814483
+        },
+        "48.3": {
+          "unitPriceExVat": 5.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-metaal-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53155995812179
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-metaal-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53155989848403
+        },
+        "33.7": {
+          "unitPriceExVat": 3.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-metaal-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53155991650643
+        },
+        "42.4": {
+          "unitPriceExVat": 4.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-metaal-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53155991814483
+        },
+        "48.3": {
+          "unitPriceExVat": 5.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-metaal-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 53155995812179
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 0.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876235603
+        },
+        "33.7": {
+          "unitPriceExVat": 1.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876301139
+        },
+        "42.4": {
+          "unitPriceExVat": 1.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876366675
+        },
+        "48.3": {
+          "unitPriceExVat": 1.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876432211
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 0.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876235603
+        },
+        "33.7": {
+          "unitPriceExVat": 1.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876301139
+        },
+        "42.4": {
+          "unitPriceExVat": 1.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876366675
+        },
+        "48.3": {
+          "unitPriceExVat": 1.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876432211
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 0.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876235603
+        },
+        "33.7": {
+          "unitPriceExVat": 1.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876301139
+        },
+        "42.4": {
+          "unitPriceExVat": 1.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876366675
+        },
+        "48.3": {
+          "unitPriceExVat": 1.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/afdekdop-kunststof-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 48127876432211
+        }
+      }
+    },
+    "voetplaat-vierkant": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 6.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796675671
+        },
+        "33.7": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796741207
+        },
+        "42.4": {
+          "unitPriceExVat": 11.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796970583
+        },
+        "48.3": {
+          "unitPriceExVat": 12.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797003351
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 6.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796675671
+        },
+        "33.7": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796741207
+        },
+        "42.4": {
+          "unitPriceExVat": 11.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796970583
+        },
+        "48.3": {
+          "unitPriceExVat": 12.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797003351
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 9.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806833751
+        },
+        "33.7": {
+          "unitPriceExVat": 12.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806866519
+        },
+        "42.4": {
+          "unitPriceExVat": 15.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806899287
+        },
+        "48.3": {
+          "unitPriceExVat": 17.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806932055
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 9.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806833751
+        },
+        "33.7": {
+          "unitPriceExVat": 12.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806866519
+        },
+        "42.4": {
+          "unitPriceExVat": 15.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806899287
+        },
+        "48.3": {
+          "unitPriceExVat": 17.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309806932055
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 6.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796675671
+        },
+        "33.7": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796741207
+        },
+        "42.4": {
+          "unitPriceExVat": 11.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796970583
+        },
+        "48.3": {
+          "unitPriceExVat": 12.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797003351
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 6.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796675671
+        },
+        "33.7": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796741207
+        },
+        "42.4": {
+          "unitPriceExVat": 11.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796970583
+        },
+        "48.3": {
+          "unitPriceExVat": 12.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797003351
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 6.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796675671
+        },
+        "33.7": {
+          "unitPriceExVat": 8.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796741207
+        },
+        "42.4": {
+          "unitPriceExVat": 11.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309796970583
+        },
+        "48.3": {
+          "unitPriceExVat": 12.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/voetplaat-ovaal-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309797003351
+        }
+      }
+    },
+    "scharnieroog": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 5.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800738903
+        },
+        "33.7": {
+          "unitPriceExVat": 7.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800771671
+        },
+        "42.4": {
+          "unitPriceExVat": 8.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800804439
+        },
+        "48.3": {
+          "unitPriceExVat": 9.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800837207
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 5.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800738903
+        },
+        "33.7": {
+          "unitPriceExVat": 7.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800771671
+        },
+        "42.4": {
+          "unitPriceExVat": 8.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800804439
+        },
+        "48.3": {
+          "unitPriceExVat": 9.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800837207
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 8.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808996439
+        },
+        "33.7": {
+          "unitPriceExVat": 10.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309809029207
+        },
+        "42.4": {
+          "unitPriceExVat": 11.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309809061975
+        },
+        "48.3": {
+          "unitPriceExVat": 7.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-scharnierstuk-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808701527
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 8.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808996439
+        },
+        "33.7": {
+          "unitPriceExVat": 10.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309809029207
+        },
+        "42.4": {
+          "unitPriceExVat": 11.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309809061975
+        },
+        "48.3": {
+          "unitPriceExVat": 7.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-scharnierstuk-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808701527
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 5.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800738903
+        },
+        "33.7": {
+          "unitPriceExVat": 7.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800771671
+        },
+        "42.4": {
+          "unitPriceExVat": 8.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800804439
+        },
+        "48.3": {
+          "unitPriceExVat": 9.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800837207
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 5.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800738903
+        },
+        "33.7": {
+          "unitPriceExVat": 7.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800771671
+        },
+        "42.4": {
+          "unitPriceExVat": 8.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800804439
+        },
+        "48.3": {
+          "unitPriceExVat": 9.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800837207
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 5.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800738903
+        },
+        "33.7": {
+          "unitPriceExVat": 7.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800771671
+        },
+        "42.4": {
+          "unitPriceExVat": 8.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800804439
+        },
+        "48.3": {
+          "unitPriceExVat": 9.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/scharnierstuk-enkel-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800837207
+        }
+      }
+    },
+    "scharnierhuls": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 3.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800575063
+        },
+        "33.7": {
+          "unitPriceExVat": 4.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800607831
+        },
+        "42.4": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800640599
+        },
+        "48.3": {
+          "unitPriceExVat": 6.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800673367
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800575063
+        },
+        "33.7": {
+          "unitPriceExVat": 4.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800607831
+        },
+        "42.4": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800640599
+        },
+        "48.3": {
+          "unitPriceExVat": 6.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800673367
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 5.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808865367
+        },
+        "33.7": {
+          "unitPriceExVat": 6.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808898135
+        },
+        "42.4": {
+          "unitPriceExVat": 7.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808930903
+        },
+        "48.3": {
+          "unitPriceExVat": 8.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808963671
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 5.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808865367
+        },
+        "33.7": {
+          "unitPriceExVat": 6.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808898135
+        },
+        "42.4": {
+          "unitPriceExVat": 7.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808930903
+        },
+        "48.3": {
+          "unitPriceExVat": 8.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808963671
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 3.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800575063
+        },
+        "33.7": {
+          "unitPriceExVat": 4.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800607831
+        },
+        "42.4": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800640599
+        },
+        "48.3": {
+          "unitPriceExVat": 6.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800673367
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 3.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800575063
+        },
+        "33.7": {
+          "unitPriceExVat": 4.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800607831
+        },
+        "42.4": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800640599
+        },
+        "48.3": {
+          "unitPriceExVat": 6.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800673367
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 3.6,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800575063
+        },
+        "33.7": {
+          "unitPriceExVat": 4.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800607831
+        },
+        "42.4": {
+          "unitPriceExVat": 6.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800640599
+        },
+        "48.3": {
+          "unitPriceExVat": 6.3,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/hulsdeel-scharnierstuk-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800673367
+        }
+      }
+    },
+    "dubbelscharnier-recht": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 3.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800312919
+        },
+        "33.7": {
+          "unitPriceExVat": 3.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800345687
+        },
+        "42.4": {
+          "unitPriceExVat": 4.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800378455
+        },
+        "48.3": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800411223
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800312919
+        },
+        "33.7": {
+          "unitPriceExVat": 3.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800345687
+        },
+        "42.4": {
+          "unitPriceExVat": 4.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800378455
+        },
+        "48.3": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800411223
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 5.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808734295
+        },
+        "33.7": {
+          "unitPriceExVat": 7.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808767063
+        },
+        "42.4": {
+          "unitPriceExVat": 7.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808799831
+        },
+        "48.3": {
+          "unitPriceExVat": 10.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808832599
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 5.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-zwart-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808734295
+        },
+        "33.7": {
+          "unitPriceExVat": 7.2,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-zwart-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808767063
+        },
+        "42.4": {
+          "unitPriceExVat": 7.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-zwart-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808799831
+        },
+        "48.3": {
+          "unitPriceExVat": 10.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-zwart-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309808832599
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 3.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800312919
+        },
+        "33.7": {
+          "unitPriceExVat": 3.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800345687
+        },
+        "42.4": {
+          "unitPriceExVat": 4.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800378455
+        },
+        "48.3": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800411223
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 3.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800312919
+        },
+        "33.7": {
+          "unitPriceExVat": 3.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800345687
+        },
+        "42.4": {
+          "unitPriceExVat": 4.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800378455
+        },
+        "48.3": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800411223
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 3.4,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800312919
+        },
+        "33.7": {
+          "unitPriceExVat": 3.8,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800345687
+        },
+        "42.4": {
+          "unitPriceExVat": 4.5,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800378455
+        },
+        "48.3": {
+          "unitPriceExVat": 4.9,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-180-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800411223
+        }
+      }
+    },
+    "dubbelscharnier-90": {
+      "staal": {
+        "26.9": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800443991
+        },
+        "33.7": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800476759
+        },
+        "42.4": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800509527
+        },
+        "48.3": {
+          "unitPriceExVat": 7.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800542295
+        }
+      },
+      "groen-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800443991
+        },
+        "33.7": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800476759
+        },
+        "42.4": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800509527
+        },
+        "48.3": {
+          "unitPriceExVat": 7.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800542295
+        }
+      },
+      "zwart-outdoor": {
+        "26.9": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800443991
+        },
+        "33.7": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800476759
+        },
+        "42.4": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800509527
+        },
+        "48.3": {
+          "unitPriceExVat": 7.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800542295
+        }
+      },
+      "zwart": {
+        "26.9": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800443991
+        },
+        "33.7": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800476759
+        },
+        "42.4": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800509527
+        },
+        "48.3": {
+          "unitPriceExVat": 7.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800542295
+        }
+      },
+      "wit": {
+        "26.9": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800443991
+        },
+        "33.7": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800476759
+        },
+        "42.4": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800509527
+        },
+        "48.3": {
+          "unitPriceExVat": 7.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800542295
+        }
+      },
+      "beige": {
+        "26.9": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800443991
+        },
+        "33.7": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800476759
+        },
+        "42.4": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800509527
+        },
+        "48.3": {
+          "unitPriceExVat": 7.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800542295
+        }
+      },
+      "aluminium": {
+        "26.9": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-269-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800443991
+        },
+        "33.7": {
+          "unitPriceExVat": 3.7,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-337-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800476759
+        },
+        "42.4": {
+          "unitPriceExVat": 5.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-424-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800509527
+        },
+        "48.3": {
+          "unitPriceExVat": 7.1,
+          "productUrl": "https://www.steigerbuisstunter.nl/products/oogdeel-dubbel-scharnierstuk-90-483-mm",
+          "sku": "Verzendkosten",
+          "variantId": 30309800542295
+        }
+      }
+    }
+  }
+}
