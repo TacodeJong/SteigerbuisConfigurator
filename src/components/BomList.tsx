@@ -7,7 +7,7 @@ import type {
   SceneModel,
 } from '../types'
 import { useState } from 'react'
-import { FITTINGS, MATERIALS, SHOP_BASE } from '../data/catalog'
+import { FITTINGS, MATERIALS } from '../data/catalog'
 import { FITTING_TYPE_LABELS } from '../lib/fittings'
 import { isSameBomHighlight } from '../lib/bomHighlight'
 import { formatMm, formatMeters } from '../lib/bom'
@@ -15,6 +15,7 @@ import { copyGroothandelOrderList, printBomWithGroothandelSkus } from '../lib/bo
 import { printBuildInstructions, printFloorplan } from '../lib/buildPrint'
 import { CollapsibleSection } from './CollapsibleSection'
 import { ProjectQuotePanel } from './ProjectQuotePanel'
+import { SuppliersMenu } from './SuppliersMenu'
 
 interface BomListProps {
   bom: BomResult
@@ -110,8 +111,8 @@ export function BomList({
           )}
         </div>
         <p className="bom-print-hint no-print">
-          Groothandel: vul je winkelwagen via de projectprijs (vereist .env + npm run dev). Stunter: directe
-          Shopify-cart in de browser.
+          Winkelwagen vullen kan via Projectprijs per leverancier (Groothandel: .env + npm run dev;
+          Stunter: Shopify-cart in de browser).
         </p>
         {interactive && (
           <p className="bom-hint">Klik op een regel om onderdelen in de 3D-weergave te markeren.</p>
@@ -212,6 +213,64 @@ export function BomList({
         </CollapsibleSection>
       )}
 
+      {(bom.planks?.length ?? 0) > 0 && (
+        <CollapsibleSection title="Hout (planken / platen)" defaultOpen className="bom-panel-section">
+          <table>
+            <thead>
+              <tr>
+                <th>Onderdeel</th>
+                <th>Aantal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bom.planks!.map((plank) => {
+                const rowHighlight: BomHighlight = {
+                  kind: 'plank',
+                  lengthMm: plank.lengthMm,
+                  widthMm: plank.widthMm,
+                }
+                const active = isSameBomHighlight(highlight, rowHighlight)
+                return (
+                  <tr
+                    key={`${plank.label}-${plank.lengthMm}-${plank.widthMm}-${plank.thicknessMm}`}
+                    className={interactive ? `bom-row${active ? ' bom-row-active' : ''}` : undefined}
+                    onClick={
+                      interactive
+                        ? () => toggleHighlight(highlight, rowHighlight, onHighlightChange)
+                        : undefined
+                    }
+                    role={interactive ? 'button' : undefined}
+                    tabIndex={interactive ? 0 : undefined}
+                    onKeyDown={
+                      interactive
+                        ? (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault()
+                              toggleHighlight(highlight, rowHighlight, onHighlightChange)
+                            }
+                          }
+                        : undefined
+                    }
+                  >
+                    <td>
+                      {plank.label} · {formatMm(plank.lengthMm)} × {formatMm(plank.widthMm)} ×{' '}
+                      {plank.thicknessMm} mm
+                    </td>
+                    <td>{plank.quantity}×</td>
+                  </tr>
+                )
+              })}
+              {(bom.hardware ?? []).map((item) => (
+                <tr key={item.label}>
+                  <td>{item.label}</td>
+                  <td>{item.quantity}×</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </CollapsibleSection>
+      )}
+
       {bom.notes.length > 0 && (
         <CollapsibleSection title="Opmerkingen" defaultOpen={false} className="bom-panel-section">
           <ul className="bom-notes">
@@ -222,15 +281,11 @@ export function BomList({
         </CollapsibleSection>
       )}
 
-      <CollapsibleSection title="Bestellen" defaultOpen={false} className="bom-panel-section">
-        <div className="shop-links">
-          <a href={material.shopUrl} target="_blank" rel="noopener noreferrer">
-            Steigerbuizen bestellen →
-          </a>
-          <a href={`${SHOP_BASE}/buiskoppelingen`} target="_blank" rel="noopener noreferrer">
-            Buiskoppelingen bestellen →
-          </a>
-        </div>
+      <CollapsibleSection title="Leveranciers" defaultOpen={false} className="bom-panel-section">
+        <SuppliersMenu
+          variant="list"
+          hint="Bestel bij een steigerbuisleverancier. Vergelijk ook prijzen onder Projectprijs."
+        />
       </CollapsibleSection>
 
       <CollapsibleSection title="Projectprijs" defaultOpen className="bom-panel-section quote-collapsible">

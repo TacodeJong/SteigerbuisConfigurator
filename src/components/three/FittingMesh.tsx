@@ -9,6 +9,7 @@ import {
   CrossFitting,
   Elbow90Fitting,
   EndCapFitting,
+  FootCapFitting,
   FootPlateFitting,
   FourWayFitting,
   SideOutletFitting,
@@ -77,6 +78,9 @@ export function FittingMesh({ fitting, materialId, pickable = true, highlighted 
 
       case 'afdekdop':
         return <EndCapFitting axis={axisA} pipeRadius={pipeR} mat={mat} />
+
+      case 'voetdop':
+        return <FootCapFitting pipeRadius={pipeR} />
 
       case 'koppelstuk':
         return <Collar axis={axisA} pipeRadius={pipeR} length={sleeveLen} mat={mat} boltCount={2} />

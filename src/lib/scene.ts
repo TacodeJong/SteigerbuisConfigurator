@@ -2,6 +2,7 @@ import type { HingeConnection, KlimrekConfig, SceneModel, ScenePipe, Vec3 } from
 import { PIPE_LABEL } from './bom'
 import { detectFittingsFromPipes } from './fittings'
 import { dist, isInteriorPointOnPipe, isPipeEndpoint, weldPipeJoints } from './pipeGeometry'
+import { syncPlankMounts } from './planks'
 
 export const POST_INSET_MM = 50
 
@@ -90,15 +91,19 @@ function rungHeights(heightMm: number, rungCount: number): number[] {
 }
 
 export function buildSceneFromConfig(config: KlimrekConfig): SceneModel {
-  const { width, depth, height, rungCount, diameter, materialId, includeRoof } = config
+  const { height, rungCount, diameter, materialId, includeRoof } = config
   const pipes: ScenePipe[] = []
 
   // Centerline-model: staanders op bestelbare buislengte uit elkaar, liggers
   // lopen tot de staander-as. Zo kloppen buislengtes in scene én BOM en werkt
   // fitting-detectie (armen op middellijnen). De fysieke +Ø-offset van de
   // gatafstanden wordt in de plattegrond gecorrigeerd (adjustHolesForFloorplan).
-  const halfW = orderedBarLengthMm(width) / 2
-  const halfD = orderedBarLengthMm(depth) / 2
+  // Bij dimensionMode 'buislengte' zijn width/depth al die bestelbare lengtes.
+  const mode = config.dimensionMode ?? 'buitenmaat'
+  const barW = mode === 'buislengte' ? config.width : orderedBarLengthMm(config.width)
+  const barD = mode === 'buislengte' ? config.depth : orderedBarLengthMm(config.depth)
+  const halfW = barW / 2
+  const halfD = barD / 2
 
   const corners: Vec3[] = [
     [-halfW, 0, -halfD],
@@ -178,7 +183,7 @@ export function syncSceneFittings(
 ): SceneModel {
   const sanitized = purgeOrphanAccessories(scene)
   const pipes = weldPipeJoints(sanitized.pipes)
-  return {
+  return syncPlankMounts({
     ...sanitized,
     pipes,
     fittings: detectFittingsFromPipes(pipes, {
@@ -187,7 +192,7 @@ export function syncSceneFittings(
     }),
     accessories: sanitized.accessories ?? [],
     hingeConnections: sanitized.hingeConnections ?? [],
-  }
+  })
 }
 
 /** Grond-hoogte voor de basis: 0 bij voetplaat, negatieve verankeringsdiepte bij grondanker. */

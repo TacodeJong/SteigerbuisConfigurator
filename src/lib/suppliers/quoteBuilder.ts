@@ -1,5 +1,5 @@
 import type { BomResult, FittingType, MaterialId, PipeDiameter } from '../../types'
-import { FITTINGS, MATERIALS } from '../../data/catalog'
+import { FITTINGS, MATERIALS, PLANK_CATALOG } from '../../data/catalog'
 import { FITTING_TYPE_LABELS } from '../fittings'
 import { formatMm } from '../bom'
 import type {
@@ -39,6 +39,9 @@ const FALLBACK_FITTING_EX_VAT: Partial<Record<MaterialId, number>> = {
   beige: 6,
   aluminium: 8,
 }
+
+/** Rubberen/kunststof voetdop (binnenopstelling) — geen materiaalvariant, vast richtbedrag. */
+const FALLBACK_VOETDOP_EX_VAT = 2.5
 
 export interface QuoteBuilderConfig {
   supplierId: string
@@ -164,7 +167,11 @@ export function buildQuoteFromCatalog(bom: BomResult, context: QuoteContext, con
     const { entry, estimated } = pickFittingEntry(catalog, fitting.type, context.materialId, context.diameter)
     if (estimated) hasEstimate = true
     if (!entry) hasMissing = true
-    const unit = entry?.unitPriceExVat ?? FALLBACK_FITTING_EX_VAT[context.materialId] ?? 7.5
+    const fallbackUnit =
+      fitting.type === 'voetdop'
+        ? FALLBACK_VOETDOP_EX_VAT
+        : (FALLBACK_FITTING_EX_VAT[context.materialId] ?? 7.5)
+    const unit = entry?.unitPriceExVat ?? fallbackUnit
     lines.push({
       lineKey: fittingLineKey(fitting.type, fitting.label),
       kind: 'fitting',
@@ -181,6 +188,42 @@ export function buildQuoteFromCatalog(bom: BomResult, context: QuoteContext, con
       cartItemId: entry?.variantId,
       estimated: estimated || !entry,
     })
+  }
+
+  // Steigerplanken / platen + schapsteunen: catalogusprijs (hout — geen leverancierscache).
+  for (const plank of bom.planks ?? []) {
+    const isPlate = plank.label.includes('plaat') || plank.label.includes('multiplex')
+    const areaM2 = (plank.lengthMm / 1000) * (plank.widthMm / 1000)
+    const unit = isPlate
+      ? areaM2 * PLANK_CATALOG.plate.pricePerSqmExVat
+      : (plank.lengthMm / 1000) * PLANK_CATALOG.plank.pricePerMeterExVat
+    lines.push({
+      lineKey: `plank:${plank.label}:${plank.lengthMm}x${plank.widthMm}x${plank.thicknessMm}`,
+      kind: 'plank',
+      label: `${plank.label} · ${formatMm(plank.lengthMm)} × ${formatMm(plank.widthMm)} × ${plank.thicknessMm} mm`,
+      quantity: plank.quantity,
+      unitLabel: 'per stuk',
+      unitPriceExVat: unit,
+      lineTotalExVat: unit * plank.quantity,
+      estimated: true,
+    })
+  }
+
+  for (const item of bom.hardware ?? []) {
+    lines.push({
+      lineKey: `hardware:${item.label}`,
+      kind: 'hardware',
+      label: item.label,
+      quantity: item.quantity,
+      unitLabel: 'per stuk',
+      unitPriceExVat: PLANK_CATALOG.mount.unitPriceExVat,
+      lineTotalExVat: PLANK_CATALOG.mount.unitPriceExVat * item.quantity,
+      estimated: true,
+    })
+  }
+
+  if ((bom.planks?.length ?? 0) > 0) {
+    notes.push('Hout (plank/plaat) en schapsteunen: richtprijs uit de eigen catalogus (geen leverancierscache).')
   }
 
   const subtotalExVat = lines.reduce((s, l) => s + l.lineTotalExVat, 0)

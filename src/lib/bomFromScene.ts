@@ -1,8 +1,18 @@
-import type { BomPipe, BomResult, SceneModel } from '../types'
+import type { BomHardwareItem, BomPipe, BomPlank, BomResult, SceneModel } from '../types'
 import { groupHingeEyes } from './accessories'
 import { PIPE_LABEL } from './bom'
 import { FITTING_TYPE_LABELS } from './fittings'
+import { PLANK_MOUNT_LABEL, plankBomLabel } from './planks'
 import { pipeLengthMm } from './scene'
+
+function plankGroupKey(
+  lengthMm: number,
+  widthMm: number,
+  thicknessMm: number,
+  kind: string,
+): string {
+  return `${kind}:${lengthMm}x${widthMm}x${thicknessMm}`
+}
 
 export function calculateBomFromScene(scene: SceneModel): BomResult {
   const grouped = new Map<number, BomPipe>()
@@ -61,17 +71,52 @@ export function calculateBomFromScene(scene: SceneModel): BomResult {
 
   const fittings = [...fittingCounts.values()].sort((a, b) => a.label.localeCompare(b.label, 'nl'))
 
+  // Hout (plank/plaat) gegroepeerd op soort × lengte × breedte × dikte + schapsteunen.
+  const scenePlanks = scene.planks ?? []
+  const plankGroups = new Map<string, BomPlank>()
+  for (const plank of scenePlanks) {
+    const kind = plank.kind === 'plate' ? 'plate' : 'plank'
+    const key = plankGroupKey(plank.lengthMm, plank.widthMm, plank.thicknessMm, kind)
+    const existing = plankGroups.get(key)
+    if (existing) {
+      existing.quantity += 1
+    } else {
+      plankGroups.set(key, {
+        lengthMm: plank.lengthMm,
+        widthMm: plank.widthMm,
+        thicknessMm: plank.thicknessMm,
+        quantity: 1,
+        label: plankBomLabel(kind),
+      })
+    }
+  }
+  const planks = [...plankGroups.values()].sort(
+    (a, b) => b.lengthMm - a.lengthMm || b.widthMm - a.widthMm,
+  )
+
+  const stored = scene.plankMounts ?? []
+  const mountCount = stored.length
+
+  const hardware: BomHardwareItem[] =
+    mountCount > 0 ? [{ label: PLANK_MOUNT_LABEL, quantity: mountCount }] : []
+
   const notes: string[] = [
     'Stuklijst berekend uit de 3D-editor.',
-    'Steigerbuisgroothandel zaagt buizen gratis op maat.',
+    'Veel steigerbuisleveranciers zagen buizen gratis op maat.',
   ]
   if (fittings.length === 0) {
     notes.unshift('Koppelingen zijn niet automatisch berekend — controleer verbindingen handmatig.')
+  }
+  if (planks.length > 0) {
+    notes.push(
+      'Hout: steigerplank (typ. 30×195 mm) of multiplexplaat (typ. 18 mm); breedte tot 2440 mm. Schapsteunen: alleen de handmatig geplaatste (of bij nieuwe plank als voorstel).',
+    )
   }
 
   return {
     pipes,
     fittings,
+    ...(planks.length > 0 ? { planks, hardware } : {}),
     totalPipeLengthMm,
     notes,
   }

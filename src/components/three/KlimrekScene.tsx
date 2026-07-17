@@ -3,16 +3,29 @@ import { MOUSE } from 'three'
 import { ContactShadows, OrbitControls } from '@react-three/drei'
 import type { KlimrekConfig, SceneModel } from '../../types'
 import { MATERIALS } from '../../data/catalog'
+import { configEnvironment } from '../../lib/environment'
+import { configDimensionMode } from '../../lib/dimensions'
 import { trimPipesAtFittings } from '../../lib/pipeTrim'
 import { FootprintOutline } from './FootprintOutline'
-import { GrassGround, SKY_BACKGROUND } from './GrassGround'
+import { SceneEnvironment } from './SceneEnvironment'
 import { GroundAnchor } from './GroundAnchor'
 import { PipeMesh } from './PipeMesh'
 import { FittingMesh } from './FittingMesh'
+import { PlankMesh } from './PlankMesh'
+import { PlankMountMesh } from './PlankMountMesh'
 
 interface KlimrekSceneProps {
   scene: SceneModel
-  config?: Pick<KlimrekConfig, 'width' | 'depth' | 'baseType' | 'anchorDepthMm'>
+  config?: Pick<
+    KlimrekConfig,
+    | 'width'
+    | 'depth'
+    | 'diameter'
+    | 'dimensionMode'
+    | 'baseType'
+    | 'anchorDepthMm'
+    | 'environment'
+  >
   selectedId: string | null
   highlightedIds?: Set<string>
   interactive: boolean
@@ -57,19 +70,25 @@ export function KlimrekScene({
 
   return (
     <>
-      <color attach="background" args={[SKY_BACKGROUND]} />
-      <ambientLight intensity={0.65} />
-      <directionalLight position={[5, 8, 4]} intensity={1.1} castShadow />
-      <directionalLight position={[-4, 3, -3]} intensity={0.35} />
-
-      <GrassGround
+      <SceneEnvironment
+        environment={config ? configEnvironment(config) : 'buiten'}
         size={Math.max(bounds.maxXZ * 4, 24)}
         onClick={() => interactive && onSelect(null)}
       />
 
-      {config && <GroundAnchor config={config} />}
+      {config && <GroundAnchor scene={scene} config={config} />}
 
-      <FootprintOutline pipes={scene.pipes} />
+      <FootprintOutline
+        pipes={scene.pipes}
+        // Buitenmaat-modus: labels matchen de invoervelden. Buislengte-modus:
+        // toon de echte footprint (L+Ø) die meegroeit met diameter.
+        labelWidthMm={
+          config && configDimensionMode(config) === 'buitenmaat' ? config.width : undefined
+        }
+        labelDepthMm={
+          config && configDimensionMode(config) === 'buitenmaat' ? config.depth : undefined
+        }
+      />
 
       <group>
         {trimmedPipes.map((p) => (
@@ -92,6 +111,28 @@ export function KlimrekScene({
             fitting={f}
             materialId={scene.materialId}
             highlighted={highlightedIds?.has(f.id) ?? false}
+          />
+        ))}
+      </group>
+
+      <group>
+        {(scene.planks ?? []).map((plank) => (
+          <PlankMesh
+            key={plank.id}
+            plank={plank}
+            highlighted={highlightedIds?.has(plank.id) ?? false}
+          />
+        ))}
+      </group>
+
+      {/* Na fittings/planken zodat schapsteunen zichtbaar blijven op knooppunten. */}
+      <group>
+        {(scene.plankMounts ?? []).map((mount) => (
+          <PlankMountMesh
+            key={mount.id}
+            mount={mount}
+            materialId={scene.materialId}
+            highlighted={highlightedIds?.has(mount.plankId) ?? false}
           />
         ))}
       </group>

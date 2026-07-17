@@ -1,41 +1,39 @@
-import type { KlimrekConfig } from '../../types'
-import { orderedBarLengthMm } from '../../lib/scene'
+import { useMemo } from 'react'
+import type { KlimrekConfig, SceneModel } from '../../types'
+import { computeAnchorHoles } from '../../lib/floorplan'
 
 const mm = (v: number) => v / 1000
 
+type AnchorConfig = Pick<
+  KlimrekConfig,
+  'width' | 'depth' | 'dimensionMode' | 'diameter' | 'baseType' | 'anchorDepthMm'
+>
+
 interface GroundAnchorProps {
-  config: Pick<KlimrekConfig, 'width' | 'depth' | 'baseType' | 'anchorDepthMm'>
+  scene: SceneModel
+  config: AnchorConfig
 }
 
-/** Visualiseert betonpoeren onder hoekstaanders bij grondanker. */
-export function GroundAnchor({ config }: GroundAnchorProps) {
-  if (config.baseType !== 'grondanker' || config.anchorDepthMm <= 0) return null
+/** Visualiseert betonpoeren onder staanders bij grondanker — XZ uit scene-pipes. */
+export function GroundAnchor({ scene, config }: GroundAnchorProps) {
+  const holes = useMemo(() => computeAnchorHoles(scene, config), [scene, config])
 
-  // Zelfde posities als de hoekstaanders in buildSceneFromConfig.
-  const halfW = orderedBarLengthMm(config.width) / 2
-  const halfD = orderedBarLengthMm(config.depth) / 2
-  const depthM = mm(config.anchorDepthMm)
+  if (holes.length === 0) return null
+
+  const pitH = mm(config.anchorDepthMm)
   const pitR = 0.09
-  const pitH = depthM
-
-  const corners: [number, number, number][] = [
-    [-halfW, 0, -halfD],
-    [halfW, 0, -halfD],
-    [-halfW, 0, halfD],
-    [halfW, 0, halfD],
-  ].map(([x, , z]) => [mm(x), 0, mm(z)])
 
   return (
     <group>
-      {corners.map(([x, , z], i) => (
-        <mesh key={i} position={[x, -pitH / 2, z]}>
+      {holes.map((h) => (
+        <mesh key={h.id} position={[mm(h.xMm), -pitH / 2, mm(h.zMm)]}>
           <cylinderGeometry args={[pitR, pitR * 1.05, pitH, 16]} />
           <meshStandardMaterial color="#8a8f94" roughness={0.95} metalness={0.05} transparent opacity={0.55} />
         </mesh>
       ))}
       {/* Maaiveld-markering */}
-      {corners.map(([x, , z], i) => (
-        <mesh key={`ring-${i}`} position={[x, 0.003, z]} rotation={[-Math.PI / 2, 0, 0]}>
+      {holes.map((h) => (
+        <mesh key={`ring-${h.id}`} position={[mm(h.xMm), 0.003, mm(h.zMm)]} rotation={[-Math.PI / 2, 0, 0]}>
           <ringGeometry args={[pitR * 0.55, pitR * 0.72, 24]} />
           <meshStandardMaterial color="#6b5a45" roughness={0.9} metalness={0} />
         </mesh>

@@ -9,22 +9,38 @@ const LIFT_M = 0.012
 
 interface FootprintOutlineProps {
   pipes: ScenePipe[]
+  /**
+   * Config-buitenmaten (mm). Wanneer gezet: labels matchen de invoervelden Breedte/Diepte.
+   * Weglaten: labels volgen de echte pipe-footprint (L+Ø), bv. bij buislengte-modus.
+   */
+  labelWidthMm?: number
+  labelDepthMm?: number
 }
 
 /** Rechthoek op de grond met de benodigde ruimte (lengte × breedte) van het toestel. */
-export function FootprintOutline({ pipes }: FootprintOutlineProps) {
+export function FootprintOutline({ pipes, labelWidthMm, labelDepthMm }: FootprintOutlineProps) {
   const rect = useMemo(() => {
     const fp = computeFootprint(pipes)
     if (!fp) return null
-    const w = fp.maxX - fp.minX
-    const d = fp.maxZ - fp.minZ
-    return { minX: fp.minX, maxX: fp.maxX, minZ: fp.minZ, maxZ: fp.maxZ, w, d }
+    return {
+      minX: fp.minX,
+      maxX: fp.maxX,
+      minZ: fp.minZ,
+      maxZ: fp.maxZ,
+      w: fp.maxX - fp.minX,
+      d: fp.maxZ - fp.minZ,
+      widthMm: fp.widthMm,
+      depthMm: fp.depthMm,
+    }
   }, [pipes])
 
   if (!rect) return null
-  const { minX, maxX, minZ, maxZ, w, d } = rect
+  const { minX, maxX, minZ, maxZ, w, d, widthMm, depthMm } = rect
   const y = LIFT_M
   const labelSize = Math.min(Math.max(Math.max(w, d) * 0.055, 0.09), 0.2)
+  // Config-overrides alleen voor configurator-preview; editor gebruikt echte envelope.
+  const widthLabelMm = labelWidthMm ?? widthMm
+  const depthLabelMm = labelDepthMm ?? depthMm
 
   const labelProps = {
     fontSize: labelSize,
@@ -57,7 +73,7 @@ export function FootprintOutline({ pipes }: FootprintOutlineProps) {
         rotation={[-Math.PI / 2, 0, 0]}
         {...labelProps}
       >
-        {formatMm(Math.round(w * 1000))}
+        {formatMm(widthLabelMm)}
       </Text>
       {/* Diepte langs Z — label aan de rechterzijde */}
       <Text
@@ -65,7 +81,7 @@ export function FootprintOutline({ pipes }: FootprintOutlineProps) {
         rotation={[-Math.PI / 2, 0, Math.PI / 2]}
         {...labelProps}
       >
-        {formatMm(Math.round(d * 1000))}
+        {formatMm(depthLabelMm)}
       </Text>
     </group>
   )

@@ -1,5 +1,5 @@
 import type { BomFitting, BomPipe, BomResult, KlimrekConfig } from '../types'
-import { orderedBarLengthMm } from './scene'
+import { barLengthFromConfig } from './dimensions'
 
 export const PIPE_LABEL = 'Buis'
 
@@ -26,14 +26,14 @@ function addFitting(fittings: BomFitting[], type: BomFitting['type'], quantity: 
  * Buizen zijn altijd gewone buizen op maat — gegroepeerd per lengte.
  */
 export function calculateKlimrekBom(config: KlimrekConfig): BomResult {
-  const { width, depth, height, rungCount, includeRoof, baseType, anchorDepthMm } = config
+  const { height, rungCount, includeRoof, baseType, anchorDepthMm } = config
   const pipes: BomPipe[] = []
   const fittings: BomFitting[] = []
   const notes: string[] = []
 
   const postLength = height + (baseType === 'grondanker' ? anchorDepthMm : 0)
-  const rungLength = orderedBarLengthMm(width)
-  const depthBarLength = orderedBarLengthMm(depth)
+  const rungLength = barLengthFromConfig(config, 'width')
+  const depthBarLength = barLengthFromConfig(config, 'depth')
 
   addPipe(pipes, postLength, 4)
   addPipe(pipes, rungLength, rungCount * 2)
@@ -56,6 +56,13 @@ export function calculateKlimrekBom(config: KlimrekConfig): BomResult {
     addFitting(fittings, 'voetplaat-rond', 4, 'Onder hoekpaal')
   }
 
+  if (baseType === 'vloerdop') {
+    addFitting(fittings, 'voetdop', 4, 'Onder hoekpaal')
+    notes.push(
+      'Binnenopstelling: het rek staat los op de vloer op rubberen/kunststof voetdoppen (anti-slip).',
+    )
+  }
+
   addFitting(fittings, 't-kort', rungCount * 4, 'T-stuk op staander')
   addFitting(fittings, 'kniestuk-90', 4, 'Hoekverbinding')
 
@@ -67,12 +74,15 @@ export function calculateKlimrekBom(config: KlimrekConfig): BomResult {
     notes.push('Bij een hoogte boven 2 m adviseren we minimaal Ø 33,7 mm voor extra stevigheid.')
   }
 
-  if (config.materialId === 'zwart' || config.materialId === 'wit' || config.materialId === 'beige') {
+  if (
+    baseType !== 'vloerdop' &&
+    (config.materialId === 'zwart' || config.materialId === 'wit' || config.materialId === 'beige')
+  ) {
     notes.push('Gekozen materiaal is primair voor binnen; overweeg groen outdoor of zwart outdoor voor de tuin.')
   }
 
   notes.push(
-    'Steigerbuisgroothandel zaagt buizen gratis op maat. Geef de exacte lengtes door bij bestelling.',
+    'Veel steigerbuisleveranciers zagen buizen gratis op maat. Geef de exacte lengtes door bij bestelling.',
   )
 
   const totalPipeLengthMm = pipes.reduce((sum, p) => sum + p.lengthMm * p.quantity, 0)

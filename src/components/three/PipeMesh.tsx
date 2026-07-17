@@ -17,11 +17,14 @@ interface PipeMeshProps {
   drawMode?: boolean
   hingeMode?: boolean
   moveMode?: boolean
+  plankMode?: boolean
   onSelect?: (id: string, worldPosition: Vec3) => void
   onDrawClick?: (snapOnPipe: Vec3, pipeId: string, modifiers: PointerModifiers) => void
   onDrawHover?: (snapOnPipe: Vec3, pipeId: string, modifiers: PointerModifiers) => void
   onHingeClick?: (snapOnPipe: Vec3, pipeId: string, modifiers: PointerModifiers) => void
   onHingeHover?: (snapOnPipe: Vec3, pipeId: string, modifiers: PointerModifiers) => void
+  onPlankClick?: (snapOnPipe: Vec3, pipeId: string, modifiers: PointerModifiers) => void
+  onPlankHover?: (snapOnPipe: Vec3, pipeId: string, modifiers: PointerModifiers) => void
   onMoveStart?: (pipeId: string, grab: Vec3) => void
   onMoveDrag?: (rayOrigin: Vec3, rayDir: Vec3) => void
   onMoveEnd?: (rayOrigin: Vec3, rayDir: Vec3) => void
@@ -36,11 +39,14 @@ export function PipeMesh({
   drawMode = false,
   hingeMode = false,
   moveMode = false,
+  plankMode = false,
   onSelect,
   onDrawClick,
   onDrawHover,
   onHingeClick,
   onHingeHover,
+  onPlankClick,
+  onPlankHover,
   onMoveStart,
   onMoveDrag,
   onMoveEnd,
@@ -76,7 +82,7 @@ export function PipeMesh({
   // Teken/scharnier: op pointerDown reageren (vóór het grond-vlak) en propagatie stoppen,
   // zodat het onzichtbare grondvlak van de tool niet eerst een buis naar de grond plaatst.
   const handleActionDown = (e: ThreeEvent<PointerEvent>) => {
-    if (!interactive || (!drawMode && !hingeMode)) return
+    if (!interactive || (!drawMode && !hingeMode && !plankMode)) return
     e.stopPropagation()
     const modifiers = mods(e)
     if (onDrawClick) {
@@ -85,11 +91,17 @@ export function PipeMesh({
     }
     if (onHingeClick) {
       onHingeClick(snapOnPipe(e.point, modifiers.precise), pipe.id, modifiers)
+      return
+    }
+    if (onPlankClick) {
+      // Oppervlakte-hit (niet centerline): verticale planken bepalen hiermee
+      // aan welke kant van de buis ze komen (offset = straal + half dikte).
+      onPlankClick([e.point.x, e.point.y, e.point.z], pipe.id, modifiers)
     }
   }
 
   const handleSelectClick = (e: ThreeEvent<MouseEvent>) => {
-    if (!interactive || drawMode || hingeMode || moveMode) return
+    if (!interactive || drawMode || hingeMode || moveMode || plankMode) return
     e.stopPropagation()
     onSelect?.(pipe.id, [e.point.x, e.point.y, e.point.z])
   }
@@ -121,7 +133,11 @@ export function PipeMesh({
   const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
     if (!interactive) return
     e.stopPropagation()
-    document.body.style.cursor = moveMode ? 'grab' : drawMode || hingeMode ? 'crosshair' : 'pointer'
+    document.body.style.cursor = moveMode
+      ? 'grab'
+      : drawMode || hingeMode || plankMode
+        ? 'crosshair'
+        : 'pointer'
   }
 
   const handlePointerMove = (e: ThreeEvent<PointerEvent>) => {
@@ -135,6 +151,11 @@ export function PipeMesh({
     if (hingeMode && onHingeHover) {
       e.stopPropagation()
       onHingeHover(snapOnPipe(e.point, modifiers.precise), pipe.id, modifiers)
+      return
+    }
+    if (plankMode && onPlankHover) {
+      e.stopPropagation()
+      onPlankHover([e.point.x, e.point.y, e.point.z], pipe.id, modifiers)
     }
   }
 
@@ -142,13 +163,14 @@ export function PipeMesh({
     document.body.style.cursor = 'default'
   }
 
-  const pickRadius = drawMode || hingeMode || moveMode ? radius * 3.2 : radius
+  const actionMode = drawMode || hingeMode || plankMode
+  const pickRadius = actionMode || moveMode ? radius * 3.2 : radius
   const pickHandlers = {
     onClick: handleSelectClick,
-    onPointerDown: moveMode ? handleMoveDown : drawMode || hingeMode ? handleActionDown : undefined,
+    onPointerDown: moveMode ? handleMoveDown : actionMode ? handleActionDown : undefined,
     onPointerUp: moveMode ? handleMoveUp : undefined,
     onPointerOver: handlePointerOver,
-    onPointerMove: moveMode ? handleMoveMove : drawMode || hingeMode ? handlePointerMove : undefined,
+    onPointerMove: moveMode ? handleMoveMove : actionMode ? handlePointerMove : undefined,
     onPointerOut: handlePointerOut,
   }
 
@@ -157,13 +179,13 @@ export function PipeMesh({
 
   return (
     <group position={position} quaternion={quaternion}>
-      {(drawMode || hingeMode || moveMode) && (
+      {(actionMode || moveMode) && (
         <mesh {...pickHandlers}>
           <cylinderGeometry args={[pickRadius, pickRadius, length, 12]} />
           <meshStandardMaterial visible={false} />
         </mesh>
       )}
-      <mesh ref={meshRef} {...(drawMode || hingeMode || moveMode ? {} : pickHandlers)}>
+      <mesh ref={meshRef} {...(actionMode || moveMode ? {} : pickHandlers)}>
         <cylinderGeometry args={[radius, radius, length, 16]} />
         <meshStandardMaterial
           color={color}

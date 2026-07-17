@@ -12,6 +12,7 @@ import {
   type HoleCenterDimensions,
   type HoleSpan,
 } from './floorplan'
+import { plankFootprintCorners } from './planks'
 import { openPrintDocument } from './printDocument'
 
 const dimNumberFormat = new Intl.NumberFormat('nl-NL', { maximumFractionDigits: 1 })
@@ -289,6 +290,16 @@ export function buildFloorplanSvg(scene: SceneModel, config: KlimrekConfig): str
   const rect = `<rect x="${minXmm}" y="${minZmm}" width="${footprint.widthMm}" height="${footprint.depthMm}"
     fill="none" stroke="#2d5a3d" stroke-width="6" stroke-dasharray="20 14" opacity="0.55" />`
 
+  // Steigerplanken als lichte houtkleurige rechthoeken onder de buislijnen.
+  const plankShapes = (scene.planks ?? [])
+    .map((plank) => {
+      const pts = plankFootprintCorners(plank)
+        .map((c) => `${c.xMm},${c.zMm}`)
+        .join(' ')
+      return `<polygon points="${pts}" fill="#e4c79a" stroke="#b3854d" stroke-width="3" opacity="0.7" />`
+    })
+    .join('')
+
   // Staanders projecteren van bovenaf tot een punt — die worden als cirkel
   // op ware grootte getekend; liggende buizen als lijn op ware breedte.
   const isPointProjection = (p: (typeof pipes)[number]) =>
@@ -351,6 +362,7 @@ export function buildFloorplanSvg(scene: SceneModel, config: KlimrekConfig): str
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${layout.viewBox}" width="${layout.width}" height="${layout.height}" role="img" aria-label="Plattegrond bovenaanzicht">
     ${svgDimMarkers()}
     ${rect}
+    ${plankShapes}
     ${pipeLines}
     ${postMarks}
     ${holeDimLines}
@@ -465,10 +477,22 @@ export function printFloorplan({ scene, config, materialId }: FloorplanPrintOpti
     Materiaal: <strong>${esc(material?.name ?? materialId)}</strong> · Ø ${config.diameter} mm<br />
     ${holeDims ? `${holeDimensionsSummary(holeDims)}<br />` : ''}
     ${footprint ? `Footprint buitenmaat: ${esc(formatMm(footprint.widthMm))} × ${esc(formatMm(footprint.depthMm))}` : ''}
-    ${config.baseType === 'grondanker' ? ` · Grondanker ${config.anchorDepthMm} mm onder maaiveld` : ' · Voetplaten (geen gaten)'}
+    ${
+      config.baseType === 'grondanker'
+        ? ` · Grondanker ${config.anchorDepthMm} mm onder maaiveld`
+        : config.baseType === 'vloerdop'
+          ? ' · Binnenopstelling: los op rubberen voetdoppen (geen gaten)'
+          : ' · Voetplaten (geen gaten)'
+    }
   </p>
   <div class="floorplan-wrap">${svg}</div>
-  ${config.baseType === 'grondanker' ? holeTableRows(holes, scene) : '<p>Voetplaat-onderstel: geen betonpoeren nodig. Zet voetplaten op maaiveld op de hoeken van het footprint.</p>'}
+  ${
+    config.baseType === 'grondanker'
+      ? holeTableRows(holes, scene)
+      : config.baseType === 'vloerdop'
+        ? '<p>Binnenopstelling: het rek staat los op de vloer op rubberen/kunststof voetdoppen — geen gaten of betonpoeren nodig. Gebruik de footprint en uitzetmaten om de plek op de vloer te bepalen.</p>'
+        : '<p>Voetplaat-onderstel: geen betonpoeren nodig. Zet voetplaten op maaiveld op de hoeken van het footprint.</p>'
+  }
   <p class="footer">Legenda: oranje cirkel = gat (middelpunt gemarkeerd), donkerblauwe stip = staander (doorsnede op ware grootte), lichtblauwe lijn = liggende buis, paars = losse maatstukken tussen middelpunten, groene stippellijn = diagonaal per gesloten rechthoek, donkergroen stippel = footprint buitenmaat.</p>`
 
   return openPrintWindow('Plattegrond', body)
@@ -522,7 +546,13 @@ export function printBuildInstructions({
   <p class="meta">
     ${esc(date)}<br />
     Materiaal: <strong>${esc(material?.name ?? materialId)}</strong> · Ø ${config.diameter} mm<br />
-    ${config.baseType === 'grondanker' ? `Grondanker: buizen ${config.anchorDepthMm} mm onder maaiveld` : 'Onderstel: voetplaten op maaiveld'}
+    ${
+      config.baseType === 'grondanker'
+        ? `Grondanker: buizen ${config.anchorDepthMm} mm onder maaiveld`
+        : config.baseType === 'vloerdop'
+          ? 'Binnenopstelling: rek staat los op de vloer op rubberen voetdoppen'
+          : 'Onderstel: voetplaten op maaiveld'
+    }
     ${holeDims ? `<br />${holeDimensionsSummary(holeDims)}` : ''}
   </p>
 

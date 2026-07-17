@@ -1,5 +1,6 @@
 import type { KlimrekConfig, SceneModel, ScenePipe, Vec3 } from '../types'
-import { baseGroundY, pipeLengthMm, postCenterSpanMm } from './scene'
+import { baseGroundY, pipeLengthMm } from './scene'
+import { barLengthFromConfig } from './dimensions'
 
 const GROUND_TOL_M = 0.02
 const MERGE_TOL_M = 0.08
@@ -608,9 +609,12 @@ function cornerLabel(xMm: number, zMm: number, cxMm: number, czMm: number): stri
   return `${lr}-${fb}`
 }
 
-function configCornerHoles(config: KlimrekConfig): AnchorHole[] {
-  const halfW = postCenterSpanMm(config.width, config.diameter) / 2
-  const halfD = postCenterSpanMm(config.depth, config.diameter) / 2
+function configCornerHoles(
+  config: Pick<KlimrekConfig, 'width' | 'depth' | 'dimensionMode' | 'baseType' | 'anchorDepthMm'>,
+): AnchorHole[] {
+  // Zelfde centerline-afstand als buildSceneFromConfig (niet +Ø).
+  const halfW = barLengthFromConfig(config, 'width') / 2
+  const halfD = barLengthFromConfig(config, 'depth') / 2
   const positions: [number, number][] = [
     [-halfW, -halfD],
     [halfW, -halfD],
@@ -648,7 +652,13 @@ function mergeGroundPoints(points: Vec3[]): Vec3[] {
 }
 
 /** Betonpoeren / gaten voor grondankers — afgeleid uit scene of config-hoeken. */
-export function computeAnchorHoles(scene: SceneModel, config: KlimrekConfig): AnchorHole[] {
+export function computeAnchorHoles(
+  scene: SceneModel,
+  config: Pick<
+    KlimrekConfig,
+    'width' | 'depth' | 'dimensionMode' | 'diameter' | 'baseType' | 'anchorDepthMm'
+  >,
+): AnchorHole[] {
   if (config.baseType !== 'grondanker' || config.anchorDepthMm <= 0) return []
 
   const groundY = baseGroundY(config)

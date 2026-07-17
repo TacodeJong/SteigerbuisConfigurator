@@ -59,10 +59,9 @@ body {
 
 #root {
   width: 100%;
-  max-width: 1400px;
   height: 100svh;
   max-height: 100svh;
-  margin: 0 auto;
+  margin: 0;
   overflow: hidden;
   box-sizing: border-box;
 }

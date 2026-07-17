@@ -1,4 +1,4 @@
-import type { SupplierQuote } from './types'
+import type { QuoteLine, SupplierQuote } from './types'
 import {
   buildAddToCartParams,
   parseAddToCartForm,
@@ -27,10 +27,17 @@ export interface GroothandelCartLine {
 }
 
 export function groothandelCartableLines(quote: SupplierQuote) {
-  return quote.lines.filter((l) => l.productUrl)
+  // Planken/bevestiging (hout) zijn geen shop-producten — alleen buizen en koppelingen.
+  return quote.lines.filter(
+    (l): l is QuoteLine & { kind: 'pipe' | 'fitting' } =>
+      !!l.productUrl && (l.kind === 'pipe' || l.kind === 'fitting'),
+  )
 }
 
 export function canFillGroothandelCart(quote: SupplierQuote): boolean {
+  // De winkelwagen-flow draait via de Vite dev-proxy (/shop) en .env-inloggegevens;
+  // op een statische (productie-)site bestaat die proxy niet, dus knop verbergen.
+  if (!import.meta.env.DEV) return false
   return quote.supplierId === 'steigerbuisgroothandel' && groothandelCartableLines(quote).length > 0
 }
 

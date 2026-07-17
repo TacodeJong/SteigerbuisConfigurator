@@ -7,6 +7,7 @@ import { ConfiguratorForm } from './components/ConfiguratorForm'
 import { BomList } from './components/BomList'
 import { FramePreview3D } from './components/FramePreview3D'
 import { SceneEditor } from './components/SceneEditor'
+import { SuppliersMenu } from './components/SuppliersMenu'
 import type { BomHighlight, KlimrekConfig, SceneModel, ViewMode } from './types'
 import './App.css'
 
@@ -33,8 +34,30 @@ function App() {
     setViewMode(mode)
   }
 
-  const resetEditorFromConfig = () => {
-    setEditorScene(buildSceneFromConfig(config))
+  /** Bevestig overschrijven; geeft nieuwe scene terug (null = geannuleerd). Zet zelf niets. */
+  const buildEditorSceneFromConfig = (): SceneModel | null => {
+    if (
+      editorScene !== null &&
+      !window.confirm('Huidige editor-scene overschrijven met het configurator-model?')
+    ) {
+      return null
+    }
+    return buildSceneFromConfig(config)
+  }
+
+  /** Vervang editor-scene door huidige configurator; optioneel naar editor-tab. */
+  const loadConfigIntoEditor = (switchToEditor: boolean): boolean => {
+    const next = buildEditorSceneFromConfig()
+    if (!next) return false
+    setEditorScene(next)
+    if (switchToEditor) setViewMode('editor')
+    return true
+  }
+
+  /** Voor editor-toolbar: SceneEditor past toe via history (undo herstelt vorige scene). */
+  const resetEditorFromConfig = (): SceneModel | null => buildEditorSceneFromConfig()
+  const openConfigInEditor = () => {
+    loadConfigIntoEditor(true)
   }
 
   return (
@@ -45,29 +68,32 @@ function App() {
             <p className="eyebrow">Steigerbuis configurator</p>
             <h1>Klimrek samenstellen</h1>
             <p className="subtitle">
-              Stel je tuin-klimrek samen met onderdelen van{' '}
-              <a href="https://www.steigerbuisgroothandel.nl/" target="_blank" rel="noopener noreferrer">
-                Steigerbuisgroothandel.nl
-              </a>
-              . Configureer afmetingen, bekijk in 3D en pas aan in de editor.
+              Stel je tuin-klimrek samen met steigerbuis-onderdelen. Configureer afmetingen, bekijk in
+              3D en pas aan in de editor.
             </p>
           </div>
-          <nav className="view-tabs" aria-label="Weergavemodus">
-            <button
-              type="button"
-              className={viewMode === 'configurator' ? 'active' : ''}
-              onClick={() => switchMode('configurator')}
-            >
-              Configurator
-            </button>
-            <button
-              type="button"
-              className={viewMode === 'editor' ? 'active' : ''}
-              onClick={() => switchMode('editor')}
-            >
-              3D Editor
-            </button>
-          </nav>
+          <div className="header-actions">
+            <SuppliersMenu
+              variant="dropdown"
+              hint="Vergelijk of bestel bij een van deze steigerbuisleveranciers."
+            />
+            <nav className="view-tabs" aria-label="Weergavemodus">
+              <button
+                type="button"
+                className={viewMode === 'configurator' ? 'active' : ''}
+                onClick={() => switchMode('configurator')}
+              >
+                Configurator
+              </button>
+              <button
+                type="button"
+                className={viewMode === 'editor' ? 'active' : ''}
+                onClick={() => switchMode('editor')}
+              >
+                3D Editor
+              </button>
+            </nav>
+          </div>
         </div>
       </header>
 
@@ -78,7 +104,17 @@ function App() {
           </div>
           <div className="main-center">
             <div className="preview-panel preview-panel-fill">
-              <h2>3D voorbeeld</h2>
+              <div className="preview-panel-header">
+                <h2>3D voorbeeld</h2>
+                <button
+                  type="button"
+                  className="bom-action-btn"
+                  onClick={openConfigInEditor}
+                  title="Laad dit configurator-model in de 3D-editor"
+                >
+                  Openen in 3D-editor
+                </button>
+              </div>
               <FramePreview3D
                 scene={previewScene}
                 config={config}
@@ -108,12 +144,10 @@ function App() {
 
       <footer className="app-footer">
         <p>
-          Onderdelen en prijzen vind je op{' '}
-          <a href="https://www.steigerbuisgroothandel.nl/" target="_blank" rel="noopener noreferrer">
-            steigerbuisgroothandel.nl
-          </a>
-          . Buizen worden gratis op maat gezaagd.
+          Onderdelen en prijzen via een steigerbuisleverancier. Veel leveranciers zagen buizen gratis op
+          maat.
         </p>
+        <SuppliersMenu variant="dropdown" />
       </footer>
     </div>
   )

@@ -494,6 +494,32 @@ export function EndCapFitting({ axis, pipeRadius, mat }: EndCapProps) {
   )
 }
 
+interface FootCapProps {
+  pipeRadius: number
+}
+
+/** Rubberen/kunststof voetdop op buiseinde (binnenopstelling) — dop om de buis, rek staat los op de vloer. */
+export function FootCapFitting({ pipeRadius }: FootCapProps) {
+  const capR = pipeRadius * 1.25
+  const capH = pipeRadius * 2.2
+  const rubber = { color: '#23262a', roughness: 0.95, metalness: 0.02 }
+
+  return (
+    <group>
+      {/* Huls om het buiseinde */}
+      <mesh position={[0, capH / 2, 0]}>
+        <cylinderGeometry args={[capR, capR * 1.08, capH, 20]} />
+        <meshStandardMaterial {...rubber} />
+      </mesh>
+      {/* Iets bredere anti-slip zool op de vloer */}
+      <mesh position={[0, pipeRadius * 0.15, 0]}>
+        <cylinderGeometry args={[capR * 1.12, capR * 1.18, pipeRadius * 0.3, 20]} />
+        <meshStandardMaterial {...rubber} />
+      </mesh>
+    </group>
+  )
+}
+
 interface FootPlateProps {
   pipeRadius: number
   mat: FittingMaterialProps

@@ -136,6 +136,12 @@ export const FITTINGS: FittingCatalogItem[] = [
     shopCategory: 'Afdekdoppen',
   },
   {
+    type: 'voetdop',
+    name: 'Voetdop rubber (anti-slip)',
+    description: 'Kunststof/rubberen dop op het buiseinde — rek staat binnen los op de vloer',
+    shopCategory: 'Afdekdoppen',
+  },
+  {
     type: 'scharnieroog',
     name: 'Scharnieroog',
     description: 'Oog op frame-buis — vrouwelijk deel van scharnier',
@@ -162,3 +168,28 @@ export const FITTINGS: FittingCatalogItem[] = [
 ]
 
 export const STANDARD_PIPE_LENGTHS_MM = [500, 1000, 1500, 2000, 2500, 3000, 6000]
+
+/** Steigerplank / plaat + bevestiging (houten delen — geen buiskoppelingen). Prijzen excl. btw. */
+export const PLANK_CATALOG = {
+  plank: {
+    name: 'Steigerplank 30 × 195 mm',
+    description: 'Geschaafde vuren steigerplank, op maat te zagen',
+    pricePerMeterExVat: 5.5,
+    shopUrl: `${SHOP_BASE}/steigerplanken`,
+  },
+  plate: {
+    name: 'Houten plaat (multiplex)',
+    description: 'Multiplex of vergelijkbare constructieplaat, op maat (typisch 18 mm)',
+    /** Richtprijs per m² excl. btw. */
+    pricePerSqmExVat: 28,
+    shopUrl: `${SHOP_BASE}/steigerplanken`,
+  },
+  mount: {
+    // Catalogus-key `mount` blijft (was "plankdrager"); label is schapsteun.
+    name: 'Schapsteun / planksteun',
+    description:
+      'Kee Klamp-achtige schapsteun: klemhuls op de staander met twee vleugels waarop de plank rust',
+    unitPriceExVat: 3.95,
+    shopUrl: `${SHOP_BASE}/buiskoppelingen`,
+  },
+} as const

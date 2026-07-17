@@ -515,6 +515,16 @@ export function projectPointerOnViewPlane(anchor: Vec3, rayOrigin: Vec3, rayDir:
   return cursorOnCameraPlane(anchor, rayOrigin, rayDir)
 }
 
+/** Projecteer de muisstraal op een vlak door `anchor` met gegeven normaal (null als parallel). */
+export function projectPointerOnPlane(
+  anchor: Vec3,
+  planeNormal: Vec3,
+  rayOrigin: Vec3,
+  rayDir: Vec3,
+): Vec3 | null {
+  return intersectRayPlane(rayOrigin, rayDir, anchor, planeNormal)
+}
+
 const MOVE_GROUND_TOL_M = 0.01
 
 export interface MovedPipe {

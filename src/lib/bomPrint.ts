@@ -1,5 +1,6 @@
 import type { BomResult, KlimrekConfig, MaterialId } from '../types'
 import { FITTINGS, MATERIALS } from '../data/catalog'
+import { PRICED_SUPPLIERS } from '../data/supplierRegistry'
 import { FITTING_TYPE_LABELS } from './fittings'
 import { formatMm, formatMeters } from './bom'
 import { fillPrintWindow, openPrintDocument, openPrintPlaceholder } from './printDocument'
@@ -47,7 +48,7 @@ export interface PrintBomOptions {
   bom: BomResult
   config: KlimrekConfig
   materialId: MaterialId
-  /** Artikelnummers van Steigerbuisgroothandel (optioneel). */
+  /** Artikelnummers van een leverancier (optioneel). */
   quoteLines?: QuoteLine[]
 }
 
@@ -68,6 +69,16 @@ export function buildOrderListText(bom: BomResult, quoteLines?: QuoteLine[]): st
     const label = fittingLabel(fitting.type)
     const skuPart = sku ? `\t${sku}` : ''
     rows.push(`${fitting.quantity}×\t${label} (${fitting.label})${skuPart}`)
+  }
+
+  for (const plank of bom.planks ?? []) {
+    rows.push(
+      `${plank.quantity}×\t${plank.label} ${formatMm(plank.lengthMm)} (${plank.thicknessMm} × ${plank.widthMm} mm)`,
+    )
+  }
+
+  for (const item of bom.hardware ?? []) {
+    rows.push(`${item.quantity}×\t${item.label}`)
   }
 
   return rows.join('\n')
@@ -103,7 +114,28 @@ export function buildBomHtml({ bom, config, materialId, quoteLines }: PrintBomOp
     })
     .join('')
 
+  const plankRows = (bom.planks ?? [])
+    .map(
+      (plank) => `<tr>
+        <td>${esc(plank.label)} · ${esc(formatMm(plank.lengthMm))} (${plank.thicknessMm} × ${plank.widthMm} mm)</td>
+        <td class="num">${plank.quantity}×</td>
+      </tr>`,
+    )
+    .join('')
+
+  const hardwareRows = (bom.hardware ?? [])
+    .map(
+      (item) => `<tr>
+        <td>${esc(item.label)}</td>
+        <td class="num">${item.quantity}×</td>
+      </tr>`,
+    )
+    .join('')
+
   const notes = bom.notes.map((n) => `<li>${esc(n)}</li>`).join('')
+  const supplierLinks = PRICED_SUPPLIERS.map(
+    (s) => `<a href="${esc(s.website)}">${esc(s.name)}</a>`,
+  ).join(' · ')
 
   return `<!DOCTYPE html>
 <html lang="nl">
@@ -118,7 +150,13 @@ export function buildBomHtml({ bom, config, materialId, quoteLines }: PrintBomOp
     ${esc(date)}<br />
     Materiaal: <strong>${esc(material?.name ?? materialId)}</strong> · Ø ${config.diameter} mm<br />
     Totaal buislengte: <strong>${esc(formatMeters(bom.totalPipeLengthMm))}</strong>
-    ${config.baseType === 'grondanker' ? ` · Grondanker ${config.anchorDepthMm} mm` : ' · Voetplaten'}
+    ${
+      config.baseType === 'grondanker'
+        ? ` · Grondanker ${config.anchorDepthMm} mm`
+        : config.baseType === 'vloerdop'
+          ? ' · Binnen, los op voetdoppen'
+          : ' · Voetplaten'
+    }
   </p>
 
   <h2>Steigerbuizen</h2>
@@ -141,12 +179,24 @@ export function buildBomHtml({ bom, config, materialId, quoteLines }: PrintBomOp
       : ''
   }
 
+  ${
+    plankRows || hardwareRows
+      ? `<h2>Steigerplanken &amp; bevestiging</h2>
+  <table>
+    <thead><tr>
+      <th>Onderdeel</th><th>Aantal</th>
+    </tr></thead>
+    <tbody>${plankRows}${hardwareRows}</tbody>
+  </table>`
+      : ''
+  }
+
   ${bom.notes.length > 0 ? `<ul class="notes">${notes}</ul>` : ''}
 
   <p class="footer">
-    Gegenereerd met Steigerbuis configurator · Onderdelen via
-    <a href="https://www.steigerbuisgroothandel.nl/">steigerbuisgroothandel.nl</a>
-    ${hasSku ? ' · Artikelnummers: Steigerbuisgroothandel' : ''}
+    Gegenereerd met Steigerbuis configurator · Bestel bij een steigerbuisleverancier:
+    ${supplierLinks}
+    ${hasSku ? ' · Artikelnummers van de gekozen leverancier' : ''}
   </p>
 </body>
 </html>`

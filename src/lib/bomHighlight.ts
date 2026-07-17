@@ -29,6 +29,16 @@ export function resolveBomHighlightIds(scene: SceneModel, highlight: BomHighligh
       }
       return new Set(accessories.filter((a) => a.type === highlight.type).map((a) => a.id))
     }
+    case 'plank':
+      return new Set(
+        (scene.planks ?? [])
+          .filter(
+            (p) =>
+              p.lengthMm === highlight.lengthMm &&
+              (highlight.widthMm == null || p.widthMm === highlight.widthMm),
+          )
+          .map((p) => p.id),
+      )
   }
 }
 
@@ -40,5 +50,8 @@ export function isSameBomHighlight(a: BomHighlight | null, b: BomHighlight | nul
     return a.type === b.type && a.label === b.label
   }
   if (a.kind === 'accessory' && b.kind === 'accessory') return a.type === b.type
+  if (a.kind === 'plank' && b.kind === 'plank') {
+    return a.lengthMm === b.lengthMm && (a.widthMm ?? null) === (b.widthMm ?? null)
+  }
   return false
 }

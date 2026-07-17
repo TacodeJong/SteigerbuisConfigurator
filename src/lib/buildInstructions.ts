@@ -2,6 +2,7 @@ import type { BomResult, KlimrekConfig, SceneFitting, SceneModel, ScenePipe } fr
 import { formatMm } from './bom'
 import { ANCHOR_HOLE_DIAMETER_MM, computeAnchorHoles } from './floorplan'
 import { FITTING_TYPE_LABELS } from './fittings'
+import { isVerticalPlank, PLANK_MOUNT_LABEL, plankBomLabel } from './planks'
 import { baseGroundY, pipeLengthMm } from './scene'
 
 export interface BuildPart {
@@ -112,6 +113,14 @@ export function buildInstructions(
       label: `Bekisting Ø ${ANCHOR_HOLE_DIAMETER_MM} mm`,
       quantity: holes.length,
     })
+  } else if (config.baseType === 'vloerdop') {
+    steps.push({
+      order: order++,
+      title: 'Voetdoppen monteren',
+      description:
+        'Schuif op elk buiseinde onderaan een rubberen/kunststof voetdop (anti-slip). Het rek staat los op de vloer — geen graafwerk of verankering nodig. Controleer dat de vloer vlak en schoon is.',
+      parts: countFittings(fittings.filter((f) => f.type === 'voetdop')),
+    })
   } else {
     steps.push({
       order: order++,
@@ -139,7 +148,9 @@ export function buildInstructions(
       description:
         config.baseType === 'grondanker'
           ? `Plaats de hoekpalen in de poeren tot ${formatMm(config.anchorDepthMm)} onder maaiveld. Laat het beton uitharden voordat je verder bouwt.`
-          : 'Plaats de hoekpalen in de voetplaten en controleer dat ze verticaal staan.',
+          : config.baseType === 'vloerdop'
+            ? 'Zet de hoekpalen met gemonteerde voetdop rechtop op de vloer en controleer dat ze verticaal staan.'
+            : 'Plaats de hoekpalen in de voetplaten en controleer dat ze verticaal staan.',
       parts,
     })
   }
@@ -194,6 +205,35 @@ export function buildInstructions(
       title: 'Afdekdoppen plaatsen',
       description: 'Zet afdekdoppen op de open buiseinden bovenop de staanders.',
       parts: countFittings(endCaps),
+    })
+  }
+
+  const planks = scene.planks ?? []
+  if (planks.length > 0) {
+    const byKey = new Map<string, { label: string; lengthMm: number; quantity: number }>()
+    const mounts = scene.plankMounts?.length ?? 0
+    for (const plank of planks) {
+      const label = plankBomLabel(plank.kind)
+      const key = `${label}:${plank.lengthMm}`
+      const existing = byKey.get(key)
+      if (existing) existing.quantity += 1
+      else byKey.set(key, { label, lengthMm: plank.lengthMm, quantity: 1 })
+    }
+    const parts: BuildPart[] = [...byKey.values()]
+      .sort((a, b) => b.lengthMm - a.lengthMm)
+      .map(({ label, lengthMm, quantity }) => ({ label, quantity, lengthMm }))
+    if (mounts > 0) {
+      parts.push({ label: PLANK_MOUNT_LABEL, quantity: mounts })
+    }
+    const hasPlate = planks.some((p) => p.kind === 'plate')
+    const hasVertical = planks.some((p) => isVerticalPlank(p))
+    steps.push({
+      order: order++,
+      title: hasPlate ? 'Hout (planken/platen) monteren' : 'Planken monteren',
+      description: hasVertical
+        ? 'Plaats horizontale planken/platen op de liggers en verticale schermen rechtop op de aangegeven buizen. Schuif per relevante steun een schapsteun (klemhuls met twee vleugels) op en schroef het hout vast door de boutgaten.'
+        : 'Leg de steigerplanken of platen haaks op de dragende buizen volgens het 3D-model. Schuif per relevante staander een schapsteun (klemhuls met twee vleugels) op hoogte van de onderkant en schroef vast door de boutgaten.',
+      parts,
     })
   }
 

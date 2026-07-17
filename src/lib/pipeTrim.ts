@@ -14,6 +14,7 @@ export const FITTING_ARM_OFFSET_M = FITTING_HALF_LENGTH_M * 0.92
 
 const TRIM_BY_TYPE: Partial<Record<FittingType, number>> = {
   afdekdop: FITTING_HALF_LENGTH_M * 0.85,
+  voetdop: FITTING_HALF_LENGTH_M * 0.4,
   'voetplaat-rond': FITTING_HALF_LENGTH_M * 0.85,
   't-kort': FITTING_HALF_LENGTH_M * 0.88,
   'kniestuk-90': FITTING_HALF_LENGTH_M * 0.92,

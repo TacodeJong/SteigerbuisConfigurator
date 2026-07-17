@@ -4,6 +4,7 @@ import { ContactShadows, Html, Line, OrbitControls } from '@react-three/drei'
 import type { EditorSelection, EditorTool, KlimrekConfig, SceneModel, Vec3 } from '../../types'
 import { MATERIALS } from '../../data/catalog'
 import { PIPE_LABEL } from '../../lib/bom'
+import { configEnvironment } from '../../lib/environment'
 import { placeHingeSpan, removeAccessoryFromScene, removePipeFromScene, sharedSleeveEyeIds } from '../../lib/accessories'
 import { trimPipesAtFittings } from '../../lib/pipeTrim'
 import {
@@ -20,6 +21,7 @@ import {
   resolveHingeFromPoint,
   resolveMovedPipe,
   projectPointerOnViewPlane,
+  projectPointerOnPlane,
   isValidHingeEnd,
   isValidHingeStart,
   type MovedPipe,
@@ -27,6 +29,24 @@ import {
   type SnapResult,
 } from '../../lib/snap'
 import { createPipeBetween, nextPipeId, syncSceneFittings } from '../../lib/scene'
+import {
+  createPlank,
+  getDefaultPlankKind,
+  getDefaultPlankWidthMm,
+  getDefaultVerticalPlankHeightMm,
+  isVerticalPlank,
+  movePlankHorizontal,
+  nextPlankId,
+  resolvePlankPlane,
+  resolvePlankPlacement,
+  buildPlankMountForPipe,
+  buildPlankMounts,
+  canPlacePlankBeside,
+  seedPlankMountsForPlank,
+  togglePlankMount,
+  type PlankPlacement,
+  type PlankPlane,
+} from '../../lib/planks'
 import type { PointerModifiers } from '../../lib/pointerModifiers'
 import { keyboardModifiers } from '../../lib/pointerModifiers'
 import { applyStretchMove, planStretchMove, type StretchPlan, type StretchResult } from '../../lib/stretch'
@@ -36,8 +56,10 @@ import { drawStartLabel } from '../editor/DrawPipePanel'
 import { RadialMenu } from '../editor/RadialMenu'
 import { AccessoryMesh, HingeConnectionMeshes } from './AccessoryMesh'
 import { PipeMesh } from './PipeMesh'
+import { PlankMesh } from './PlankMesh'
+import { PlankMountMesh } from './PlankMountMesh'
 import { FittingMesh } from './FittingMesh'
-import { GrassGround, SKY_BACKGROUND } from './GrassGround'
+import { SceneEnvironment } from './SceneEnvironment'
 import { FootprintOutline } from './FootprintOutline'
 import { GroundAnchor } from './GroundAnchor'
 
@@ -58,6 +80,8 @@ interface EditorSceneProps {
   tool: EditorTool
   selection: EditorSelection | null
   highlightedIds?: Set<string>
+  /** Actief plaatsingsvlak voor de plank-tool (ghost volgt dit). */
+  plankPlane?: PlankPlane
   onSceneChange: (scene: SceneModel) => void
   onSelectionChange: (selection: EditorSelection | null) => void
   onDrawUiChange?: (ui: DrawUiState | null) => void
@@ -69,6 +93,7 @@ export function EditorScene({
   tool,
   selection,
   highlightedIds,
+  plankPlane = 'xz',
   onSceneChange,
   onSelectionChange,
   onDrawUiChange,
@@ -92,17 +117,54 @@ export function EditorScene({
   } | null>(null)
   const [movePreview, setMovePreview] = useState<MovedPipe | null>(null)
   const [stretchPreview, setStretchPreview] = useState<StretchResult | null>(null)
+  const [plankPreview, setPlankPreview] = useState<PlankPlacement | null>(null)
+  const [plankMoveState, setPlankMoveState] = useState<{ plankId: string; grab: Vec3 } | null>(null)
+  const [plankMovePreview, setPlankMovePreview] = useState<Vec3 | null>(null)
   const lastDrawPipeHover = useRef<{ raw: Vec3; pipeId: string; precise: boolean } | null>(null)
   const lastHingePipeHover = useRef<{ raw: Vec3; pipeId: string; precise: boolean } | null>(null)
+  const lastPlankPipeHover = useRef<{ raw: Vec3; pipeId: string } | null>(null)
 
   const cancelMove = useCallback(() => {
     setMoveState(null)
     setMovePreview(null)
     setStretchPreview(null)
+    setPlankMoveState(null)
+    setPlankMovePreview(null)
     document.body.style.cursor = 'default'
   }, [])
 
   const accessories = useMemo(() => scene.accessories ?? [], [scene.accessories])
+  const planks = useMemo(() => scene.planks ?? [], [scene.planks])
+
+  // Ghost volgt het toolbar-vlak bij — herbereken of wis bij wissel.
+  useEffect(() => {
+    if (tool !== 'plank') {
+      setPlankPreview(null)
+      lastPlankPipeHover.current = null
+      return
+    }
+    const last = lastPlankPipeHover.current
+    if (!last) {
+      setPlankPreview(null)
+      return
+    }
+    const pipe = scene.pipes.find((p) => p.id === last.pipeId)
+    if (!pipe) {
+      setPlankPreview(null)
+      return
+    }
+    const kind = getDefaultPlankKind()
+    const widthMm =
+      plankPlane === 'xz' ? getDefaultPlankWidthMm() : getDefaultVerticalPlankHeightMm()
+    setPlankPreview(
+      resolvePlankPlacement(last.raw, pipe, scene.pipes, planks, {
+        widthMm,
+        plane: plankPlane,
+        kind,
+      }),
+    )
+  }, [plankPlane, tool, scene.pipes, planks])
+
   // Bij dubbelscharnieren (twee ogen op één klempunt) tekent alleen het eerste oog de klem.
   const sharedSleeves = useMemo(() => sharedSleeveEyeIds(accessories), [accessories])
 
@@ -150,9 +212,18 @@ export function EditorScene({
   const handlePipeSelect = useCallback(
     (pipeId: string, worldPosition: Vec3) => {
       if (tool !== 'select') return
+      // Plank geselecteerd: klik op een kandidaat-buis schakelt de schapsteun.
+      if (selection?.kind === 'plank') {
+        const plank = planks.find((p) => p.id === selection.plankId)
+        const pipe = scene.pipes.find((p) => p.id === pipeId)
+        if (plank && pipe && buildPlankMountForPipe(plank, pipe)) {
+          onSceneChange(syncSceneFittings(togglePlankMount(scene, plank.id, pipeId), config))
+          return
+        }
+      }
       onSelectionChange({ kind: 'pipe', pipeId, worldPosition })
     },
-    [tool, onSelectionChange],
+    [tool, selection, planks, scene, config, onSceneChange, onSelectionChange],
   )
 
   const previewEnd = useMemo(() => {
@@ -264,6 +335,7 @@ export function EditorScene({
     if (tool !== 'draw') cancelDraw()
     if (tool !== 'hinge') cancelHingeDraw()
     if (tool !== 'move') cancelMove()
+    if (tool !== 'plank') setPlankPreview(null)
   }, [tool, cancelDraw, cancelHingeDraw, cancelMove])
 
   useEffect(() => {
@@ -338,6 +410,160 @@ export function EditorScene({
       updateHingePreview(resolveHingeFromPoint(raw, hingeStart, scene.pipes, pipeId, modifiers.precise))
     },
     [tool, hingeStart, scene.pipes, updateHingePreview],
+  )
+
+  // Plank-tool: hover toont een ghost-plank in het gekozen plaatsingsvlak;
+  // één klik plaatst hem (zij-snap op het breedte-/dikte-raster).
+  const handlePlankHoverFromPipe = useCallback(
+    (raw: Vec3, pipeId: string) => {
+      if (tool !== 'plank') return
+      const pipe = scene.pipes.find((p) => p.id === pipeId)
+      if (!pipe) return
+      lastPlankPipeHover.current = { raw, pipeId }
+      const kind = getDefaultPlankKind()
+      const widthMm =
+        plankPlane === 'xz' ? getDefaultPlankWidthMm() : getDefaultVerticalPlankHeightMm()
+      setPlankPreview(
+        resolvePlankPlacement(raw, pipe, scene.pipes, planks, {
+          widthMm,
+          plane: plankPlane,
+          kind,
+        }),
+      )
+    },
+    [tool, scene.pipes, planks, plankPlane],
+  )
+
+  const handlePlankClickFromPipe = useCallback(
+    (raw: Vec3, pipeId: string) => {
+      const pipe = scene.pipes.find((p) => p.id === pipeId)
+      if (!pipe) return
+      const kind = getDefaultPlankKind()
+      const widthMm =
+        plankPlane === 'xz' ? getDefaultPlankWidthMm() : getDefaultVerticalPlankHeightMm()
+      const placement = resolvePlankPlacement(raw, pipe, scene.pipes, planks, {
+        widthMm,
+        plane: plankPlane,
+        kind,
+      })
+      if (!placement) return
+      const id = nextPlankId(scene)
+      const plank = createPlank(placement, id)
+      const withPlank = { ...scene, planks: [...planks, plank] }
+      onSceneChange(syncSceneFittings(seedPlankMountsForPlank(withPlank, plank), config))
+      onSelectionChange({ kind: 'plank', plankId: id, worldPosition: plank.position })
+    },
+    [scene, planks, config, plankPlane, onSceneChange, onSelectionChange],
+  )
+
+  const handlePlankSelect = useCallback(
+    (plankId: string, worldPosition: Vec3) => {
+      if (tool !== 'select') return
+      onSelectionChange({ kind: 'plank', plankId, worldPosition })
+    },
+    [tool, onSelectionChange],
+  )
+
+  const deletePlank = useCallback(
+    (plankId: string) => {
+      onSceneChange(
+        syncSceneFittings({ ...scene, planks: planks.filter((p) => p.id !== plankId) }, config),
+      )
+      onSelectionChange(null)
+    },
+    [scene, planks, config, onSceneChange, onSelectionChange],
+  )
+
+  /**
+   * Kopieer de plank strak ernaast (plankbreedte opzij) — voor een dicht platform.
+   * `side` +1 / −1 = beide kanten loodrecht op de planglengte.
+   */
+  const duplicatePlank = useCallback(
+    (plankId: string, side: 1 | -1) => {
+      const source = planks.find((p) => p.id === plankId)
+      if (!source) return
+      const widthDir: Vec3 = [source.axis[2], 0, -source.axis[0]]
+      const stepMm = isVerticalPlank(source) ? source.thicknessMm : source.widthMm
+      const offset = (stepMm / 1000) * side
+      const id = nextPlankId(scene)
+      // Offset in dikte-/breedterichting (kan buiten het vlak zijn) — niet via movePlankHorizontal.
+      const copy: typeof source = {
+        ...source,
+        id,
+        position: [
+          source.position[0] + widthDir[0] * offset,
+          source.position[1],
+          source.position[2] + widthDir[2] * offset,
+        ],
+      }
+      const withPlank = { ...scene, planks: [...planks, copy] }
+      onSceneChange(syncSceneFittings(seedPlankMountsForPlank(withPlank, copy), config))
+      onSelectionChange({ kind: 'plank', plankId: id, worldPosition: copy.position })
+    },
+    [scene, planks, config, onSceneChange, onSelectionChange],
+  )
+
+  const handlePlankMoveStart = useCallback(
+    (plankId: string, grab: Vec3) => {
+      setPlankMoveState({ plankId, grab })
+      setPlankMovePreview(null)
+    },
+    [],
+  )
+
+  const plankMoveDelta = useCallback(
+    (rayOrigin: Vec3, rayDir: Vec3): Vec3 | null => {
+      if (!plankMoveState) return null
+      const plank = planks.find((p) => p.id === plankMoveState.plankId)
+      if (!plank) return null
+      const plane = resolvePlankPlane(plank)
+      const grab = plankMoveState.grab
+
+      let cursor: Vec3
+      if (plane === 'xy') {
+        // Raycast tegen XY-vlak door de plank (normaal ±Z).
+        cursor =
+          projectPointerOnPlane(grab, [0, 0, 1], rayOrigin, rayDir) ??
+          projectPointerOnViewPlane(grab, rayOrigin, rayDir)
+        cursor = [cursor[0], cursor[1], grab[2]]
+      } else if (plane === 'yz') {
+        // Raycast tegen YZ-vlak door de plank (normaal ±X).
+        cursor =
+          projectPointerOnPlane(grab, [1, 0, 0], rayOrigin, rayDir) ??
+          projectPointerOnViewPlane(grab, rayOrigin, rayDir)
+        cursor = [grab[0], cursor[1], cursor[2]]
+      } else {
+        // xz: bestaand gedrag — view-plane; Y blijft vast in movePlankHorizontal.
+        cursor = projectPointerOnViewPlane(grab, rayOrigin, rayDir)
+      }
+
+      return [cursor[0] - grab[0], cursor[1] - grab[1], cursor[2] - grab[2]]
+    },
+    [plankMoveState, planks],
+  )
+
+  const handlePlankMoveDrag = useCallback(
+    (rayOrigin: Vec3, rayDir: Vec3) => {
+      const delta = plankMoveDelta(rayOrigin, rayDir)
+      if (!delta) return
+      setPlankMovePreview(delta)
+    },
+    [plankMoveDelta],
+  )
+
+  const handlePlankMoveEnd = useCallback(
+    (rayOrigin: Vec3, rayDir: Vec3) => {
+      const delta = plankMoveDelta(rayOrigin, rayDir)
+      if (delta && plankMoveState && Math.hypot(delta[0], delta[1], delta[2]) > 0.0005) {
+        const nextPlanks = planks.map((p) =>
+          p.id === plankMoveState.plankId ? movePlankHorizontal(p, delta) : p,
+        )
+        onSceneChange(syncSceneFittings({ ...scene, planks: nextPlanks }, config))
+      }
+      setPlankMoveState(null)
+      setPlankMovePreview(null)
+    },
+    [plankMoveDelta, plankMoveState, planks, scene, config, onSceneChange],
   )
 
   useEffect(() => {
@@ -568,20 +794,17 @@ export function EditorScene({
   const selectedPipe = selection?.kind === 'pipe' ? scene.pipes.find((p) => p.id === selection.pipeId) : null
   const selectedAccessory =
     selection?.kind === 'accessory' ? accessories.find((a) => a.id === selection.accessoryId) : null
+  const selectedPlank = selection?.kind === 'plank' ? planks.find((p) => p.id === selection.plankId) : null
 
   return (
     <>
-      <color attach="background" args={[SKY_BACKGROUND]} />
-      <ambientLight intensity={0.65} />
-      <directionalLight position={[5, 8, 4]} intensity={1.1} castShadow />
-      <directionalLight position={[-4, 3, -3]} intensity={0.35} />
-
-      <GrassGround
+      <SceneEnvironment
+        environment={configEnvironment(config)}
         size={Math.max(bounds.maxXZ * 4, 24)}
         onClick={() => tool === 'select' && onSelectionChange(null)}
       />
 
-      <GroundAnchor config={config} />
+      <GroundAnchor scene={scene} config={config} />
 
       <FootprintOutline pipes={scene.pipes} />
 
@@ -593,21 +816,63 @@ export function EditorScene({
             color={color}
             selected={selection?.kind === 'pipe' && selection.pipeId === p.id}
             highlighted={highlightedIds?.has(p.id) ?? false}
-            interactive={tool === 'select' || tool === 'draw' || tool === 'hinge' || tool === 'move'}
+            interactive={tool === 'select' || tool === 'draw' || tool === 'hinge' || tool === 'move' || tool === 'plank'}
             drawMode={tool === 'draw'}
             hingeMode={tool === 'hinge'}
             moveMode={tool === 'move'}
+            plankMode={tool === 'plank'}
             onSelect={tool === 'select' ? handlePipeSelect : undefined}
             onDrawClick={tool === 'draw' ? handleDrawClickFromPipe : undefined}
             onDrawHover={tool === 'draw' ? handleDrawHover : undefined}
             onHingeClick={tool === 'hinge' ? handleHingeClickFromPipe : undefined}
             onHingeHover={tool === 'hinge' ? handleHingeHoverFromPipe : undefined}
+            onPlankClick={tool === 'plank' ? handlePlankClickFromPipe : undefined}
+            onPlankHover={tool === 'plank' ? handlePlankHoverFromPipe : undefined}
             onMoveStart={tool === 'move' ? handleMoveStart : undefined}
             onMoveDrag={tool === 'move' ? handleMoveDrag : undefined}
             onMoveEnd={tool === 'move' ? handleMoveEnd : undefined}
           />
         ))}
       </group>
+
+      <group>
+        {planks.map((plank) => {
+          const moving = plankMoveState?.plankId === plank.id && plankMovePreview != null
+          const shown = moving ? movePlankHorizontal(plank, plankMovePreview!) : plank
+          return (
+            <PlankMesh
+              key={plank.id}
+              plank={shown}
+              selected={selection?.kind === 'plank' && selection.plankId === plank.id}
+              highlighted={highlightedIds?.has(plank.id) ?? false}
+              pickable={tool === 'select'}
+              moveMode={tool === 'move'}
+              ghost={moving}
+              onSelect={tool === 'select' ? handlePlankSelect : undefined}
+              onMoveStart={tool === 'move' ? handlePlankMoveStart : undefined}
+              onMoveDrag={tool === 'move' ? handlePlankMoveDrag : undefined}
+              onMoveEnd={tool === 'move' ? handlePlankMoveEnd : undefined}
+            />
+          )
+        })}
+      </group>
+
+      {tool === 'plank' && plankPreview && (
+        <PlankMesh
+          plank={{
+            id: 'plank-ghost',
+            position: plankPreview.position,
+            axis: plankPreview.axis,
+            lengthMm: plankPreview.lengthMm,
+            widthMm: plankPreview.widthMm,
+            thicknessMm: plankPreview.thicknessMm,
+            plane: plankPreview.plane,
+            orientation: plankPreview.plane === 'xz' ? undefined : 'vertical',
+            kind: plankPreview.kind === 'plate' ? 'plate' : undefined,
+          }}
+          ghost
+        />
+      )}
 
       <group>
         {accessories.map((acc) => (
@@ -636,6 +901,51 @@ export function EditorScene({
             highlighted={highlightedIds?.has(f.id) ?? false}
           />
         ))}
+      </group>
+
+      {/* Schapsteunen ná fittings: anders verdwijnen ze in T-stukken op dezelfde knoop. */}
+      <group>
+        {(scene.plankMounts ?? []).map((mount) => {
+          const plank = planks.find((p) => p.id === mount.plankId)
+          if (!plank) return null
+          const moving = plankMoveState?.plankId === plank.id && plankMovePreview != null
+          const shown = moving ? movePlankHorizontal(plank, plankMovePreview!) : plank
+          const pipe = scene.pipes.find((p) => p.id === mount.pipeId)
+          const live =
+            moving && pipe ? (buildPlankMountForPipe(shown, pipe) ?? mount) : mount
+          return (
+            <PlankMountMesh
+              key={mount.id}
+              mount={live}
+              materialId={scene.materialId}
+              highlighted={highlightedIds?.has(plank.id) ?? false}
+              ghost={moving}
+            />
+          )
+        })}
+        {tool === 'plank' &&
+          plankPreview &&
+          buildPlankMounts(
+            {
+              id: 'plank-ghost',
+              position: plankPreview.position,
+              axis: plankPreview.axis,
+              lengthMm: plankPreview.lengthMm,
+              widthMm: plankPreview.widthMm,
+              thicknessMm: plankPreview.thicknessMm,
+              plane: plankPreview.plane,
+              orientation: plankPreview.plane === 'xz' ? undefined : 'vertical',
+              kind: plankPreview.kind === 'plate' ? 'plate' : undefined,
+            },
+            scene.pipes,
+          ).map((mount) => (
+            <PlankMountMesh
+              key={`ghost-${mount.id}`}
+              mount={mount}
+              materialId={scene.materialId}
+              ghost
+            />
+          ))}
       </group>
 
       <HingeDrawTool
@@ -727,6 +1037,48 @@ export function EditorScene({
         </Html>
       )}
 
+      {selection && selectedPlank && tool === 'select' && selection.kind === 'plank' && (
+        <Html position={selection.worldPosition} center zIndexRange={[100, 0]}>
+          <RadialMenu
+            items={[
+              ...(canPlacePlankBeside(selectedPlank, -1, planks, scene.pipes)
+                ? [
+                    {
+                      id: 'duplicate-left',
+                      label: 'Leg ernaast ←',
+                      icon: '⧉',
+                      onClick: () => duplicatePlank(selection.plankId, -1),
+                    },
+                  ]
+                : []),
+              ...(canPlacePlankBeside(selectedPlank, 1, planks, scene.pipes)
+                ? [
+                    {
+                      id: 'duplicate-right',
+                      label: 'Leg ernaast →',
+                      icon: '⧉',
+                      onClick: () => duplicatePlank(selection.plankId, 1),
+                    },
+                  ]
+                : []),
+              {
+                id: 'delete',
+                label: 'Verwijder',
+                icon: '✕',
+                variant: 'danger',
+                onClick: () => deletePlank(selection.plankId),
+              },
+              {
+                id: 'close',
+                label: 'Sluiten',
+                icon: '○',
+                onClick: () => onSelectionChange(null),
+              },
+            ]}
+          />
+        </Html>
+      )}
+
       {selection && selectedAccessory && tool === 'select' && selection.kind === 'accessory' && (
         <Html position={selection.worldPosition} center zIndexRange={[100, 0]}>
           <RadialMenu
@@ -767,7 +1119,8 @@ export function EditorScene({
             ? false
             : (tool === 'select' && !isDrawing) ||
               (tool === 'draw' && !drawStart) ||
-              (tool === 'hinge' && !hingeStart)
+              (tool === 'hinge' && !hingeStart) ||
+              tool === 'plank'
         }
         enableZoom
         panSpeed={0.8}

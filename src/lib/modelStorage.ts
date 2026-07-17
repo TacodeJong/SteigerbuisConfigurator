@@ -1,8 +1,23 @@
 import type { KlimrekConfig, SceneModel } from '../types'
+import { normalizeConfig } from './environment'
 
 const STORAGE_KEY = 'steigerbuis.savedModels.v1'
 const FILE_VERSION = 1
 const FILE_EXT = '.steigerbuis.json'
+
+/** Oude opgeslagen scenes missen planks/accessoires — vul defaults aan.
+ *  `plankMounts` blijft `undefined` als het veld ontbreekt, zodat sync eenmalig
+ *  het automatische voorstel kan zetten (lege array = bewust geen steunen).
+ */
+function normalizeScene(scene: SceneModel): SceneModel {
+  return {
+    ...scene,
+    accessories: scene.accessories ?? [],
+    hingeConnections: scene.hingeConnections ?? [],
+    planks: scene.planks ?? [],
+    ...(scene.plankMounts != null ? { plankMounts: scene.plankMounts } : {}),
+  }
+}
 
 export interface SavedModel {
   id: string
@@ -26,7 +41,9 @@ export function listSavedModels(): SavedModel[] {
     if (!raw) return []
     const parsed = JSON.parse(raw) as SavedModel[]
     if (!Array.isArray(parsed)) return []
-    return parsed.slice().sort((a, b) => b.savedAt - a.savedAt)
+    return parsed
+      .map((m) => ({ ...m, scene: normalizeScene(m.scene), config: normalizeConfig(m.config) }))
+      .sort((a, b) => b.savedAt - a.savedAt)
   } catch {
     return []
   }
@@ -85,8 +102,8 @@ function parseModelPayload(data: unknown): SavedModel {
     id: `m_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name,
     savedAt,
-    scene: raw.scene,
-    config: raw.config as KlimrekConfig,
+    scene: normalizeScene(raw.scene as SceneModel),
+    config: normalizeConfig(raw.config as KlimrekConfig),
   }
 }
 

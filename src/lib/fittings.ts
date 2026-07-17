@@ -253,6 +253,10 @@ function classifyJunction(
       if (options?.baseType === 'grondanker') {
         return null
       }
+      if (options?.baseType === 'vloerdop') {
+        // Binnen: rubberen/kunststof voetdop op het buiseinde, rek staat los op de vloer.
+        return fitting(id, 'voetdop', pos, [0, 1, 0], diameterMm)
+      }
       return fitting(id, 'voetplaat-rond', pos, [0, 1, 0], diameterMm)
     }
 
@@ -436,6 +440,7 @@ export const FITTING_TYPE_LABELS: Record<FittingType, string> = {
   'voetplaat-rond': 'Voetplaat rond',
   'voetplaat-vierkant': 'Voetplaat vierkant',
   afdekdop: 'Afdekdop',
+  voetdop: 'Voetdop rubber (anti-slip)',
   '3-weg-hoek': 'Hoekstuk (3-weg)',
   'drieweg-kniestuk': 'Drieweg kniestuk',
   'vierweg-kruisstuk': 'Vierweg kruisstuk',

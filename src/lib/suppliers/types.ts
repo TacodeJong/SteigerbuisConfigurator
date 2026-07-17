@@ -11,7 +11,7 @@ export interface QuoteContext {
   materialId: MaterialId
 }
 
-export type QuoteLineKind = 'pipe' | 'fitting'
+export type QuoteLineKind = 'pipe' | 'fitting' | 'plank' | 'hardware'
 
 export interface QuoteLine {
   lineKey: string
