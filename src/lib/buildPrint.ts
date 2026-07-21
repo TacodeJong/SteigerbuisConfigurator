@@ -474,26 +474,35 @@ export function buildFloorplanPrintBody({
 }: FloorplanPrintOptions): string {
   const material = MATERIALS.find((m) => m.id === materialId)
   const footprint = computeFootprint(scene.pipes)
+  const holes = prepareFloorplanHoles(scene, config)
+  const holeDims = holes.length >= 2 ? computeHoleCenterDimensions(holes, scene.pipes) : null
   const date = new Date().toLocaleString('nl-NL', { dateStyle: 'long', timeStyle: 'short' })
   const svg = buildFloorplanSvg(scene, config)
 
-  // Alleen tekening + korte meta/legenda — geen gaten-/maattabellen (die horen in bouwinstructie).
   return `
-  <h1>Plattegrond</h1>
+  <h1>Plattegrond — gaten &amp; footprint</h1>
   <p class="meta">
     ${esc(date)}<br />
     Materiaal: <strong>${esc(material?.name ?? materialId)}</strong> · Ø ${config.diameter} mm<br />
-    ${footprint ? `Footprint: ${esc(formatMm(footprint.widthMm))} × ${esc(formatMm(footprint.depthMm))}` : ''}
+    ${holeDims ? `${holeDimensionsSummary(holeDims)}<br />` : ''}
+    ${footprint ? `Footprint buitenmaat: ${esc(formatMm(footprint.widthMm))} × ${esc(formatMm(footprint.depthMm))}` : ''}
     ${
       config.baseType === 'grondanker'
         ? ` · Grondanker ${config.anchorDepthMm} mm onder maaiveld`
         : config.baseType === 'vloerdop'
-          ? ' · Binnenopstelling: voetdoppen (geen gaten)'
+          ? ' · Binnenopstelling: los op rubberen voetdoppen (geen gaten)'
           : ' · Voetplaten (geen gaten)'
     }
   </p>
   <div class="floorplan-wrap">${svg}</div>
-  <p class="footer">Legenda: oranje cirkel = gat, donkerblauwe stip = staander, lichtblauwe lijn = liggende buis, paars = maatstukken tussen middelpunten, groene stippellijn = diagonaal, donkergroen stippel = footprint.</p>`
+  ${
+    config.baseType === 'grondanker'
+      ? holeTableRows(holes, scene)
+      : config.baseType === 'vloerdop'
+        ? '<p>Binnenopstelling: het rek staat los op de vloer op rubberen/kunststof voetdoppen — geen gaten of betonpoeren nodig. Gebruik de footprint en uitzetmaten om de plek op de vloer te bepalen.</p>'
+        : '<p>Voetplaat-onderstel: geen betonpoeren nodig. Zet voetplaten op maaiveld op de hoeken van het footprint.</p>'
+  }
+  <p class="footer">Legenda: oranje cirkel = gat (middelpunt gemarkeerd), donkerblauwe stip = staander (doorsnede op ware grootte), lichtblauwe lijn = liggende buis, paars = losse maatstukken tussen middelpunten, groene stippellijn = diagonaal per gesloten rechthoek, donkergroen stippel = footprint buitenmaat.</p>`
 }
 
 export interface BuildInstructionPrintOptions {
