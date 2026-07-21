@@ -6,6 +6,7 @@ import type { GatedFeatureId } from './featureGates'
 import { stubGrantModelFeature } from './modelFeatureGrants'
 import { stubGrantAccountFeature } from './accountFeatureGrants'
 import { fetchResolvedFeaturePriceCents } from './featurePrices'
+import { PAID_FEATURE_AUTH_REASON } from './paidFeatureAuth'
 
 export interface CheckoutResult {
   url: string | null
@@ -49,10 +50,14 @@ export async function startCheckout(
     throw new ApiError('validation', 'Gratis abonnement vereist geen betaling.')
   }
 
+  // All paid checkouts (subscription + pay-per-use) require a logged-in account.
   if (!isSupabaseConfigured()) {
+    const session = stubGetSession()
+    if (!session?.user) {
+      throw new ApiError('unauthorized', PAID_FEATURE_AUTH_REASON)
+    }
+    const userId = session.user.id
     if (feature) {
-      const session = stubGetSession()
-      const userId = session?.user?.id ?? 'stub-user'
       const cents = await fetchResolvedFeaturePriceCents(feature)
       if (feature === 'download_model' && !modelId) {
         stubGrantAccountFeature(userId, feature, cents)
@@ -103,7 +108,7 @@ export async function startCheckout(
   const {
     data: { session },
   } = await supabase.auth.getSession()
-  if (!session) throw new ApiError('unauthorized', 'Log in om te betalen.')
+  if (!session) throw new ApiError('unauthorized', PAID_FEATURE_AUTH_REASON)
 
   const returnUrl =
     (import.meta.env.VITE_BILLING_RETURN_URL as string | undefined)?.trim() ||

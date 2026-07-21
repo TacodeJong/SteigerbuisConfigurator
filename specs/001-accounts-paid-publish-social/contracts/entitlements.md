@@ -62,7 +62,7 @@ allow if user_has_plan_feature(uid, flag)
 
 **Admin grant**: does not create Mollie IDs. Feature rights still come from the assigned plan’s `features` (+ flags above). If the user had a Mollie subscription id, Beheer warns that handmatige toewijzing overschrijft lokale entitlements; RPC may mark local `mollie_subscription_status=canceled` without calling Mollie.
 
-**UI**: locked controls use lock icon + greyed style (no “Betaalde functie” badge text). Subscription locks → abonnement CTA; pay-per-use → one-shot **or** abonnement.
+**UI**: locked controls use lock icon + greyed style (no “Betaalde functie” badge text). Subscription locks → abonnement CTA; pay-per-use → one-shot **or** abonnement. **Guests** hitting a paid gate MUST get login/register first (`PAID_FEATURE_AUTH_REASON`); checkout never starts while logged out.
 
 **Out of scope**: `ProjectQuote` UI.
 

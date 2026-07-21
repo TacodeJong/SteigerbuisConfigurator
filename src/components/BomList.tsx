@@ -43,6 +43,7 @@ import {
   hasModelFeatureGrant,
 } from '../lib/billing/modelFeatureGrants'
 import { startCheckout } from '../lib/billing/checkout'
+import { PAID_FEATURE_AUTH_REASON } from '../lib/billing/paidFeatureAuth'
 import {
   defaultSubscriptionPlans,
   fetchActivePlans,
@@ -54,6 +55,7 @@ import { BomFittingThumb } from './BomFittingThumb'
 import { CollapsibleSection } from './CollapsibleSection'
 import { PaidLockIcon } from './PaidLockIcon'
 import { PriceIndicationPanel } from './PriceIndicationPanel'
+import { AuthModal } from './auth/AuthModal'
 
 interface BomListProps {
   bom: BomResult
@@ -105,6 +107,7 @@ export function BomList({
   const [copyOk, setCopyOk] = useState(false)
   const [payBusy, setPayBusy] = useState<GatedFeatureId | null>(null)
   const [gateMsg, setGateMsg] = useState<string | null>(null)
+  const [authOpen, setAuthOpen] = useState(false)
   const [prices, setPrices] = useState<PlanPrices>(defaultPlanPrices())
   const [featurePrices, setFeaturePrices] = useState<FeaturePrices>(defaultFeaturePrices())
   const [gates, setGates] = useState<FeatureGates>(defaultFeatureGates())
@@ -150,11 +153,16 @@ export function BomList({
     setModelGrants(grants)
   }
 
+  /** Guests must auth before any pay-per-use checkout (incl. future full_pdf, etc.). */
+  const requireAccountForPaid = () => {
+    setGateMsg(null)
+    setAuthOpen(true)
+  }
+
   const handlePayForFeature = async (feature: GatedFeatureId) => {
     setGateMsg(null)
     if (!user) {
-      setGateMsg('Log in om deze functie te ontgrendelen.')
-      navigate({ name: 'upgrade' })
+      requireAccountForPaid()
       return
     }
     if (!cloudModelId) {
@@ -190,6 +198,10 @@ export function BomList({
   const handlePrint = async () => {
     setGateMsg(null)
     if (!bomPrintOk) {
+      if (!user) {
+        requireAccountForPaid()
+        return
+      }
       setGateMsg(`Stuklijst printen vereist ${paywallHint('bom_print')}.`)
       return
     }
@@ -205,6 +217,10 @@ export function BomList({
   const handleCopyOrderList = async () => {
     setGateMsg(null)
     if (!copyOkEntitled) {
+      if (!user) {
+        requireAccountForPaid()
+        return
+      }
       setGateMsg(`Bestellijst kopiëren naar klembord vereist ${paywallHint('copy_order_list')}.`)
       return
     }
@@ -218,6 +234,10 @@ export function BomList({
     if (!scene) return
     setGateMsg(null)
     if (!footprintOk) {
+      if (!user) {
+        requireAccountForPaid()
+        return
+      }
       setGateMsg(`Volledige plattegrond vereist ${paywallHint('full_print')}.`)
       return
     }
@@ -227,6 +247,10 @@ export function BomList({
   const handlePrint3dView = () => {
     setGateMsg(null)
     if (!bomPrintOk) {
+      if (!user) {
+        requireAccountForPaid()
+        return
+      }
       setGateMsg(`3D-weergave printen vereist ${paywallHint('bom_print')}.`)
       return
     }
@@ -343,7 +367,12 @@ export function BomList({
         {gateMsg && (
           <p className="bom-gate-msg no-print">
             {gateMsg}{' '}
-            {showUpgradeLink && lockedFeatureForCta && (
+            {showUpgradeLink && !user && (
+              <button type="button" className="linkish" onClick={requireAccountForPaid}>
+                Account aanmaken of inloggen
+              </button>
+            )}
+            {showUpgradeLink && user && lockedFeatureForCta && (
               <>
                 {payBusy === lockedFeatureForCta ? (
                   <span>Bezig…</span>
@@ -369,7 +398,7 @@ export function BomList({
                 )}
               </>
             )}
-            {showUpgradeLink && !lockedFeatureForCta && (
+            {showUpgradeLink && user && !lockedFeatureForCta && (
               <button type="button" className="linkish" onClick={() => navigate({ name: 'upgrade' })}>
                 Bekijk opties
               </button>
@@ -576,6 +605,12 @@ export function BomList({
       <CollapsibleSection title="Prijsindicatie" className="bom-panel-section">
         <PriceIndicationPanel bom={bom} config={config} materialId={effectiveMaterialId} />
       </CollapsibleSection>
+
+      <AuthModal
+        open={authOpen}
+        onClose={() => setAuthOpen(false)}
+        reason={PAID_FEATURE_AUTH_REASON}
+      />
     </div>
   )
 }

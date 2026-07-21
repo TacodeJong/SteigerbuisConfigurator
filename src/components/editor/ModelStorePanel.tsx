@@ -53,6 +53,7 @@ import {
   hasModelFeatureGrant,
 } from '../../lib/billing/modelFeatureGrants'
 import { startCheckout } from '../../lib/billing/checkout'
+import { PAID_FEATURE_AUTH_REASON } from '../../lib/billing/paidFeatureAuth'
 import { fetchActivePlans, type SubscriptionPlan } from '../../lib/billing/plans'
 import { AuthModal } from '../auth/AuthModal'
 import { PaidLockIcon } from '../PaidLockIcon'
@@ -207,7 +208,7 @@ export function ModelStoreDialog({
   const handlePayForFeature = async (feature: GatedFeatureId, modelId?: string | null) => {
     setGateMsg(null)
     if (!user) {
-      requireLogin('Log in om deze functie te ontgrendelen.')
+      requireLogin(PAID_FEATURE_AUTH_REASON)
       return
     }
     setPayBusy(feature)
@@ -445,6 +446,10 @@ export function ModelStoreDialog({
       plans,
     })
     if (!ok) {
+      if (!user) {
+        requireLogin(PAID_FEATURE_AUTH_REASON)
+        return
+      }
       setPendingCheckoutModelId(cloudId)
       showFeaturePaywall('download_model', 'Downloaden van modellen.')
       return
@@ -931,7 +936,15 @@ export function ModelStoreDialog({
             {gateMsg && (
               <p className="bom-gate-msg model-gate-msg">
                 {gateMsg}{' '}
-                {lockedFeatureForCta ? (
+                {!user ? (
+                  <button
+                    type="button"
+                    className="linkish"
+                    onClick={() => requireLogin(PAID_FEATURE_AUTH_REASON)}
+                  >
+                    Account aanmaken of inloggen
+                  </button>
+                ) : lockedFeatureForCta ? (
                   <>
                     {payBusy === lockedFeatureForCta ? (
                       <span>Bezig…</span>

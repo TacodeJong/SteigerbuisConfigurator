@@ -199,7 +199,11 @@ Deno.serve(async (req) => {
   try {
     const authHeader = req.headers.get('Authorization')
     if (!authHeader) {
-      return json(401, { error: 'unauthorized', message: 'Geen Authorization-header.' })
+      return json(401, {
+        error: 'unauthorized',
+        message:
+          'Maak een account of log in om te betalen. Betaalde functies vereisen een account.',
+      })
     }
 
     const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? ''
@@ -227,7 +231,8 @@ Deno.serve(async (req) => {
     if (userErr || !userData.user) {
       return json(401, {
         error: 'unauthorized',
-        message: userErr?.message ?? 'Sessie ongeldig — opnieuw inloggen.',
+        message:
+          'Sessie ongeldig of niet ingelogd. Maak een account of log in om te betalen.',
       })
     }
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../lib/auth/session'
 import { startCheckout } from '../../lib/billing/checkout'
+import { PAID_FEATURE_AUTH_REASON } from '../../lib/billing/paidFeatureAuth'
 import { ApiError } from '../../lib/apiErrors'
 import { hasExportPack } from '../../lib/billing/entitlements'
 import {
@@ -385,7 +386,7 @@ export function UpgradePanel() {
         open={authOpen}
         onClose={() => setAuthOpen(false)}
         initialMode="register"
-        reason="Log in of maak een account om te selecteren (zodat we de aankoop aan je account kunnen koppelen)."
+        reason={PAID_FEATURE_AUTH_REASON}
       />
     </main>
   )
