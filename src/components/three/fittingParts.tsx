@@ -60,17 +60,17 @@ export function Collar({ axis, pipeRadius, length, mat, offset = 0, boltCount = 
 
   return (
     <group position={pos} quaternion={quat}>
-      <mesh>
+      <mesh castShadow={false}>
         <cylinderGeometry args={[outerR, outerR * 0.98, length, 20]} />
         <meshStandardMaterial color={mat.body} roughness={mat.roughness} metalness={mat.metalness} />
       </mesh>
       {bolts.map((boltPos, i) => (
         <group key={i} position={boltPos} quaternion={boltQuat}>
-          <mesh rotation={[0, 0, Math.PI / 6]}>
+          <mesh castShadow={false} rotation={[0, 0, Math.PI / 6]}>
             <cylinderGeometry args={[outerR * 0.19, outerR * 0.19, outerR * 0.14, 6]} />
             <meshStandardMaterial color={mat.bolt} metalness={0.92} roughness={0.15} />
           </mesh>
-          <mesh position={[0, outerR * 0.08, 0]}>
+          <mesh castShadow={false} position={[0, outerR * 0.08, 0]}>
             <cylinderGeometry args={[outerR * 0.07, outerR * 0.07, outerR * 0.1, 8]} />
             <meshStandardMaterial color={mat.bolt} metalness={0.92} roughness={0.15} />
           </mesh>
@@ -168,7 +168,9 @@ interface SideOutletProps {
 
 /**
  * Doorlopende staander met haakse zij-uitgangen op hetzelfde punt:
- * 2 uitgangen = drieweg kniestuk (type 20), 3-4 = vierweg kruisstuk (type 40).
+ * 2 uitgangen = drieweg kniestuk (type 20),
+ * 3 = vijfweg kruisstuk (5 pijprichtingen),
+ * 4 = vierweg kruisstuk (type 40 / 6 pijprichtingen).
  */
 export function SideOutletFitting({ through, branches, pipeRadius, sleeveLen, mat }: SideOutletProps) {
   const outerR = pipeRadius * 1.58

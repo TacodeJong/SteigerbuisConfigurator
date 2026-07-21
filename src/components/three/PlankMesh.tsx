@@ -3,6 +3,7 @@ import type { ThreeEvent } from '@react-three/fiber'
 import { Matrix4, Quaternion, Vector3 } from 'three'
 import type { ScenePlank, Vec3 } from '../../types'
 import { resolvePlankPlane } from '../../lib/planks'
+import { isToolPointer } from '../../lib/pointerModifiers'
 
 /** Houtkleur met lichte nerf-variatie per plank (stabiel op basis van id). */
 const WOOD_TINTS = ['#b3854d', '#a97c49', '#bd8f58', '#ab8050'] as const
@@ -95,12 +96,14 @@ export function PlankMesh({
 
   const handleSelectClick = (e: ThreeEvent<MouseEvent>) => {
     if (!pickable || moveMode || !onSelect) return
+    if (!isToolPointer(e.nativeEvent)) return
     e.stopPropagation()
     onSelect(plank.id, [e.point.x, e.point.y, e.point.z])
   }
 
   const handleMoveDown = (e: ThreeEvent<PointerEvent>) => {
     if (!moveMode) return
+    if (!isToolPointer(e.nativeEvent)) return
     e.stopPropagation()
     ;(e.target as Element & { setPointerCapture?: (id: number) => void }).setPointerCapture?.(e.pointerId)
     document.body.style.cursor = 'grabbing'
@@ -150,7 +153,7 @@ export function PlankMesh({
           <meshBasicMaterial visible={false} depthWrite={false} />
         </mesh>
       )}
-      <mesh castShadow={!ghost} raycast={() => undefined}>
+      <mesh castShadow={!ghost} receiveShadow={false} raycast={() => undefined}>
         <boxGeometry args={size} />
         <meshStandardMaterial
           color={color}

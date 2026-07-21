@@ -10,7 +10,7 @@ import type {
   PipeDiameter,
   SceneModel,
 } from '../types'
-import { PIPE_DIAMETERS } from '../data/catalog'
+import { MATERIALS, PIPE_DIAMETERS } from '../data/catalog'
 import { configEnvironment, withEnvironment } from '../lib/environment'
 import { normalizeHingeAccessories, removeAccessoryFromScene, removePipeFromScene } from '../lib/accessories'
 import { baseGroundY, normalizePipeIds, pipeLengthMm, rebaseGroundEndpoints, syncSceneFittings } from '../lib/scene'
@@ -48,9 +48,11 @@ import {
 import { useEditorHistory } from '../hooks/useEditorHistory'
 import { EditorCanvas } from './editor/EditorCanvas'
 import { DrawPipePanel } from './editor/DrawPipePanel'
-import { ModelStorePanel } from './editor/ModelStorePanel'
+import { ModelStoreDialog, type ModelsDialogFocus } from './editor/ModelStorePanel'
 import type { DrawUiState } from './three/EditorScene'
 import { BomList } from './BomList'
+import { BomSheetTrigger, ResponsiveBomSidebar } from './ResponsiveBomSidebar'
+import { ConfigSheetTrigger, ResponsiveConfigSidebar } from './ResponsiveConfigSidebar'
 
 interface SceneEditorProps {
   config: KlimrekConfig
@@ -59,6 +61,20 @@ interface SceneEditorProps {
   onConfigChange?: (config: KlimrekConfig) => void
   /** Bevestig + bouw scene; null = geannuleerd. SceneEditor past toe via history. */
   onResetFromConfig: () => SceneModel | null
+  activeCloudModelId: string | null
+  activeCloudModelName?: string | null
+  onActiveCloudModelIdChange: (id: string | null, name?: string | null) => void
+  /** Externe open-aanvraag vanuit de app-sidebar. */
+  openModelsTick?: number
+  openModelsFocus?: ModelsDialogFocus
+  /** Externe disk-import-aanvraag (Paid) vanuit de app-sidebar. */
+  diskImportTick?: number
+  /** Externe open-aanvraag voor de config/editor bottom sheet (mobiel). */
+  openConfigSheetTick?: number
+  /** Admin-featureflag: plank/plaat-tool in de editor. */
+  planksEnabled?: boolean
+  /** Na cloud-opslaan of laden: markeer editor als clean (geen beforeunload). */
+  onEditorBaseline?: (scene: SceneModel, config: KlimrekConfig) => void
 }
 
 function isTypingTarget(target: EventTarget | null): boolean {
@@ -68,14 +84,55 @@ function isTypingTarget(target: EventTarget | null): boolean {
   return target.isContentEditable
 }
 
-export function SceneEditor({ config, scene: rawScene, onSceneChange, onConfigChange, onResetFromConfig }: SceneEditorProps) {
+export function SceneEditor({
+  config,
+  scene: rawScene,
+  onSceneChange,
+  onConfigChange,
+  onResetFromConfig,
+  activeCloudModelId,
+  activeCloudModelName = null,
+  onActiveCloudModelIdChange,
+  openModelsTick = 0,
+  openModelsFocus = 'browse',
+  diskImportTick = 0,
+  openConfigSheetTick = 0,
+  planksEnabled = true,
+  onEditorBaseline,
+}: SceneEditorProps) {
   const [tool, setTool] = useState<EditorTool>('select')
   const [selection, setSelection] = useState<EditorSelection | null>(null)
   const [bomHighlight, setBomHighlight] = useState<BomHighlight | null>(null)
+  const [bomSheetOpen, setBomSheetOpen] = useState(false)
+  const [configSheetOpen, setConfigSheetOpen] = useState(false)
   const [plankToolWidthMm, setPlankToolWidthMm] = useState(getDefaultPlankWidthMm())
   const [plankToolKind, setPlankToolKind] = useState<PlankKind>(getDefaultPlankKind())
   const [plankToolPlane, setPlankToolPlane] = useState<PlankPlane>(getDefaultPlankPlane())
+  const [modelsOpen, setModelsOpen] = useState(false)
+  const [modelsFocus, setModelsFocus] = useState<ModelsDialogFocus>('browse')
+  const [diskImportRequest, setDiskImportRequest] = useState(0)
   const plankToolVertical = plankToolPlane !== 'xz'
+
+  useEffect(() => {
+    if (!planksEnabled && tool === 'plank') setTool('select')
+  }, [planksEnabled, tool])
+
+  useEffect(() => {
+    if (openModelsTick <= 0) return
+    setModelsFocus(openModelsFocus)
+    setModelsOpen(true)
+  }, [openModelsTick, openModelsFocus])
+
+  useEffect(() => {
+    if (diskImportTick <= 0) return
+    setDiskImportRequest((n) => n + 1)
+  }, [diskImportTick])
+
+  useEffect(() => {
+    if (openConfigSheetTick <= 0) return
+    setBomSheetOpen(false)
+    setConfigSheetOpen(true)
+  }, [openConfigSheetTick])
 
   // Repareer dubbele buis-id's en verouderde scharnierhulzen (legacy) en
   // hersynchroniseer fittings, zodat oude auto-fittings direct verdwijnen.
@@ -282,9 +339,13 @@ export function SceneEditor({ config, scene: rawScene, onSceneChange, onConfigCh
 
   return (
     <main className="app-main">
-      <div className="main-left">
+      <ResponsiveConfigSidebar
+        open={configSheetOpen}
+        onOpenChange={setConfigSheetOpen}
+        title="Aanpassen"
+      >
         <section className="editor-panel form-section">
-          <h2>Buisdiameter</h2>
+          <h2>Buis</h2>
           <div className="base-type-toggle diameter-toggle" role="group" aria-label="Buisdiameter">
             {PIPE_DIAMETERS.map((d) => (
               <button
@@ -300,6 +361,22 @@ export function SceneEditor({ config, scene: rawScene, onSceneChange, onConfigCh
           <p className="base-type-hint">
             Geldt voor het hele model — alle buizen en koppelingen schalen mee.
           </p>
+          <p className="field-label">Materiaal & kleur</p>
+          <div className="material-picker" role="group" aria-label="Materiaal en kleur">
+            {MATERIALS.map((m) => (
+              <button
+                key={m.id}
+                type="button"
+                className={`material-swatch-btn${scene.materialId === m.id ? ' active' : ''}`}
+                title={m.name}
+                aria-label={m.name}
+                aria-pressed={scene.materialId === m.id}
+                onClick={() => changeMaterial(m.id)}
+              >
+                <span className="swatch" style={{ background: m.color }} />
+              </button>
+            ))}
+          </div>
         </section>
 
         <section className="editor-panel form-section base-type-panel">
@@ -358,7 +435,7 @@ export function SceneEditor({ config, scene: rawScene, onSceneChange, onConfigCh
           )}
           <p className="base-type-hint">
             {environment === 'binnen'
-              ? 'Binnenopstelling: rek staat los op de vloer op rubberen voetdoppen — geen verankering.'
+              ? 'Binnenopstelling: constructie staat los op de vloer op rubberen voetdoppen — geen verankering.'
               : config.baseType === 'grondanker'
                 ? `Buizen verankerd in beton (${config.anchorDepthMm} mm onder maaiveld) — geen voetplaten.`
                 : 'Voetplaten op maaiveld onder elke staander.'}
@@ -513,7 +590,7 @@ export function SceneEditor({ config, scene: rawScene, onSceneChange, onConfigCh
           </section>
         )}
 
-        {tool === 'plank' && (
+        {planksEnabled && tool === 'plank' && (
           <section className="editor-panel form-section">
             <h2>Plank / plaat plaatsen</h2>
             <div className="base-type-toggle diameter-toggle" role="group" aria-label="Houttype">
@@ -554,7 +631,7 @@ export function SceneEditor({ config, scene: rawScene, onSceneChange, onConfigCh
               {plankToolKind === 'plate'
                 ? `Plaat: typ. 18 mm dik, breedte tot ${MAX_PLANK_WIDTH_MM} mm (standaard 1220).`
                 : `Plank: typ. 30×195 mm, breedte tot ${MAX_PLANK_WIDTH_MM} mm.`}{' '}
-              Plaatsingsvlak kies je in de toolbar: {plankPlaneLabel(plankToolPlane)}.
+              Plaatsingsvlak kies je in de gereedschapbalk (uitklappen): {plankPlaneLabel(plankToolPlane)}.
             </p>
           </section>
         )}
@@ -579,20 +656,27 @@ export function SceneEditor({ config, scene: rawScene, onSceneChange, onConfigCh
           </section>
         )}
 
-        <ModelStorePanel
-          scene={scene}
-          config={config}
-          onLoad={(m) => {
-            commitWithHistory(m.scene, m.config)
-            setSelection(null)
-            setBomHighlight(null)
-          }}
-        />
-      </div>
+      </ResponsiveConfigSidebar>
 
       <div className="main-center">
         <div className="preview-panel preview-panel-fill">
-          <h2>3D Editor</h2>
+          <div className="preview-panel-header">
+            <h2>3D Editor</h2>
+            <div className="preview-panel-actions">
+              <ConfigSheetTrigger
+                onClick={() => {
+                  setBomSheetOpen(false)
+                  setConfigSheetOpen(true)
+                }}
+              />
+              <BomSheetTrigger
+                onClick={() => {
+                  setConfigSheetOpen(false)
+                  setBomSheetOpen(true)
+                }}
+              />
+            </div>
+          </div>
           <EditorCanvas
             scene={scene}
             config={config}
@@ -600,13 +684,13 @@ export function SceneEditor({ config, scene: rawScene, onSceneChange, onConfigCh
             selection={selection}
             highlightedIds={highlightIds}
             plankPlane={plankToolPlane}
+            planksEnabled={planksEnabled}
             onSceneChange={setSceneWithHistory}
             onSelectionChange={setSelection}
             onToolChange={(t) => {
               setTool(t)
               if (t === 'draw' || t === 'pan' || t === 'hinge' || t === 'move' || t === 'plank') setSelection(null)
             }}
-            onMaterialChange={changeMaterial}
             onPlankPlaneChange={updatePlankToolPlane}
             onUndo={undo}
             onRedo={redo}
@@ -625,7 +709,10 @@ export function SceneEditor({ config, scene: rawScene, onSceneChange, onConfigCh
         </div>
       </div>
 
-      <aside className="main-sidebar">
+      <ResponsiveBomSidebar
+        open={bomSheetOpen}
+        onOpenChange={setBomSheetOpen}
+      >
         <BomList
           bom={bom}
           config={config}
@@ -633,8 +720,28 @@ export function SceneEditor({ config, scene: rawScene, onSceneChange, onConfigCh
           materialId={scene.materialId}
           highlight={bomHighlight}
           onHighlightChange={setBomHighlight}
+          cloudModelId={activeCloudModelId}
         />
-      </aside>
+      </ResponsiveBomSidebar>
+
+      <ModelStoreDialog
+        open={modelsOpen}
+        onClose={() => setModelsOpen(false)}
+        initialFocus={modelsFocus}
+        diskImportRequest={diskImportRequest}
+        scene={scene}
+        config={config}
+        activeCloudModelId={activeCloudModelId}
+        activeCloudModelName={activeCloudModelName}
+        onActiveCloudModelIdChange={onActiveCloudModelIdChange}
+        onLoad={(m) => {
+          commitWithHistory(m.scene, m.config)
+          setSelection(null)
+          setBomHighlight(null)
+          onEditorBaseline?.(m.scene, m.config)
+        }}
+        onSaved={() => onEditorBaseline?.(rawScene, config)}
+      />
     </main>
   )
 }

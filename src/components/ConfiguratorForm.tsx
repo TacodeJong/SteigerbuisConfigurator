@@ -9,6 +9,7 @@ import {
   withDimensionMode,
 } from '../lib/dimensions'
 import { formatMm } from '../lib/bom'
+import { CollapsibleSection } from './CollapsibleSection'
 
 interface ConfiguratorFormProps {
   config: KlimrekConfig
@@ -28,6 +29,18 @@ function axisHint(
   return `Resulterende buitenmaat / gat-middenafstand ≈ ${formatMm(outer)} (buislengte + Ø)`
 }
 
+/** Vergelijk alleen de vorm-velden van een preset (niet materiaal/omgeving). */
+function matchesPresetShape(config: KlimrekConfig, preset: KlimrekConfig): boolean {
+  return (
+    config.width === preset.width &&
+    config.depth === preset.depth &&
+    config.height === preset.height &&
+    config.rungCount === preset.rungCount &&
+    config.includeRoof === preset.includeRoof &&
+    config.dimensionMode === preset.dimensionMode
+  )
+}
+
 export function ConfiguratorForm({ config, onChange }: ConfiguratorFormProps) {
   const update = <K extends keyof KlimrekConfig>(key: K, value: KlimrekConfig[K]) => {
     onChange({ ...config, [key]: value })
@@ -37,29 +50,146 @@ export function ConfiguratorForm({ config, onChange }: ConfiguratorFormProps) {
   const dimensionMode = configDimensionMode(config)
   const isBuislengte = dimensionMode === 'buislengte'
 
+  const applyPreset = (presetConfig: KlimrekConfig) => {
+    const shaped = withEnvironment(presetConfig, environment)
+    onChange({
+      ...shaped,
+      materialId: config.materialId,
+      diameter: config.diameter,
+      ...(environment === 'buiten'
+        ? { baseType: config.baseType, anchorDepthMm: config.anchorDepthMm }
+        : {}),
+    })
+  }
+
   return (
-    <div className="config-form">
-      <section className="form-section">
-        <h2>Startpunt</h2>
+    <div className="sidebar-panels config-panel">
+      <CollapsibleSection title="Omgeving" className="config-panel-section">
+        <div className="base-type-row" role="group" aria-label="Omgeving">
+          <button
+            type="button"
+            className={`base-type-btn${environment === 'buiten' ? ' active' : ''}`}
+            onClick={() => onChange(withEnvironment(config, 'buiten'))}
+          >
+            <strong>Buiten</strong>
+            <span>Tuin / terras — verankering nodig</span>
+          </button>
+          <button
+            type="button"
+            className={`base-type-btn${environment === 'binnen' ? ' active' : ''}`}
+            onClick={() => onChange(withEnvironment(config, 'binnen'))}
+          >
+            <strong>Binnen</strong>
+            <span>Op de vloer — voetdoppen</span>
+          </button>
+        </div>
+
+        {environment === 'binnen' ? (
+          <p className="field-hint config-subhint">
+            Onderstel: los op kunststof/rubberen voetdoppen (anti-slip). Geen voetplaten of
+            grondankers.
+          </p>
+        ) : (
+          <div className="config-subsection">
+            <p className="field-label">Verankering</p>
+            <div className="base-type-row">
+              <button
+                type="button"
+                className={`base-type-btn${config.baseType === 'voetplaat' ? ' active' : ''}`}
+                onClick={() => update('baseType', 'voetplaat')}
+              >
+                <strong>Voetplaat</strong>
+                <span>Ronde plaat op maaiveld</span>
+              </button>
+              <button
+                type="button"
+                className={`base-type-btn${config.baseType === 'grondanker' ? ' active' : ''}`}
+                onClick={() => update('baseType', 'grondanker')}
+              >
+                <strong>Grondanker</strong>
+                <span>Buis in betonpoer</span>
+              </button>
+            </div>
+            {config.baseType === 'grondanker' && (
+              <label className="anchor-depth-field">
+                Diepte in grond (mm)
+                <input
+                  type="number"
+                  min={200}
+                  max={800}
+                  step={50}
+                  value={config.anchorDepthMm}
+                  onChange={(e) => update('anchorDepthMm', Number(e.target.value))}
+                />
+                <span className="field-hint">
+                  Aanbevolen 300–500 mm. De hoekstaander loopt onder maaiveld door.
+                </span>
+              </label>
+            )}
+          </div>
+        )}
+      </CollapsibleSection>
+
+      <CollapsibleSection title="Buis" className="config-panel-section">
+        <div className="diameter-row">
+          <div className="diameter-options">
+            {PIPE_DIAMETERS.map((d) => (
+              <button
+                key={d.value}
+                type="button"
+                className={`diameter-btn${config.diameter === d.value ? ' active' : ''}`}
+                onClick={() => update('diameter', d.value)}
+              >
+                {d.label}
+              </button>
+            ))}
+          </div>
+          {isBuislengte && (
+            <span className="field-hint diameter-mode-hint">
+              Diameter wijzigen houdt de buislengtes vast; footprint en gatafstand schalen mee.
+            </span>
+          )}
+        </div>
+
+        <div className="config-subsection">
+          <p className="field-label">Materiaal & kleur</p>
+          <div className="material-grid">
+            {MATERIALS.map((material) => (
+              <button
+                key={material.id}
+                type="button"
+                className={`material-card${config.materialId === material.id ? ' active' : ''}`}
+                onClick={() => update('materialId', material.id)}
+              >
+                <span className="swatch" style={{ background: material.color }} />
+                <span className="material-info">
+                  <strong>{material.name}</strong>
+                  <span>{material.description}</span>
+                </span>
+                {material.outdoor && <span className="badge">Buiten</span>}
+              </button>
+            ))}
+          </div>
+        </div>
+      </CollapsibleSection>
+
+      <CollapsibleSection title="Startvorm" className="config-panel-section">
         <div className="preset-grid">
           {KLIMREK_PRESETS.map((preset) => (
             <button
               key={preset.id}
               type="button"
-              className={`preset-card${
-                JSON.stringify(preset.config) === JSON.stringify(config) ? ' active' : ''
-              }`}
-              onClick={() => onChange(preset.config)}
+              className={`preset-card${matchesPresetShape(config, preset.config) ? ' active' : ''}`}
+              onClick={() => applyPreset(preset.config)}
             >
               <strong>{preset.name}</strong>
               <span>{preset.description}</span>
             </button>
           ))}
         </div>
-      </section>
+      </CollapsibleSection>
 
-      <section className="form-section">
-        <h2>Afmetingen</h2>
+      <CollapsibleSection title="Afmetingen" className="config-panel-section">
         <div className="base-type-row dimension-mode-row" role="group" aria-label="Maatvoering">
           <button
             type="button"
@@ -67,7 +197,7 @@ export function ConfiguratorForm({ config, onChange }: ConfiguratorFormProps) {
             onClick={() => onChange(withDimensionMode(config, 'buitenmaat'))}
           >
             <strong>Buitenmaat leidend</strong>
-            <span>Velden = gewenste buitenmaat; buislengte volgt</span>
+            <span>Velden = gewenste buitenmaat</span>
           </button>
           <button
             type="button"
@@ -75,7 +205,7 @@ export function ConfiguratorForm({ config, onChange }: ConfiguratorFormProps) {
             onClick={() => onChange(withDimensionMode(config, 'buislengte'))}
           >
             <strong>Buislengte leidend</strong>
-            <span>Velden = bestelbare lengte; footprint groeit met Ø</span>
+            <span>Velden = bestelbare lengte</span>
           </button>
         </div>
         <p className="field-hint dimension-mode-intro">
@@ -121,7 +251,7 @@ export function ConfiguratorForm({ config, onChange }: ConfiguratorFormProps) {
             <span className="field-hint">
               {isBuislengte
                 ? 'Lengte van de hoekstaander boven maaiveld (excl. eventueel grondanker).'
-                : 'Hoogte van het rek boven maaiveld.'}
+                : 'Hoogte van de constructie boven maaiveld.'}
             </span>
           </label>
           <label>
@@ -141,122 +271,9 @@ export function ConfiguratorForm({ config, onChange }: ConfiguratorFormProps) {
             checked={config.includeRoof}
             onChange={(e) => update('includeRoof', e.target.checked)}
           />
-          Dakvlak / speelplatform bovenop
+          Dakvlak / bovenste platform
         </label>
-      </section>
-
-      <section className="form-section">
-        <h2>Omgeving</h2>
-        <div className="base-type-row">
-          <button
-            type="button"
-            className={`base-type-btn${environment === 'buiten' ? ' active' : ''}`}
-            onClick={() => onChange(withEnvironment(config, 'buiten'))}
-          >
-            <strong>Buiten</strong>
-            <span>In de tuin — verankerd met voetplaten of grondankers</span>
-          </button>
-          <button
-            type="button"
-            className={`base-type-btn${environment === 'binnen' ? ' active' : ''}`}
-            onClick={() => onChange(withEnvironment(config, 'binnen'))}
-          >
-            <strong>Binnen</strong>
-            <span>Los op de vloer op rubberen voetdoppen</span>
-          </button>
-        </div>
-      </section>
-
-      {environment === 'binnen' ? (
-        <section className="form-section">
-          <h2>Onderstel</h2>
-          <p className="field-hint">
-            Binnenopstelling: het rek staat los op de vloer op kunststof/rubberen voetdoppen (anti-slip).
-            Geen voetplaten of grondankers nodig.
-          </p>
-        </section>
-      ) : (
-        <section className="form-section">
-          <h2>Verankering</h2>
-          <div className="base-type-row">
-            <button
-              type="button"
-              className={`base-type-btn${config.baseType === 'voetplaat' ? ' active' : ''}`}
-              onClick={() => update('baseType', 'voetplaat')}
-            >
-              <strong>Voetplaat</strong>
-              <span>Ronde plaat op maaiveld, geschroefd of gelast</span>
-            </button>
-            <button
-              type="button"
-              className={`base-type-btn${config.baseType === 'grondanker' ? ' active' : ''}`}
-              onClick={() => update('baseType', 'grondanker')}
-            >
-              <strong>Grondanker</strong>
-              <span>Buisdeel in beton — geen voetplaat nodig</span>
-            </button>
-          </div>
-          {config.baseType === 'grondanker' && (
-            <label className="anchor-depth-field">
-              Diepte in grond (mm)
-              <input
-                type="number"
-                min={200}
-                max={800}
-                step={50}
-                value={config.anchorDepthMm}
-                onChange={(e) => update('anchorDepthMm', Number(e.target.value))}
-              />
-              <span className="field-hint">
-                Aanbevolen 300–500 mm voor tuin-klimrekken. De hoekstaander loopt dit stuk onder maaiveld door
-                en wordt in een betonpoer gegoten.
-              </span>
-            </label>
-          )}
-        </section>
-      )}
-
-      <section className="form-section">
-        <h2>Materiaal & diameter</h2>
-        <div className="material-grid">
-          {MATERIALS.map((material) => (
-            <button
-              key={material.id}
-              type="button"
-              className={`material-card${config.materialId === material.id ? ' active' : ''}`}
-              onClick={() => update('materialId', material.id)}
-            >
-              <span className="swatch" style={{ background: material.color }} />
-              <span className="material-info">
-                <strong>{material.name}</strong>
-                <span>{material.description}</span>
-              </span>
-              {material.outdoor && <span className="badge">Buiten</span>}
-            </button>
-          ))}
-        </div>
-
-        <div className="diameter-row">
-          <span className="field-label">Buisdiameter</span>
-          <div className="diameter-options">
-            {PIPE_DIAMETERS.map((d) => (
-              <button
-                key={d.value}
-                type="button"
-                className={`diameter-btn${config.diameter === d.value ? ' active' : ''}`}
-                onClick={() => update('diameter', d.value)}
-              >
-                {d.label}
-              </button>
-            ))}
-          </div>
-          {isBuislengte && (
-            <span className="field-hint diameter-mode-hint">
-              Diameter wijzigen houdt de buislengtes vast; footprint en gatafstand schalen mee.
-            </span>
-          )}
-        </div>
-      </section>
+      </CollapsibleSection>
     </div>
   )
 }

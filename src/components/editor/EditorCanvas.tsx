@@ -1,7 +1,9 @@
-import { Suspense } from 'react'
-import { Canvas } from '@react-three/fiber'
-import type { EditorSelection, EditorTool, KlimrekConfig, MaterialId, SceneModel } from '../../types'
+import { Suspense, useCallback, useState } from 'react'
+import { Canvas, type RootState } from '@react-three/fiber'
+import type { EditorSelection, EditorTool, KlimrekConfig, SceneModel } from '../../types'
 import type { PlankPlane } from '../../lib/planks'
+import { useContainerSize } from '../../hooks/useContainerSize'
+import { CameraControlsHint } from '../CameraControlsHint'
 import { EditorScene, type DrawUiState } from '../three/EditorScene'
 import { EditorToolbar } from './EditorToolbar'
 
@@ -12,10 +14,11 @@ interface EditorCanvasProps {
   selection: EditorSelection | null
   highlightedIds?: Set<string>
   plankPlane?: PlankPlane
+  /** Admin-flag: toon plank-tool. */
+  planksEnabled?: boolean
   onSceneChange: (scene: SceneModel) => void
   onSelectionChange: (selection: EditorSelection | null) => void
   onToolChange: (tool: EditorTool) => void
-  onMaterialChange: (id: MaterialId) => void
   onPlankPlaneChange?: (plane: PlankPlane) => void
   onUndo?: () => void
   onRedo?: () => void
@@ -37,10 +40,10 @@ export function EditorCanvas({
   selection,
   highlightedIds,
   plankPlane = 'xz',
+  planksEnabled = true,
   onSceneChange,
   onSelectionChange,
   onToolChange,
-  onMaterialChange,
   onPlankPlaneChange,
   onUndo,
   onRedo,
@@ -50,6 +53,20 @@ export function EditorCanvas({
   onReset,
   onDrawUiChange,
 }: EditorCanvasProps) {
+  const { ref, width, height } = useContainerSize()
+  const [canvasKey, setCanvasKey] = useState(0)
+  const onCreated = useCallback((state: RootState) => {
+    const { gl } = state
+    const onLost = (event: Event) => {
+      event.preventDefault()
+      window.setTimeout(() => {
+        if (gl.getContext().isContextLost()) setCanvasKey((k) => k + 1)
+      }, 150)
+    }
+    gl.domElement.addEventListener('webglcontextlost', onLost, false)
+  }, [])
+  const ready = width > 0 && height > 0
+
   const planeHint =
     plankPlane === 'xy'
       ? 'Verticaal XY · klik ligger langs X'
@@ -58,58 +75,71 @@ export function EditorCanvas({
         : 'Liggend XZ · klik liggende buis'
 
   return (
-    <div
-      className={`preview-3d editor-canvas-wrap${tool === 'draw' ? ' draw-mode' : ''}${tool === 'pan' ? ' pan-mode' : ''}${tool === 'hinge' ? ' hinge-mode' : ''}${tool === 'move' ? ' move-mode' : ''}${tool === 'plank' ? ' plank-mode' : ''}`}
-    >
+    <div className="editor-workspace">
       <EditorToolbar
         tool={tool}
-        materialId={scene.materialId}
         canDelete={!!selection}
         canUndo={canUndo}
         canRedo={canRedo}
         plankPlane={plankPlane}
+        planksEnabled={planksEnabled}
         onToolChange={onToolChange}
-        onMaterialChange={onMaterialChange}
         onPlankPlaneChange={onPlankPlaneChange}
         onUndo={onUndo}
         onRedo={onRedo}
         onDelete={onDelete}
         onReset={onReset}
       />
-      <Suspense fallback={<Loader />}>
-        <div className="canvas-inner">
-          <Canvas
-            shadows
-            camera={{ position: [3, 2.5, 4], fov: 45, near: 0.1, far: 100 }}
-            gl={{ antialias: true }}
-          >
-            <EditorScene
-              scene={scene}
-              config={config}
-              tool={tool}
-              selection={selection}
-              highlightedIds={highlightedIds}
-              plankPlane={plankPlane}
-              onSceneChange={onSceneChange}
-              onSelectionChange={onSelectionChange}
-              onDrawUiChange={onDrawUiChange}
-            />
-          </Canvas>
+      <div
+        className={`preview-3d editor-canvas-wrap${tool === 'draw' ? ' draw-mode' : ''}${tool === 'pan' ? ' pan-mode' : ''}${tool === 'hinge' ? ' hinge-mode' : ''}${tool === 'move' ? ' move-mode' : ''}${tool === 'plank' ? ' plank-mode' : ''}`}
+        onContextMenu={(e) => e.preventDefault()}
+      >
+        <div className="canvas-inner" ref={ref}>
+          {ready ? (
+            <Canvas
+              key={canvasKey}
+              shadows
+              camera={{ position: [3, 2.5, 4], fov: 45, near: 0.1, far: 100 }}
+              gl={{ antialias: true, powerPreference: 'high-performance' }}
+              dpr={[1, 1.75]}
+              style={{ width, height }}
+              onCreated={onCreated}
+            >
+              <Suspense fallback={null}>
+                <EditorScene
+                  scene={scene}
+                  config={config}
+                  tool={tool}
+                  selection={selection}
+                  highlightedIds={highlightedIds}
+                  plankPlane={plankPlane}
+                  onSceneChange={onSceneChange}
+                  onSelectionChange={onSelectionChange}
+                  onDrawUiChange={onDrawUiChange}
+                />
+              </Suspense>
+            </Canvas>
+          ) : (
+            <Loader />
+          )}
         </div>
-      </Suspense>
-      <p className="preview-hint">
-        {tool === 'draw'
-          ? 'Klik grond of buis · Alt = nauwkeurig snappen · Shift = vrij eindpunt · Enter = plaatsen'
-          : tool === 'hinge'
-            ? 'Klik frame-buis = oog · Alt = nauwkeurig snappen · Tweede klik = eind · Enter = plaatsen'
-            : tool === 'plank'
-              ? `${planeHint} · Toolbar: plaatsingsvlak · Snap naast bestaande delen`
-              : tool === 'move'
-                ? 'Sleep een buis of plank · Verbonden buizen rekken mee · Grond blijft vast · Rood = niet toegestaan · Esc annuleert'
-                : tool === 'pan'
-                  ? 'Sleep om te pannen · Scroll = zoomen'
-                  : 'Klik buis of plank = opties · Linkermuis = draaien · Rechtermuis = pannen · Scroll = zoomen'}
-      </p>
+        <div className="preview-hint" role="note">
+          <p className="preview-hint-tool">
+            {tool === 'draw'
+              ? 'Teken: klik grond of buis · Alt = nauwkeurig snappen · Shift = vrij eindpunt · Enter = plaatsen'
+              : tool === 'hinge'
+                ? 'Scharnier: klik frame-buis = oog · Alt = nauwkeurig snappen · tweede klik = eind · Enter = plaatsen'
+                : tool === 'plank'
+                  ? `Plank: ${planeHint} · vlak kiezen in de gereedschapsbalk`
+                  : tool === 'move'
+                    ? 'Verplaats: sleep buis of plank · Esc annuleert'
+                    : tool === 'pan'
+                      ? 'Hand-tool actief'
+                      : 'Select: klik voor opties'}
+          </p>
+          <CameraControlsHint variant={tool === 'pan' ? 'editor-hand' : 'editor'} />
+        </div>
+      </div>
     </div>
   )
 }

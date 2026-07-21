@@ -8,13 +8,18 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "test:fittings": "npx tsx src/lib/fittings.detect.test.ts",
+    "test:entitlements": "npx tsx src/lib/billing/entitlements.test.ts",
     "fetch-catalog": "npx tsx scripts/fetch-supplier-catalog.ts",
     "fetch-prices": "npx tsx scripts/fetch-supplier-prices.ts",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/barlow": "^5.2.8",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/nunito": "^5.2.7",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
+    "@supabase/supabase-js": "^2.110.7",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "three": "^0.185.1"

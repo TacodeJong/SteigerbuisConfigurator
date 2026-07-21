@@ -1,16 +1,38 @@
 <!doctype html>
-<html lang="nl">
+<html lang="nl" data-theme="werkplaats">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
+    <title>Steigerbuis Ontwerpen – Constructie samenstellen in 3D</title>
+    <meta
+      name="description"
+      content="Ontwerp klimrekken, meubels en constructies van steigerbuis in 3D. Gratis configurator met stuklijst; optioneel cloud-opslag, galerij en export."
     />
-    <title>Steigerbuis Configurator – Klimrek samenstellen</title>
+    <link rel="canonical" href="https://steigerbuisontwerpen.nl/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="nl_NL" />
+    <meta property="og:url" content="https://steigerbuisontwerpen.nl/" />
+    <meta property="og:site_name" content="Steigerbuis Ontwerpen" />
+    <meta property="og:title" content="Steigerbuis Ontwerpen – Constructie samenstellen in 3D" />
+    <meta
+      property="og:description"
+      content="Ontwerp klimrekken, meubels en constructies van steigerbuis in 3D. Gratis configurator met stuklijst; optioneel cloud-opslag, galerij en export."
+    />
+    <meta property="og:image" content="https://steigerbuisontwerpen.nl/favicon.svg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Steigerbuis Ontwerpen – Constructie samenstellen in 3D" />
+    <meta
+      name="twitter:description"
+      content="Ontwerp klimrekken, meubels en constructies van steigerbuis in 3D. Gratis configurator met stuklijst."
+    />
+    <script>
+      /* Theme vóór paint — werkt op statische hosting (geen server). */
+      try {
+        var t = localStorage.getItem('steigerbuis-theme');
+        if (t === 'werkplaats' || t === 'speels') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -26,6 +26,7 @@ export const EDITOR_FITTING_TYPES: FittingType[] = [
   '3-weg-hoek',
   'drieweg-kniestuk',
   'vierweg-kruisstuk',
+  'vijfweg-kruisstuk',
   'scharnieroog',
   'scharnierhuls',
   'dubbelscharnier-90',
@@ -44,6 +45,7 @@ export const AUTO_DETECTED_FITTING_TYPES: FittingType[] = [
   '3-weg-hoek',
   'drieweg-kniestuk',
   'vierweg-kruisstuk',
+  'vijfweg-kruisstuk',
 ]
 
 export function materialFamilyForId(materialId: MaterialId): SupplierMaterialFamily {
@@ -136,6 +138,8 @@ export function mapProductToFittingType(name: string, slug: string): FittingType
   if (t.includes('koppelstuk') || t.includes('verbindingsstuk') || t.includes('klemverbinder')) {
     return 'koppelstuk'
   }
+  if (t.includes('vijfweg') || t.includes('5-weg') || t.includes('5 weg')) return 'vijfweg-kruisstuk'
+  if (t.includes('zesweg') || t.includes('6-weg') || t.includes('6 weg')) return 'vierweg-kruisstuk'
   if (t.includes('vierweg') || t.includes('4-weg') || t.includes('4 weg')) return 'vierweg-kruisstuk'
   if (t.includes('centraal kruis') || t.includes('centraal-kruis')) return 'vierweg-kruisstuk'
   if (t.includes('open kruis') || t.includes('kruisstuk 4') || t.includes('kruisstuk-4')) {

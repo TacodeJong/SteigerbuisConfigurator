@@ -1,4 +1,6 @@
+import { useState, type RefObject } from 'react'
 import { PRICED_SUPPLIERS } from '../data/supplierRegistry'
+import { useAutoCloseOnIdle } from '../hooks/useAutoCloseOnIdle'
 
 interface SuppliersMenuProps {
   /** Dropdown voor header/footer; lijst voor sidebar-secties. */
@@ -13,6 +15,9 @@ export function SuppliersMenu({
   className = '',
   hint,
 }: SuppliersMenuProps) {
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const idleRef = useAutoCloseOnIdle(dropdownOpen, () => setDropdownOpen(false))
+
   const rootClass =
     variant === 'dropdown'
       ? `suppliers-menu suppliers-menu-dropdown${className ? ` ${className}` : ''}`
@@ -35,7 +40,14 @@ export function SuppliersMenu({
 
   if (variant === 'dropdown') {
     return (
-      <details className={rootClass}>
+      <details
+        ref={idleRef as RefObject<HTMLDetailsElement>}
+        className={rootClass}
+        open={dropdownOpen}
+        onToggle={(e) => {
+          setDropdownOpen(e.currentTarget.open)
+        }}
+      >
         <summary>Leveranciers</summary>
         {panel}
       </details>

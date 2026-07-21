@@ -1,6 +1,7 @@
-import { useMemo } from 'react'
-import { MOUSE } from 'three'
+import { useLayoutEffect, useMemo, useRef } from 'react'
+import { MOUSE, Vector3 } from 'three'
 import { ContactShadows, OrbitControls } from '@react-three/drei'
+import { useThree } from '@react-three/fiber'
 import type { KlimrekConfig, SceneModel } from '../../types'
 import { MATERIALS } from '../../data/catalog'
 import { configEnvironment } from '../../lib/environment'
@@ -13,6 +14,54 @@ import { PipeMesh } from './PipeMesh'
 import { FittingMesh } from './FittingMesh'
 import { PlankMesh } from './PlankMesh'
 import { PlankMountMesh } from './PlankMountMesh'
+
+/** Zet camera/orbit terug op het model na een grote maten-wissel (preset). */
+function FrameCameraToBounds({
+  maxY,
+  minY,
+  maxXZ,
+  tight = false,
+}: {
+  maxY: number
+  minY: number
+  maxXZ: number
+  /** Galerij-thumb: dichterbij inzoomen. */
+  tight?: boolean
+}) {
+  const camera = useThree((s) => s.camera)
+  const controls = useThree((s) => s.controls) as
+    | { target: Vector3; update: () => void; maxDistance: number }
+    | null
+  const prev = useRef({ maxY: 0, maxXZ: 0 })
+
+  useLayoutEffect(() => {
+    const prevSpan = Math.max(prev.current.maxY, prev.current.maxXZ)
+    const nextSpan = Math.max(maxY, maxXZ)
+    const first = prev.current.maxY === 0 && prev.current.maxXZ === 0
+    const changedALot =
+      first || prevSpan < 0.01 || Math.abs(nextSpan - prevSpan) / prevSpan > 0.12
+    prev.current = { maxY, maxXZ }
+    if (!changedALot) return
+
+    const targetY = (maxY + minY) / 2
+    const dist = tight
+      ? Math.max(maxXZ * 1.85, (maxY - minY) * 1.25, 2.2)
+      : Math.max(maxXZ * 2.6, (maxY - minY) * 1.6, 3.2)
+    camera.position.set(dist * 0.72, targetY + dist * 0.42, dist * 0.95)
+    camera.near = 0.05
+    camera.far = Math.max(80, dist * 12)
+    camera.updateProjectionMatrix()
+    if (controls?.target) {
+      controls.target.set(0, targetY, 0)
+      controls.maxDistance = Math.max(maxXZ * 6, dist * 2.5)
+      controls.update()
+    } else {
+      camera.lookAt(0, targetY, 0)
+    }
+  }, [camera, controls, maxY, minY, maxXZ, tight])
+
+  return null
+}
 
 interface KlimrekSceneProps {
   scene: SceneModel
@@ -30,6 +79,17 @@ interface KlimrekSceneProps {
   highlightedIds?: Set<string>
   interactive: boolean
   onSelect: (id: string | null) => void
+  /** Gallery/thumbnails: geen orbit, geen footprint-labels (sneller + static). */
+  compact?: boolean
+  /** Lichte preview (galerij detail): geen ContactShadows. Default: aan. */
+  showContactShadows?: boolean
+  /** Galerij-thumb: studio-achtergrond + strakkere camera. */
+  studioThumb?: boolean
+  /**
+   * Footprint-maatlabels: `config` = Breedte/Diepte uit config (configurator buitenmaat),
+   * `scene` = echte pipe-envelope via computeFootprint (editor / galerij / custom models).
+   */
+  footprintLabels?: 'config' | 'scene'
 }
 
 export function KlimrekScene({
@@ -39,6 +99,10 @@ export function KlimrekScene({
   highlightedIds,
   interactive,
   onSelect,
+  compact = false,
+  showContactShadows = true,
+  studioThumb = false,
+  footprintLabels = 'config',
 }: KlimrekSceneProps) {
   const color = useMemo(() => {
     const material = MATERIALS.find((m) => m.id === scene.materialId)
@@ -68,27 +132,44 @@ export function KlimrekScene({
     return { maxY, minY, maxXZ }
   }, [scene.pipes])
 
+  const orbitTarget = useMemo(
+    (): [number, number, number] => [0, (bounds.maxY + bounds.minY) / 2, 0],
+    [bounds.maxY, bounds.minY],
+  )
+  const shadowKey = `${bounds.maxXZ.toFixed(2)}:${bounds.maxY.toFixed(2)}`
+
   return (
     <>
       <SceneEnvironment
         environment={config ? configEnvironment(config) : 'buiten'}
         size={Math.max(bounds.maxXZ * 4, 24)}
         onClick={() => interactive && onSelect(null)}
+        studio={studioThumb}
       />
 
-      {config && <GroundAnchor scene={scene} config={config} />}
+      {config && !studioThumb && <GroundAnchor scene={scene} config={config} />}
 
-      <FootprintOutline
-        pipes={scene.pipes}
-        // Buitenmaat-modus: labels matchen de invoervelden. Buislengte-modus:
-        // toon de echte footprint (L+Ø) die meegroeit met diameter.
-        labelWidthMm={
-          config && configDimensionMode(config) === 'buitenmaat' ? config.width : undefined
-        }
-        labelDepthMm={
-          config && configDimensionMode(config) === 'buitenmaat' ? config.depth : undefined
-        }
-      />
+      {!compact && (
+        <FootprintOutline
+          pipes={scene.pipes}
+          // Configurator (buitenmaat): labels = invoervelden. Galerij/custom:
+          // altijd scene-envelope — config.width/depth is vaak nog default.
+          labelWidthMm={
+            footprintLabels === 'config' &&
+            config &&
+            configDimensionMode(config) === 'buitenmaat'
+              ? config.width
+              : undefined
+          }
+          labelDepthMm={
+            footprintLabels === 'config' &&
+            config &&
+            configDimensionMode(config) === 'buitenmaat'
+              ? config.depth
+              : undefined
+          }
+        />
+      )}
 
       <group>
         {trimmedPipes.map((p) => (
@@ -137,29 +218,47 @@ export function KlimrekScene({
         ))}
       </group>
 
-      <ContactShadows
-        position={[0, 0, 0]}
-        opacity={0.35}
-        scale={bounds.maxXZ * 3}
-        blur={2}
-        far={bounds.maxY + 1}
-      />
+      {/* frames={1}: één shadow-pass per maten-wissel i.p.v. elke frame — minder GPU-druk bij presets. */}
+      {showContactShadows && (
+        <ContactShadows
+          key={shadowKey}
+          position={[0, 0, 0]}
+          opacity={0.35}
+          scale={Math.max(bounds.maxXZ * 3, 6)}
+          blur={2}
+          far={bounds.maxY + 1}
+          resolution={compact ? 128 : 256}
+          frames={1}
+        />
+      )}
 
-      <OrbitControls
-        makeDefault
-        enablePan
-        enableDamping
-        dampingFactor={0.08}
-        panSpeed={0.8}
-        mouseButtons={{
-          LEFT: MOUSE.ROTATE,
-          MIDDLE: MOUSE.PAN,
-          RIGHT: MOUSE.PAN,
-        }}
-        target={[0, (bounds.maxY + bounds.minY) / 2, 0]}
-        minDistance={1}
-        maxDistance={bounds.maxXZ * 6}
-        maxPolarAngle={Math.PI / 2 - 0.05}
+      {!compact && (
+        <OrbitControls
+          makeDefault
+          enablePan
+          enableDamping
+          dampingFactor={0.08}
+          panSpeed={0.8}
+          mouseButtons={{
+            // Zelfde schema als Hand-tool / viewer: LMB draaien, Shift+sleep pannen;
+            // middelste/rechter ook draaien (CAD-achtig).
+            LEFT: MOUSE.ROTATE,
+            MIDDLE: MOUSE.ROTATE,
+            RIGHT: MOUSE.ROTATE,
+          }}
+          target={orbitTarget}
+          minDistance={1}
+          maxDistance={Math.max(bounds.maxXZ * 6, 8)}
+          minPolarAngle={0}
+          maxPolarAngle={Math.PI * 0.95}
+        />
+      )}
+
+      <FrameCameraToBounds
+        maxY={bounds.maxY}
+        minY={bounds.minY}
+        maxXZ={bounds.maxXZ}
+        tight={studioThumb}
       />
     </>
   )

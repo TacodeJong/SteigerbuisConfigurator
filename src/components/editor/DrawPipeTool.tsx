@@ -6,7 +6,7 @@ import { DoubleSide, Mesh, Vector3 } from 'three'
 
 const FORWARD = new Vector3()
 import type { ScenePipe, Vec3 } from '../../types'
-import { keyboardModifiers, pointerModifiers, type PointerModifiers } from '../../lib/pointerModifiers'
+import { keyboardModifiers, isToolPointer, pointerModifiers, type PointerModifiers } from '../../lib/pointerModifiers'
 import {
   distance,
   isValidDrawEnd,
@@ -132,6 +132,7 @@ export function DrawPipeTool({
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     if (!active) return
+    if (!isToolPointer(event.nativeEvent)) return
     event.stopPropagation()
     const modifiers = pointerModifiers(event.nativeEvent)
     lastModifiers.current = modifiers

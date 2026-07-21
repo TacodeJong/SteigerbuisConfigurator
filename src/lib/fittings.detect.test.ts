@@ -75,6 +75,35 @@ function assert(cond: boolean, msg: string) {
   assert(f?.type === '3-weg-hoek', `Eindigende staander verwacht 3-weg-hoek, kreeg ${f?.type}`)
 }
 
+// Staander doorlopend + 3 zij-uitgangen (↑↓←→→) → vijfweg (5 pijprichtingen)
+{
+  const f = fittingAt(
+    [
+      pipe('post', [0, 0, 0], [0, 2, 0]),
+      pipe('x+', [0, 1, 0], [1, 1, 0]),
+      pipe('x-', [0, 1, 0], [-1, 1, 0]),
+      pipe('z+', [0, 1, 0], [0, 1, 1]),
+    ],
+    1,
+  )
+  assert(f?.type === 'vijfweg-kruisstuk', `5 richtingen verwacht vijfweg-kruisstuk, kreeg ${f?.type}`)
+}
+
+// Staander doorlopend + 4 zij-uitgangen → vierweg (type 40; geen zesweg in catalogus)
+{
+  const f = fittingAt(
+    [
+      pipe('post', [0, 0, 0], [0, 2, 0]),
+      pipe('x+', [0, 1, 0], [1, 1, 0]),
+      pipe('x-', [0, 1, 0], [-1, 1, 0]),
+      pipe('z+', [0, 1, 0], [0, 1, 1]),
+      pipe('z-', [0, 1, 0], [0, 1, -1]),
+    ],
+    1,
+  )
+  assert(f?.type === 'vierweg-kruisstuk', `6 richtingen/4 zij verwacht vierweg-kruisstuk, kreeg ${f?.type}`)
+}
+
 // Scharnierpunt: geen automatische fitting op het oog/huls-punt
 {
   const fittings = detectFittingsFromPipes(

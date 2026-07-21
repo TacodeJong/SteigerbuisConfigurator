@@ -21,11 +21,12 @@ export const DEFAULT_CONFIG: KlimrekConfig = {
   anchorDepthMm: 400,
 }
 
+/** Startpunten: rechthoekig frame met sporten (o.a. klimrek, rek, pergola-achtig). */
 export const KLIMREK_PRESETS: KlimrekPreset[] = [
   {
     id: 'klein',
-    name: 'Klein klimrek',
-    description: 'Compact rek voor jonge kinderen (2×1,2 m, 1,8 m hoog)',
+    name: 'Compact frame',
+    description: 'Klein rechthoekig frame (2×1,2 m, 1,8 m hoog)',
     config: {
       width: 2000,
       depth: 1200,
@@ -42,14 +43,14 @@ export const KLIMREK_PRESETS: KlimrekPreset[] = [
   },
   {
     id: 'standaard',
-    name: 'Standaard klimrek',
-    description: 'Klassiek tuin-klimrek (2×1,5 m, 2,2 m hoog)',
+    name: 'Standaard frame',
+    description: 'Veelgebruikte maat (2×1,5 m, 2,2 m hoog)',
     config: DEFAULT_CONFIG,
   },
   {
     id: 'groot',
-    name: 'Groot klimrek',
-    description: 'Ruim klimrek met extra sporten (2,5×2 m, 2,5 m hoog)',
+    name: 'Groot frame',
+    description: 'Ruimer frame met extra sporten (2,5×2 m, 2,5 m hoog)',
     config: {
       width: 2500,
       depth: 2000,
@@ -66,8 +67,8 @@ export const KLIMREK_PRESETS: KlimrekPreset[] = [
   },
   {
     id: 'met-dak',
-    name: 'Klimrek met dak',
-    description: 'Klimrek met horizontaal dakvlak als speelplatform',
+    name: 'Frame met dakvlak',
+    description: 'Frame met horizontaal dakvlak / bovenste platform',
     config: {
       width: 2000,
       depth: 1500,

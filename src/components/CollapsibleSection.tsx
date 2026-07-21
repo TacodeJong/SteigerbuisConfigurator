@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 
 interface CollapsibleSectionProps {
   title: string
@@ -11,26 +11,29 @@ interface CollapsibleSectionProps {
 export function CollapsibleSection({
   title,
   children,
-  defaultOpen = true,
+  defaultOpen = false,
   className = '',
   actions,
 }: CollapsibleSectionProps) {
+  const [open, setOpen] = useState(defaultOpen)
+
   return (
-    <details className={`collapsible-section${className ? ` ${className}` : ''}`} open={defaultOpen}>
-      <summary className="collapsible-summary">
-        <span className="collapsible-title">{title}</span>
-        {actions && (
-          <span
-            className="collapsible-actions"
-            onClick={(e) => e.preventDefault()}
-            onKeyDown={(e) => e.stopPropagation()}
-          >
-            {actions}
-          </span>
-        )}
-        <span className="collapsible-chevron" aria-hidden />
-      </summary>
-      <div className="collapsible-body">{children}</div>
-    </details>
+    <div
+      className={`collapsible-section${open ? ' is-open' : ''}${className ? ` ${className}` : ''}`}
+    >
+      <div className="collapsible-summary-row">
+        <button
+          type="button"
+          className="collapsible-summary"
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span className="collapsible-title">{title}</span>
+          <span className="collapsible-chevron" aria-hidden />
+        </button>
+        {actions && <div className="collapsible-actions">{actions}</div>}
+      </div>
+      {open ? <div className="collapsible-body">{children}</div> : null}
+    </div>
   )
 }

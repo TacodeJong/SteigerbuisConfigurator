@@ -465,35 +465,26 @@ export interface FloorplanPrintOptions {
 export function printFloorplan({ scene, config, materialId }: FloorplanPrintOptions): boolean {
   const material = MATERIALS.find((m) => m.id === materialId)
   const footprint = computeFootprint(scene.pipes)
-  const holes = prepareFloorplanHoles(scene, config)
-  const holeDims = holes.length >= 2 ? computeHoleCenterDimensions(holes, scene.pipes) : null
   const date = new Date().toLocaleString('nl-NL', { dateStyle: 'long', timeStyle: 'short' })
   const svg = buildFloorplanSvg(scene, config)
 
+  // Alleen tekening + korte meta/legenda — geen gaten-/maattabellen (die horen in bouwinstructie).
   const body = `
-  <h1>Plattegrond — gaten &amp; footprint</h1>
+  <h1>Plattegrond</h1>
   <p class="meta">
     ${esc(date)}<br />
     Materiaal: <strong>${esc(material?.name ?? materialId)}</strong> · Ø ${config.diameter} mm<br />
-    ${holeDims ? `${holeDimensionsSummary(holeDims)}<br />` : ''}
-    ${footprint ? `Footprint buitenmaat: ${esc(formatMm(footprint.widthMm))} × ${esc(formatMm(footprint.depthMm))}` : ''}
+    ${footprint ? `Footprint: ${esc(formatMm(footprint.widthMm))} × ${esc(formatMm(footprint.depthMm))}` : ''}
     ${
       config.baseType === 'grondanker'
         ? ` · Grondanker ${config.anchorDepthMm} mm onder maaiveld`
         : config.baseType === 'vloerdop'
-          ? ' · Binnenopstelling: los op rubberen voetdoppen (geen gaten)'
+          ? ' · Binnenopstelling: voetdoppen (geen gaten)'
           : ' · Voetplaten (geen gaten)'
     }
   </p>
   <div class="floorplan-wrap">${svg}</div>
-  ${
-    config.baseType === 'grondanker'
-      ? holeTableRows(holes, scene)
-      : config.baseType === 'vloerdop'
-        ? '<p>Binnenopstelling: het rek staat los op de vloer op rubberen/kunststof voetdoppen — geen gaten of betonpoeren nodig. Gebruik de footprint en uitzetmaten om de plek op de vloer te bepalen.</p>'
-        : '<p>Voetplaat-onderstel: geen betonpoeren nodig. Zet voetplaten op maaiveld op de hoeken van het footprint.</p>'
-  }
-  <p class="footer">Legenda: oranje cirkel = gat (middelpunt gemarkeerd), donkerblauwe stip = staander (doorsnede op ware grootte), lichtblauwe lijn = liggende buis, paars = losse maatstukken tussen middelpunten, groene stippellijn = diagonaal per gesloten rechthoek, donkergroen stippel = footprint buitenmaat.</p>`
+  <p class="footer">Legenda: oranje cirkel = gat, donkerblauwe stip = staander, lichtblauwe lijn = liggende buis, paars = maatstukken tussen middelpunten, groene stippellijn = diagonaal, donkergroen stippel = footprint.</p>`
 
   return openPrintWindow('Plattegrond', body)
 }
@@ -503,6 +494,11 @@ export interface BuildInstructionPrintOptions {
   config: KlimrekConfig
   materialId: MaterialId
   bom: BomResult
+  /**
+   * When false, strip embedded plattegrond SVG + hole/uitzet tables (non-Paid path).
+   * Default true for backwards-compat / Paid users.
+   */
+  includeFootprint?: boolean
 }
 
 export function printBuildInstructions({
@@ -510,13 +506,17 @@ export function printBuildInstructions({
   config,
   materialId,
   bom,
+  includeFootprint = true,
 }: BuildInstructionPrintOptions): boolean {
   const material = MATERIALS.find((m) => m.id === materialId)
   const steps = buildInstructions(scene, config, bom)
-  const holes = prepareFloorplanHoles(scene, config)
-  const holeDims = holes.length >= 2 ? computeHoleCenterDimensions(holes, scene.pipes) : null
+  const holes = includeFootprint ? prepareFloorplanHoles(scene, config) : []
+  const holeDims =
+    includeFootprint && holes.length >= 2
+      ? computeHoleCenterDimensions(holes, scene.pipes)
+      : null
   const date = new Date().toLocaleString('nl-NL', { dateStyle: 'long', timeStyle: 'short' })
-  const svg = buildFloorplanSvg(scene, config)
+  const svg = includeFootprint ? buildFloorplanSvg(scene, config) : ''
 
   const stepHtml = steps
     .map(
@@ -541,8 +541,14 @@ export function printBuildInstructions({
     )
     .join('')
 
+  const footprintBlock = includeFootprint
+    ? `<h2>Plattegrond (bovenaanzicht)</h2>
+  <div class="floorplan-wrap">${svg}</div>
+  ${config.baseType === 'grondanker' ? holeTableRows(holes, scene) : ''}`
+    : `<p class="meta" style="border:1px solid #ccc;padding:8px;">Plattegrond en uitzetmaten vereisen een abonnement met printtoegang, of een eenmalige ontgrendeling van deze functie. Ontgrendel via de editor of ga naar Abonnement &amp; aankopen.</p>`
+
   const body = `
-  <h1>Bouwinstructie</h1>
+  <h1>Bouwinstructie${includeFootprint ? '' : ' (bouwstappen)'}</h1>
   <p class="meta">
     ${esc(date)}<br />
     Materiaal: <strong>${esc(material?.name ?? materialId)}</strong> · Ø ${config.diameter} mm<br />
@@ -556,14 +562,12 @@ export function printBuildInstructions({
     ${holeDims ? `<br />${holeDimensionsSummary(holeDims)}` : ''}
   </p>
 
-  <h2>Plattegrond (bovenaanzicht)</h2>
-  <div class="floorplan-wrap">${svg}</div>
-  ${config.baseType === 'grondanker' ? holeTableRows(holes, scene) : ''}
+  ${footprintBlock}
 
   <h2>Bouwstappen</h2>
   ${stepHtml}
 
-  <p class="footer">Gegenereerd met Steigerbuis configurator. Controleer alle maten in de 3D-weergave vóór montage.${config.baseType === 'grondanker' ? ' Zet de poeren uit met de losse maatstukken per rij/kolom; meet daarna per rechthoek de groene diagonaal om haakse hoeken te controleren.' : ''}</p>`
+  <p class="footer">Gegenereerd met Steigerbuis configurator. Controleer alle maten in de 3D-weergave vóór montage.${includeFootprint && config.baseType === 'grondanker' ? ' Zet de poeren uit met de losse maatstukken per rij/kolom; meet daarna per rechthoek de groene diagonaal om haakse hoeken te controleren.' : ''}</p>`
 
   return openPrintWindow('Bouwinstructie', body)
 }

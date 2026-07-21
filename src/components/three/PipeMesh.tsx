@@ -3,7 +3,7 @@ import type { ThreeEvent } from '@react-three/fiber'
 import { Mesh, Quaternion, Vector3 } from 'three'
 import type { ScenePipe, Vec3 } from '../../types'
 import type { PointerModifiers } from '../../lib/pointerModifiers'
-import { pointerModifiers } from '../../lib/pointerModifiers'
+import { isToolPointer, pointerModifiers } from '../../lib/pointerModifiers'
 import { snapToPipeCenterline } from '../../lib/snap'
 
 const UP = new Vector3(0, 1, 0)
@@ -81,8 +81,10 @@ export function PipeMesh({
 
   // Teken/scharnier: op pointerDown reageren (vóór het grond-vlak) en propagatie stoppen,
   // zodat het onzichtbare grondvlak van de tool niet eerst een buis naar de grond plaatst.
+  // Middelste/rechtermuis en Alt+LMB laten we aan OrbitControls.
   const handleActionDown = (e: ThreeEvent<PointerEvent>) => {
     if (!interactive || (!drawMode && !hingeMode && !plankMode)) return
+    if (!isToolPointer(e.nativeEvent)) return
     e.stopPropagation()
     const modifiers = mods(e)
     if (onDrawClick) {
@@ -102,12 +104,14 @@ export function PipeMesh({
 
   const handleSelectClick = (e: ThreeEvent<MouseEvent>) => {
     if (!interactive || drawMode || hingeMode || moveMode || plankMode) return
+    if (!isToolPointer(e.nativeEvent)) return
     e.stopPropagation()
     onSelect?.(pipe.id, [e.point.x, e.point.y, e.point.z])
   }
 
   const handleMoveDown = (e: ThreeEvent<PointerEvent>) => {
     if (!moveMode) return
+    if (!isToolPointer(e.nativeEvent)) return
     e.stopPropagation()
     ;(e.target as Element & { setPointerCapture?: (id: number) => void }).setPointerCapture?.(e.pointerId)
     document.body.style.cursor = 'grabbing'
@@ -185,7 +189,7 @@ export function PipeMesh({
           <meshStandardMaterial visible={false} />
         </mesh>
       )}
-      <mesh ref={meshRef} {...(actionMode || moveMode ? {} : pickHandlers)}>
+      <mesh ref={meshRef} castShadow={false} {...(actionMode || moveMode ? {} : pickHandlers)}>
         <cylinderGeometry args={[radius, radius, length, 16]} />
         <meshStandardMaterial
           color={color}
