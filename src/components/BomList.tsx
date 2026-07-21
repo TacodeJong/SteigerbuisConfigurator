@@ -339,15 +339,12 @@ export function BomList({
             )}
           </p>
         )}
-        {interactive && (
-          <p className="bom-hint">Klik een regel om te markeren in 3D.</p>
-        )}
-        {bom.fittings.length > 0 && (
-          <p className="bom-hint">Tik op een koppeling-voorbeeld voor een grotere 3D-weergave.</p>
-        )}
       </CollapsibleSection>
 
       <CollapsibleSection title="Steigerbuizen" className="bom-panel-section">
+        {interactive && (
+          <p className="bom-hint">Klik een regel om te markeren in 3D.</p>
+        )}
         <table>
           <thead>
             <tr>
@@ -392,6 +389,10 @@ export function BomList({
 
       {bom.fittings.length > 0 && (
         <CollapsibleSection title="Buiskoppelingen" className="bom-panel-section">
+          {interactive && (
+            <p className="bom-hint">Klik een regel om te markeren in 3D.</p>
+          )}
+          <p className="bom-hint">Tik op een koppeling-voorbeeld voor een grotere 3D-weergave.</p>
           <table className="bom-fittings-table">
             <thead>
               <tr>

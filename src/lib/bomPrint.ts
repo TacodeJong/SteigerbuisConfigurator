@@ -244,7 +244,7 @@ export async function printBomWithGroothandelSkus(
 
 export async function copyGroothandelOrderList(
   bom: BomResult,
-  _config: KlimrekConfig,
+  config: KlimrekConfig,
   materialId: MaterialId,
 ): Promise<boolean> {
   const text = buildOrderListText(bom)
