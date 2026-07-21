@@ -27,10 +27,13 @@ import { useFeatureFlags } from './hooks/useFeatureFlags'
 import { useMediaQuery } from './hooks/useMediaQuery'
 import { usePageVisitTracker } from './hooks/usePageVisitTracker'
 import { AuthProvider, useAuth } from './lib/auth/session'
+import { ApiError } from './lib/apiErrors'
 import { canOpenFromDisk } from './lib/billing/entitlements'
 import { fetchActivePlans, type SubscriptionPlan } from './lib/billing/plans'
+import { normalizeConfig } from './lib/environment'
+import { importModelFromFile, upsertModel } from './lib/modelStorage'
+import { saveCloudModel, type CloudModel } from './lib/models/cloudModels'
 import { parseRoute, navigate, type AppRoute } from './lib/routing'
-import type { CloudModel } from './lib/models/cloudModels'
 import type { DiskImportGate, ModelsDialogFocus } from './components/editor/ModelStorePanel'
 import type { BomHighlight, KlimrekConfig, SceneModel, ViewMode } from './types'
 import './App.css'
@@ -79,8 +82,8 @@ function AppShell() {
   const [activeCloudModelName, setActiveCloudModelName] = useState<string | null>(null)
   const [openModelsTick, setOpenModelsTick] = useState(0)
   const [openModelsFocus, setOpenModelsFocus] = useState<ModelsDialogFocus>('browse')
-  const [diskImportTick, setDiskImportTick] = useState(0)
   const [openConfigSheetTick, setOpenConfigSheetTick] = useState(0)
+  const diskFileInputRef = useRef<HTMLInputElement>(null)
   const [authOpen, setAuthOpen] = useState(false)
   const [authReason, setAuthReason] = useState<string | null>(null)
   const [welcomeDismissed, setWelcomeDismissed] = useState(
@@ -154,10 +157,44 @@ function AppShell() {
       navigate({ name: 'upgrade' })
       return
     }
-    if (route.name !== 'app') navigate({ name: 'app' })
-    ensureEditor()
-    // Alleen file-picker (via SceneEditor); geen ModelStore “Opgeslagen modellen”.
-    setDiskImportTick((t) => t + 1)
+    // Native file picker moet synchroon in de click-handler (user gesture).
+    // Niet via ensureEditor → lazy SceneEditor → useEffect: browsers blokkeren dat.
+    diskFileInputRef.current?.click()
+  }
+
+  const handleDiskFileSelected = async (file: File) => {
+    try {
+      const model = await importModelFromFile(file)
+      const saved = await saveCloudModel({
+        name: model.name,
+        scene: model.scene,
+        config: model.config,
+      })
+      const cfg = normalizeConfig(saved.config)
+      upsertModel({
+        id: saved.id,
+        name: saved.name,
+        savedAt: new Date(saved.updated_at).getTime(),
+        scene: saved.scene,
+        config: cfg,
+      })
+      if (route.name !== 'app') navigate({ name: 'app' })
+      dismissWelcome()
+      setConfig(cfg)
+      setEditorScene(saved.scene)
+      markEditorBaseline(saved.scene, cfg)
+      setActiveCloudModel(saved.id, saved.name)
+      setBomHighlight(null)
+      setViewMode('editor')
+    } catch (e) {
+      const msg =
+        e instanceof ApiError
+          ? e.message
+          : e instanceof Error
+            ? e.message
+            : 'Kon bestand niet laden'
+      setBillingNotice(msg)
+    }
   }
 
   const dismissWelcome = () => {
@@ -365,6 +402,17 @@ function AppShell() {
       />
 
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} reason={authReason} />
+      <input
+        ref={diskFileInputRef}
+        type="file"
+        accept=".json,.steigerbuis.json,application/json"
+        hidden
+        onChange={(e) => {
+          const file = e.target.files?.[0]
+          if (file) void handleDiskFileSelected(file)
+          e.target.value = ''
+        }}
+      />
 
       <div className="app-shell-main">
         <header className="app-header app-header--thin">
@@ -538,7 +586,6 @@ function AppShell() {
                 onActiveCloudModelIdChange={(id, name) => setActiveCloudModel(id, name)}
                 openModelsTick={openModelsTick}
                 openModelsFocus={openModelsFocus}
-                diskImportTick={diskImportTick}
                 openConfigSheetTick={openConfigSheetTick}
                 planksEnabled={planksEnabled}
                 onEditorBaseline={markEditorBaseline}

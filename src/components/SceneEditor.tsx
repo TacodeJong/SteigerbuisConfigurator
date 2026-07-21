@@ -67,8 +67,6 @@ interface SceneEditorProps {
   /** Externe open-aanvraag vanuit de app-sidebar. */
   openModelsTick?: number
   openModelsFocus?: ModelsDialogFocus
-  /** Externe disk-import-aanvraag (Paid) vanuit de app-sidebar. */
-  diskImportTick?: number
   /** Externe open-aanvraag voor de config/editor bottom sheet (mobiel). */
   openConfigSheetTick?: number
   /** Admin-featureflag: plank/plaat-tool in de editor. */
@@ -95,7 +93,6 @@ export function SceneEditor({
   onActiveCloudModelIdChange,
   openModelsTick = 0,
   openModelsFocus = 'browse',
-  diskImportTick = 0,
   openConfigSheetTick = 0,
   planksEnabled = true,
   onEditorBaseline,
@@ -110,7 +107,6 @@ export function SceneEditor({
   const [plankToolPlane, setPlankToolPlane] = useState<PlankPlane>(getDefaultPlankPlane())
   const [modelsOpen, setModelsOpen] = useState(false)
   const [modelsFocus, setModelsFocus] = useState<ModelsDialogFocus>('browse')
-  const [diskImportRequest, setDiskImportRequest] = useState(0)
   const plankToolVertical = plankToolPlane !== 'xz'
 
   useEffect(() => {
@@ -122,11 +118,6 @@ export function SceneEditor({
     setModelsFocus(openModelsFocus)
     setModelsOpen(true)
   }, [openModelsTick, openModelsFocus])
-
-  useEffect(() => {
-    if (diskImportTick <= 0) return
-    setDiskImportRequest((n) => n + 1)
-  }, [diskImportTick])
 
   useEffect(() => {
     if (openConfigSheetTick <= 0) return
@@ -728,7 +719,6 @@ export function SceneEditor({
         open={modelsOpen}
         onClose={() => setModelsOpen(false)}
         initialFocus={modelsFocus}
-        diskImportRequest={diskImportRequest}
         scene={scene}
         config={config}
         activeCloudModelId={activeCloudModelId}

@@ -70,11 +70,6 @@ interface ModelStoreDialogProps {
   onClose: () => void
   /** Bij openen: focus op bibliotheek of opslaan. */
   initialFocus?: ModelsDialogFocus
-  /**
-   * Verhoog om (bij Paid) de file-picker te openen, ook als het dialoog dicht is.
-   * Gebruikt door het Modellen-menu “Openen van schijf…”.
-   */
-  diskImportRequest?: number
   scene: SceneModel
   config: KlimrekConfig
   onLoad: (model: SavedModel) => void
@@ -111,7 +106,6 @@ export function ModelStoreDialog({
   open,
   onClose,
   initialFocus = 'browse',
-  diskImportRequest = 0,
   scene,
   config,
   onLoad,
@@ -337,23 +331,6 @@ export function ModelStoreDialog({
     containerRef: deleteDialogRef,
     closeOnEscape: Boolean(deleteConfirm) && !deleteBusy,
   })
-
-  useEffect(() => {
-    if (diskImportRequest <= 0) return
-    if (!user) {
-      setAuthReason('Log in om een bestand te importeren.')
-      setAuthOpen(true)
-      return
-    }
-    if (!openFromDiskOk) {
-      // Geen file-picker; CTA zichtbaar in dialoog of naar abonnementen.
-      if (open) showSubscriptionRequired('Openen van schijf.')
-      else navigate({ name: 'upgrade' })
-      return
-    }
-    const t = window.setTimeout(() => fileInputRef.current?.click(), 0)
-    return () => window.clearTimeout(t)
-  }, [diskImportRequest, openFromDiskOk, user, open])
 
   const requireLogin = (reason: string) => {
     setAuthReason(reason)
