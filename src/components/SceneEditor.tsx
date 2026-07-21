@@ -712,6 +712,7 @@ export function SceneEditor({
           highlight={bomHighlight}
           onHighlightChange={setBomHighlight}
           cloudModelId={activeCloudModelId}
+          modelTitle={activeCloudModelName}
         />
       </ResponsiveBomSidebar>
 

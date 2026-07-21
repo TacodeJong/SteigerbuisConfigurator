@@ -570,6 +570,7 @@ function AppShell() {
                   highlight={bomHighlight}
                   onHighlightChange={setBomHighlight}
                   cloudModelId={activeCloudModelId}
+                  modelTitle={activeCloudModelName}
                 />
               </ResponsiveBomSidebar>
             </main>

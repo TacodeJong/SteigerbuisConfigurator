@@ -4,6 +4,7 @@ import type { KlimrekConfig, SceneModel } from '../types'
 import { useContainerSize } from '../hooks/useContainerSize'
 import { CameraControlsHint } from './CameraControlsHint'
 import { KlimrekScene } from './three/KlimrekScene'
+import { ViewportCaptureBridge } from './three/ViewportCaptureBridge'
 
 interface FramePreview3DProps {
   scene: SceneModel
@@ -76,6 +77,7 @@ export function FramePreview3D({
             gl={{
               antialias: true,
               powerPreference: lightweight ? 'default' : 'high-performance',
+              preserveDrawingBuffer: true,
             }}
             dpr={lightweight ? [1, 1.5] : [1, 1.75]}
             style={{ width, height }}
@@ -83,6 +85,7 @@ export function FramePreview3D({
           >
             {/* Suspense binnen Canvas: Text/font-load mag de WebGL-context niet unmounten. */}
             <Suspense fallback={null}>
+              <ViewportCaptureBridge />
               <KlimrekScene
                 scene={scene}
                 config={config}

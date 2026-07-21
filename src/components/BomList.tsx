@@ -13,6 +13,7 @@ import { isSameBomHighlight } from '../lib/bomHighlight'
 import { formatMm, formatMeters } from '../lib/bom'
 import { copyGroothandelOrderList, printBomWithGroothandelSkus } from '../lib/bomPrint'
 import { printFloorplan } from '../lib/buildPrint'
+import { printViewportCapture } from '../lib/viewportCapture'
 import { useAuth } from '../lib/auth/session'
 import {
   canCopyOrderList,
@@ -66,6 +67,8 @@ interface BomListProps {
   readOnly?: boolean
   /** Cloud model id — needed for durable per-model feature grants. */
   cloudModelId?: string | null
+  /** Optionele titel op de 3D-print (bijv. cloud-modelnaam). */
+  modelTitle?: string | null
 }
 
 const ACCESSORY_TYPES = new Set<AccessoryBomType>([
@@ -92,6 +95,7 @@ export function BomList({
   highlight = null,
   onHighlightChange,
   cloudModelId = null,
+  modelTitle = null,
 }: BomListProps) {
   const { profile, user } = useAuth()
   const effectiveMaterialId = materialId ?? config.materialId
@@ -220,6 +224,20 @@ export function BomList({
     printFloorplan({ scene, config, materialId: effectiveMaterialId })
   }
 
+  const handlePrint3dView = () => {
+    setGateMsg(null)
+    if (!bomPrintOk) {
+      setGateMsg(`3D-weergave printen vereist ${paywallHint('bom_print')}.`)
+      return
+    }
+    const ok = printViewportCapture({ title: modelTitle })
+    if (!ok) {
+      setGateMsg(
+        'Kon de 3D-weergave niet vastleggen. Controleer of het 3D-venster zichtbaar is en of pop-ups zijn toegestaan.',
+      )
+    }
+  }
+
   const showUpgradeLink = !footprintOk || !copyOkEntitled || !bomPrintOk
   const lockedFeatureForCta: GatedFeatureId | null = !copyOkEntitled
     ? 'copy_order_list'
@@ -302,6 +320,25 @@ export function BomList({
               )}
             </button>
           )}
+          <button
+            type="button"
+            className={`bom-action-btn secondary${bomPrintOk ? '' : ' bom-action-locked'}`}
+            onClick={handlePrint3dView}
+            title={
+              bomPrintOk
+                ? '3D-weergave printen (huidige camerastand, met omgeving)'
+                : `${paywallHint('bom_print')}: 3D-weergave printen`
+            }
+          >
+            {bomPrintOk ? (
+              '3D-weergave printen'
+            ) : (
+              <>
+                3D-weergave printen
+                <PaidLockIcon />
+              </>
+            )}
+          </button>
         </div>
         {gateMsg && (
           <p className="bom-gate-msg no-print">

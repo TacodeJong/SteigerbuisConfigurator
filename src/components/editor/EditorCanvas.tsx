@@ -5,6 +5,7 @@ import type { PlankPlane } from '../../lib/planks'
 import { useContainerSize } from '../../hooks/useContainerSize'
 import { CameraControlsHint } from '../CameraControlsHint'
 import { EditorScene, type DrawUiState } from '../three/EditorScene'
+import { ViewportCaptureBridge } from '../three/ViewportCaptureBridge'
 import { EditorToolbar } from './EditorToolbar'
 
 interface EditorCanvasProps {
@@ -100,12 +101,17 @@ export function EditorCanvas({
               key={canvasKey}
               shadows
               camera={{ position: [3, 2.5, 4], fov: 45, near: 0.1, far: 100 }}
-              gl={{ antialias: true, powerPreference: 'high-performance' }}
+              gl={{
+                antialias: true,
+                powerPreference: 'high-performance',
+                preserveDrawingBuffer: true,
+              }}
               dpr={[1, 1.75]}
               style={{ width, height }}
               onCreated={onCreated}
             >
               <Suspense fallback={null}>
+                <ViewportCaptureBridge />
                 <EditorScene
                   scene={scene}
                   config={config}
