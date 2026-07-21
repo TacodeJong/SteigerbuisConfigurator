@@ -16,7 +16,7 @@ Server MUST enforce gated cloud actions via RPCs/RLS; print/download gates are c
 | Design / 3D / price indication | allow | allow | allow | allow |
 | Simple BOM view | allow | allow | allow | allow |
 | Stuklijst printen | allow³ | allow³ | allow | allow |
-| Bestellijst kopiëren | deny / unlock³ | deny / unlock³ · of model-grant | allow (`copy_order_list`) | if `copy_order_list` |
+| Bestellijst kopiëren naar klembord | deny / unlock³ | deny / unlock³ · of model-grant | allow (`copy_order_list`) | if `copy_order_list` |
 | Cloud save | deny → login | if count &lt; `max_private_models` | typically no (`max=0`) | per plan max (null = ∞) |
 | Openen van schijf | deny → login | deny → **abonnement** | deny | if `open_from_disk` (or `cloud_save`) |
 | Download model (.json) | deny → login¹ | deny / unlock³ · of grant | deny | if `download_model` (or `cloud_save`) / grant |

@@ -38,7 +38,7 @@ export const DEFAULT_FEATURE_GATES: FeatureGates = {
 
 export const GATED_FEATURE_LABELS: Record<GatedFeatureId, string> = {
   full_print: 'Plattegrond / volledige bouwinstructie',
-  copy_order_list: 'Bestellijst kopiëren',
+  copy_order_list: 'Bestellijst kopiëren naar klembord',
   bom_print: 'Stuklijst printen',
   download_model: 'Downloaden van modellen',
 }

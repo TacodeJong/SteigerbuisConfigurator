@@ -591,7 +591,7 @@ Deno.serve(async (req) => {
     const amountValue = centsToEur(amountCents)
     const featureLabels: Record<string, string> = {
       full_print: 'Plattegrond / bouwinstructie',
-      copy_order_list: 'Bestellijst kopiëren',
+      copy_order_list: 'Bestellijst kopiëren naar klembord',
       bom_print: 'Stuklijst printen',
       download_model: 'Downloaden van modellen',
     }

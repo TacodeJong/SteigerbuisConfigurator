@@ -12,12 +12,11 @@ import { FITTING_TYPE_LABELS } from '../lib/fittings'
 import { isSameBomHighlight } from '../lib/bomHighlight'
 import { formatMm, formatMeters } from '../lib/bom'
 import { copyGroothandelOrderList, printBomWithGroothandelSkus } from '../lib/bomPrint'
-import { printBuildInstructions, printFloorplan } from '../lib/buildPrint'
+import { printFloorplan } from '../lib/buildPrint'
 import { useAuth } from '../lib/auth/session'
 import {
   canCopyOrderList,
   canPrintBomList,
-  canPrintFullBuildInstructions,
   canPrintFullFootprint,
 } from '../lib/billing/entitlements'
 import {
@@ -133,7 +132,6 @@ export function BomList({
   })
 
   const footprintOk = canPrintFullFootprint(profile, gates, accessOpts('full_print'))
-  const buildFullOk = canPrintFullBuildInstructions(profile, gates, accessOpts('full_print'))
   const copyOkEntitled = canCopyOrderList(profile, gates, accessOpts('copy_order_list'))
   const bomPrintOk = canPrintBomList(profile, gates, accessOpts('bom_print'))
 
@@ -203,7 +201,7 @@ export function BomList({
   const handleCopyOrderList = async () => {
     setGateMsg(null)
     if (!copyOkEntitled) {
-      setGateMsg(`Bestellijst kopiëren vereist ${paywallHint('copy_order_list')}.`)
+      setGateMsg(`Bestellijst kopiëren naar klembord vereist ${paywallHint('copy_order_list')}.`)
       return
     }
     setCopyOk(false)
@@ -220,23 +218,6 @@ export function BomList({
       return
     }
     printFloorplan({ scene, config, materialId: effectiveMaterialId })
-  }
-
-  const handlePrintBuildInstructions = () => {
-    if (!scene) return
-    setGateMsg(null)
-    printBuildInstructions({
-      scene,
-      config,
-      materialId: effectiveMaterialId,
-      bom,
-      includeFootprint: buildFullOk,
-    })
-    if (!buildFullOk) {
-      setGateMsg(
-        'Bouwinstructie zonder plattegrond geprint. Betaal voor deze functie of neem een abonnement.',
-      )
-    }
   }
 
   const showUpgradeLink = !footprintOk || !copyOkEntitled || !bomPrintOk
@@ -285,55 +266,41 @@ export function BomList({
             onClick={() => void handleCopyOrderList()}
             title={
               copyOkEntitled
-                ? 'Bestellijst kopiëren'
-                : `${paywallHint('copy_order_list')}: bestellijst kopiëren`
+                ? 'Bestellijst kopiëren naar klembord'
+                : `${paywallHint('copy_order_list')}: bestellijst kopiëren naar klembord`
             }
           >
             {copyOk ? (
               'Gekopieerd!'
             ) : copyOkEntitled ? (
-              'Bestellijst kopiëren'
+              'Bestellijst kopiëren naar klembord'
             ) : (
               <>
-                Bestellijst kopiëren
+                Bestellijst kopiëren naar klembord
                 <PaidLockIcon />
               </>
             )}
           </button>
           {scene && (
-            <>
-              <button
-                type="button"
-                className={`bom-action-btn secondary${footprintOk ? '' : ' bom-action-locked'}`}
-                onClick={handlePrintFloorplan}
-                title={
-                  footprintOk
-                    ? 'Plattegrond printen'
-                    : `${paywallHint('full_print')}: volledige plattegrond`
-                }
-              >
-                {footprintOk ? (
-                  'Plattegrond'
-                ) : (
-                  <>
-                    Plattegrond
-                    <PaidLockIcon />
-                  </>
-                )}
-              </button>
-              <button
-                type="button"
-                className="bom-action-btn secondary"
-                onClick={handlePrintBuildInstructions}
-                title={
-                  buildFullOk
-                    ? 'Volledige bouwinstructie'
-                    : 'Bouwstappen zonder plattegrond (upgrade voor footprint)'
-                }
-              >
-                {buildFullOk ? 'Bouwinstructie' : 'Bouwstappen'}
-              </button>
-            </>
+            <button
+              type="button"
+              className={`bom-action-btn secondary${footprintOk ? '' : ' bom-action-locked'}`}
+              onClick={handlePrintFloorplan}
+              title={
+                footprintOk
+                  ? 'Plattegrond printen'
+                  : `${paywallHint('full_print')}: volledige plattegrond`
+              }
+            >
+              {footprintOk ? (
+                'Plattegrond'
+              ) : (
+                <>
+                  Plattegrond
+                  <PaidLockIcon />
+                </>
+              )}
+            </button>
           )}
         </div>
         {gateMsg && (

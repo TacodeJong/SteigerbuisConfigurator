@@ -46,7 +46,7 @@ export const FEATURE_FLAG_LABELS: Record<PlanFeatureFlag, string> = {
   publish: 'Publiceren',
   fork: 'Eigen kopie van galerijmodellen',
   full_print: 'Volledige print/plattegrond',
-  copy_order_list: 'Bestellijst kopiëren',
+  copy_order_list: 'Bestellijst kopiëren naar klembord',
   download_model: 'Downloaden van modellen',
   unlimited_saves: 'Onbeperkt cloud-modellen',
 }
