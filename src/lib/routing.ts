@@ -10,6 +10,8 @@ export type AppRoute =
   | { name: 'admin' }
   | { name: 'privacy' }
   | { name: 'terms' }
+  /** Dev/seed: JPEG-catalogus voor BOM/PDF koppeling-thumbs. */
+  | { name: 'fitting-preview-gen' }
 
 export function parseRoute(search = window.location.search, hash = window.location.hash): AppRoute {
   const params = new URLSearchParams(search)
@@ -25,6 +27,7 @@ export function parseRoute(search = window.location.search, hash = window.locati
   if (params.get('view') === 'admin' || hash === '#admin') return { name: 'admin' }
   if (params.get('view') === 'privacy' || hash === '#privacy') return { name: 'privacy' }
   if (params.get('view') === 'terms' || hash === '#terms') return { name: 'terms' }
+  if (params.get('view') === 'fitting-preview-gen') return { name: 'fitting-preview-gen' }
   return { name: 'app' }
 }
 
@@ -59,6 +62,9 @@ export function navigate(route: AppRoute): void {
       break
     case 'terms':
       url.searchParams.set('view', 'terms')
+      break
+    case 'fitting-preview-gen':
+      url.searchParams.set('view', 'fitting-preview-gen')
       break
     case 'model':
       url.searchParams.set('model', route.id)

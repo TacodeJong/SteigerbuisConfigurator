@@ -11,6 +11,7 @@
     "test:entitlements": "npx tsx src/lib/billing/entitlements.test.ts",
     "fetch-catalog": "npx tsx scripts/fetch-supplier-catalog.ts",
     "fetch-prices": "npx tsx scripts/fetch-supplier-prices.ts",
+    "generate-fitting-previews": "npx tsx scripts/generate-fitting-previews.ts",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -30,6 +31,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "oxlint": "^1.71.0",
+    "playwright": "^1.54.2",
     "typescript": "~6.0.2",
     "vite": "^8.1.1"
   }

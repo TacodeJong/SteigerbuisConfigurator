@@ -28,3 +28,7 @@ npm run build
 ```
 
 Upload de inhoud van `dist/` naar je static host (bijv. Strato). Bouw met de gewenste `VITE_*` waarden in `.env`.
+
+## Koppeling-previews (BOM / PDF)
+
+Standaard JPEG-weergaven per koppelingstype staan in `public/fittings/` (optioneel ook in Supabase Storage). Regenereren: zie [docs/fitting-previews.md](docs/fitting-previews.md).

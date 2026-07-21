@@ -16,11 +16,20 @@ import type { FittingType, MaterialId, PipeDiameter } from '../types'
 import { FITTINGS } from '../data/catalog'
 import { FITTING_TYPE_LABELS } from '../lib/fittings'
 import { buildFittingPreview } from '../lib/fittingPreviewModel'
+import {
+  fetchFittingPreviewDataUrl,
+  fittingPreviewCacheKey,
+  markFittingPreviewMissing,
+  markFittingPreviewResolved,
+  resolveFittingPreviewUrl,
+  resolveFittingPreviewUrlSync,
+  toPrintableImageSrc,
+} from '../lib/fittingPreviewAssets'
 import { fittingProductUrl } from '../lib/suppliers/productMap'
 import { FittingMesh } from './three/FittingMesh'
 import { AccessoryMesh } from './three/AccessoryMesh'
 
-const THUMB_CACHE_VERSION = 'fitting-bom-v1'
+/** In-memory JPEG/data-URL cache (static resolve + live capture). */
 const previewCache = new Map<string, string>()
 
 /** Max gelijktijdige WebGL-thumbs in de stuklijst (capture-once, daarna JPEG). */
@@ -33,7 +42,8 @@ export function fittingThumbCacheKey(
   materialId: MaterialId,
   diameter: PipeDiameter,
 ): string {
-  return `${THUMB_CACHE_VERSION}:${type}:${materialId}:${diameter}`
+  // Diameter blijft in de live-cache-key; static catalogus negeert Ø (standaardweergave).
+  return `${fittingPreviewCacheKey(type, materialId)}:${diameter}`
 }
 
 function acquireSlot(): Promise<() => void> {
@@ -95,7 +105,7 @@ function CaptureOnce({
   return null
 }
 
-function FittingPreviewScene({
+export function FittingPreviewScene({
   type,
   materialId,
   diameterMm,
@@ -134,7 +144,7 @@ const THUMB_SIZE_PX = 96
 const CAPTURE_TIMEOUT_MS = 6000
 
 /**
- * JPEG data-URL van een koppeling-voorbeeld (zelfde cache als BomFittingThumb).
+ * JPEG data-URL van een koppeling-voorbeeld (static catalogus of live capture).
  * Voor print: canvassen printen niet betrouwbaar — embed als &lt;img&gt;.
  */
 export async function ensureFittingThumbDataUrl(
@@ -145,6 +155,19 @@ export async function ensureFittingThumbDataUrl(
   const cacheKey = fittingThumbCacheKey(type, materialId, diameter)
   const cached = previewCache.get(cacheKey)
   if (cached) return cached
+
+  const staticData = await fetchFittingPreviewDataUrl(type, materialId)
+  if (staticData) {
+    previewCache.set(cacheKey, staticData)
+    return staticData
+  }
+
+  const staticUrl = await resolveFittingPreviewUrl(type, materialId)
+  if (staticUrl) {
+    const printable = toPrintableImageSrc(staticUrl)
+    previewCache.set(cacheKey, printable)
+    return printable
+  }
 
   const release = await acquireSlot()
   try {
@@ -226,7 +249,7 @@ interface BomFittingThumbProps {
 
 /**
  * Compacte 3D-herkenning per koppeling in de stuklijst.
- * Inline: lazy WebGL → één JPEG-capture → cache (max 1 gelijktijdige renderer).
+ * Inline: standaard JPEG uit catalogus/Storage, anders lazy WebGL → JPEG-cache.
  * Klik: gedeelde detail-popover met orbit (één live Canvas).
  */
 export function BomFittingThumb({ type, materialId, diameter }: BomFittingThumbProps) {
@@ -234,11 +257,19 @@ export function BomFittingThumb({ type, materialId, diameter }: BomFittingThumbP
   const wrapRef = useRef<HTMLButtonElement>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
   const titleId = useId()
-  const [src, setSrc] = useState<string | null>(() => previewCache.get(cacheKey) ?? null)
+  const [src, setSrc] = useState<string | null>(() => {
+    const cached = previewCache.get(cacheKey)
+    if (cached) return cached
+    return resolveFittingPreviewUrlSync(type, materialId)
+  })
   const [visible, setVisible] = useState(false)
   const [hasSlot, setHasSlot] = useState(false)
   const [failed, setFailed] = useState(false)
   const [open, setOpen] = useState(false)
+  const [staticChecked, setStaticChecked] = useState(() => {
+    if (previewCache.has(cacheKey)) return true
+    return resolveFittingPreviewUrlSync(type, materialId) != null
+  })
 
   const catalog = FITTINGS.find((f) => f.type === type)
   const label = FITTING_TYPE_LABELS[type] ?? catalog?.name ?? type
@@ -249,10 +280,33 @@ export function BomFittingThumb({ type, materialId, diameter }: BomFittingThumbP
     if (cached) {
       setSrc(cached)
       setFailed(false)
-    } else {
-      setSrc(null)
+      setStaticChecked(true)
+      return
     }
-  }, [cacheKey])
+    const sync = resolveFittingPreviewUrlSync(type, materialId)
+    if (sync) {
+      previewCache.set(cacheKey, sync)
+      setSrc(sync)
+      setFailed(false)
+      setStaticChecked(true)
+      return
+    }
+    setSrc(null)
+    setStaticChecked(false)
+    let cancelled = false
+    void resolveFittingPreviewUrl(type, materialId).then((url) => {
+      if (cancelled) return
+      if (url) {
+        previewCache.set(cacheKey, url)
+        setSrc(url)
+        setFailed(false)
+      }
+      setStaticChecked(true)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [cacheKey, type, materialId])
 
   useEffect(() => {
     const el = wrapRef.current
@@ -266,7 +320,7 @@ export function BomFittingThumb({ type, materialId, diameter }: BomFittingThumbP
   }, [])
 
   useEffect(() => {
-    if (src || failed || !visible) return
+    if (!staticChecked || src || failed || !visible) return
 
     let cancelled = false
     let release: (() => void) | null = null
@@ -285,7 +339,7 @@ export function BomFittingThumb({ type, materialId, diameter }: BomFittingThumbP
       setHasSlot(false)
       release?.()
     }
-  }, [src, failed, visible])
+  }, [staticChecked, src, failed, visible])
 
   const onReady = useCallback((url: string) => {
     if (!url) {
@@ -315,7 +369,7 @@ export function BomFittingThumb({ type, materialId, diameter }: BomFittingThumbP
     }
   }, [open])
 
-  const shouldRender = !src && !failed && visible && hasSlot
+  const shouldRender = staticChecked && !src && !failed && visible && hasSlot
 
   const stopRow = (e: ReactMouseEvent) => {
     e.stopPropagation()
@@ -404,7 +458,22 @@ export function BomFittingThumb({ type, materialId, diameter }: BomFittingThumbP
         onKeyDown={(e) => e.stopPropagation()}
       >
         {src ? (
-          <img src={src} alt="" className="bom-fitting-thumb-img" draggable={false} />
+          <img
+            src={src}
+            alt=""
+            className="bom-fitting-thumb-img"
+            draggable={false}
+            onLoad={() => {
+              markFittingPreviewResolved(type, materialId, src)
+              previewCache.set(cacheKey, src)
+            }}
+            onError={() => {
+              markFittingPreviewMissing(type, materialId)
+              previewCache.delete(cacheKey)
+              setSrc(null)
+              setStaticChecked(true)
+            }}
+          />
         ) : failed ? (
           <span className="bom-fitting-thumb-fallback" aria-hidden>
             3D

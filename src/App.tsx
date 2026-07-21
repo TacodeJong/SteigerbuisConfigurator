@@ -21,6 +21,7 @@ import { FeedPage } from './components/gallery/FeedPage'
 import { ProfilePage } from './components/gallery/ProfilePage'
 import { PrivacyPage, TermsPage } from './components/legal/LegalPages'
 import { TutorialsPage } from './components/tutorials/TutorialsPage'
+import { FittingPreviewGeneratorPage } from './components/FittingPreviewGeneratorPage'
 import { WelcomeLanding } from './components/WelcomeLanding'
 import { useAppTheme } from './hooks/useAppTheme'
 import { useFeatureFlags } from './hooks/useFeatureFlags'
@@ -377,6 +378,10 @@ function AppShell() {
   const modelDetailOpen = route.name === 'model'
   const showWelcome =
     route.name === 'app' && !authLoading && !user && !welcomeDismissed
+
+  if (route.name === 'fitting-preview-gen') {
+    return <FittingPreviewGeneratorPage />
+  }
 
   return (
     <div
