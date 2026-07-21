@@ -1,8 +1,10 @@
 import { useLayoutEffect, useMemo, useRef } from 'react'
 import { Group, Mesh, Vector3 } from 'three'
+import type { ThreeEvent } from '@react-three/fiber'
 import type { HingeConnection, MaterialId, PipeAccessory } from '../../types'
 import { accessoryConnectPoint, hingeConnectionHulsId } from '../../lib/accessories'
 import { getFittingMaterial } from '../../lib/fittingMaterial'
+import { isToolPointer } from '../../lib/pointerModifiers'
 import { HingePinMesh, SwivelEyeAccessory, SwivelHulsAccessory } from './fittingParts'
 
 interface AccessoryMeshProps {
@@ -38,6 +40,8 @@ export function AccessoryMesh({
     group.traverse((obj) => {
       const mesh = obj as Mesh
       if (!mesh.isMesh) return
+      // Accessoires (scharnieren e.d.) werpen geen schaduw — zelfde als buizen/fittings.
+      mesh.castShadow = false
       if (!pickable) {
         mesh.userData._raycast = mesh.raycast
         mesh.raycast = () => undefined
@@ -48,8 +52,9 @@ export function AccessoryMesh({
     })
   }, [pickable, accessory.id])
 
-  const handleClick = (e: { stopPropagation: () => void; point: { x: number; y: number; z: number } }) => {
+  const handleClick = (e: ThreeEvent<MouseEvent>) => {
     if (!pickable || !onSelect) return
+    if (!isToolPointer(e.nativeEvent)) return
     e.stopPropagation()
     onSelect(accessory.id, [e.point.x, e.point.y, e.point.z])
   }

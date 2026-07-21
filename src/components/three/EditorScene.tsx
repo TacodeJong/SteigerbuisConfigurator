@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { MOUSE } from 'three'
-import { ContactShadows, Html, Line, OrbitControls } from '@react-three/drei'
+import { ContactShadows, GizmoHelper, GizmoViewcube, Html, Line, OrbitControls } from '@react-three/drei'
 import type { EditorSelection, EditorTool, KlimrekConfig, SceneModel, Vec3 } from '../../types'
 import { MATERIALS } from '../../data/catalog'
 import { PIPE_LABEL } from '../../lib/bom'
@@ -98,7 +98,6 @@ export function EditorScene({
   onSelectionChange,
   onDrawUiChange,
 }: EditorSceneProps) {
-  const [isDrawing, setIsDrawing] = useState(false)
   const [drawStart, setDrawStart] = useState<Vec3 | null>(null)
   const [drawStartKind, setDrawStartKind] = useState<SnapKind>('endpoint')
   const [drawStartPipeId, setDrawStartPipeId] = useState<string | null>(null)
@@ -120,9 +119,26 @@ export function EditorScene({
   const [plankPreview, setPlankPreview] = useState<PlankPlacement | null>(null)
   const [plankMoveState, setPlankMoveState] = useState<{ plankId: string; grab: Vec3 } | null>(null)
   const [plankMovePreview, setPlankMovePreview] = useState<Vec3 | null>(null)
+  /** Alt+LMB = orbit; Alt+Shift+LMB = pan (OrbitControls Shift→pan). Tools ignore Alt+left via isToolPointer. */
+  const [altOrbit, setAltOrbit] = useState(false)
   const lastDrawPipeHover = useRef<{ raw: Vec3; pipeId: string; precise: boolean } | null>(null)
   const lastHingePipeHover = useRef<{ raw: Vec3; pipeId: string; precise: boolean } | null>(null)
   const lastPlankPipeHover = useRef<{ raw: Vec3; pipeId: string } | null>(null)
+
+  useEffect(() => {
+    const syncAlt = (e: KeyboardEvent) => {
+      setAltOrbit(e.altKey || e.getModifierState?.('Alt') === true || e.getModifierState?.('AltGraph') === true)
+    }
+    const clearAlt = () => setAltOrbit(false)
+    window.addEventListener('keydown', syncAlt)
+    window.addEventListener('keyup', syncAlt)
+    window.addEventListener('blur', clearAlt)
+    return () => {
+      window.removeEventListener('keydown', syncAlt)
+      window.removeEventListener('keyup', syncAlt)
+      window.removeEventListener('blur', clearAlt)
+    }
+  }, [])
 
   const cancelMove = useCallback(() => {
     setMoveState(null)
@@ -237,7 +253,6 @@ export function EditorScene({
     setDrawStartPipeId(null)
     setDrawPreview(null)
     setDrawLengthMm(DEFAULT_DRAW_LENGTH_MM)
-    setIsDrawing(false)
   }, [])
 
   const placeDraw = useCallback(
@@ -290,7 +305,6 @@ export function EditorScene({
         setDrawStartKind(result.kind)
         setDrawStartPipeId(result.pipeId ?? null)
         updateDrawPreview(result)
-        setIsDrawing(true)
       }
     },
     [drawStart, updateDrawPreview],
@@ -1114,26 +1128,34 @@ export function EditorScene({
         enablePan
         enableDamping
         dampingFactor={0.08}
-        enableRotate={
-          tool === 'pan' || tool === 'move'
-            ? false
-            : (tool === 'select' && !isDrawing) ||
-              (tool === 'draw' && !drawStart) ||
-              (tool === 'hinge' && !hingeStart) ||
-              tool === 'plank'
-        }
+        enableRotate
         enableZoom
         panSpeed={0.8}
         mouseButtons={
-          tool === 'pan'
-            ? { LEFT: MOUSE.PAN, MIDDLE: MOUSE.PAN, RIGHT: MOUSE.PAN }
-            : { LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.PAN, RIGHT: MOUSE.PAN }
+          tool === 'pan' || altOrbit
+            ? // Hand, or Alt held: LMB orbits; Shift+drag pans (OrbitControls built-in)
+              { LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.ROTATE, RIGHT: MOUSE.ROTATE }
+            : // Tools keep LMB; middle/right orbit; Shift+middle/right pans
+              // LEFT must be cleared explicitly so Alt-orbit mapping does not stick.
+              { LEFT: undefined, MIDDLE: MOUSE.ROTATE, RIGHT: MOUSE.ROTATE }
         }
         target={[0, (bounds.maxY + bounds.minY) / 2, 0]}
         minDistance={1}
         maxDistance={bounds.maxXZ * 6}
-        maxPolarAngle={Math.PI / 2 - 0.05}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI * 0.95}
       />
+
+      {/* Fusion-achtige view cube — rechtsboven in de 3D-viewport */}
+      <GizmoHelper alignment="top-right" margin={[80, 80]}>
+        <GizmoViewcube
+          color="#e8eaed"
+          textColor="#1a1a1a"
+          strokeColor="#9aa0a6"
+          hoverColor="#c5cad1"
+          faces={['Rechts', 'Links', 'Boven', 'Onder', 'Voor', 'Achter']}
+        />
+      </GizmoHelper>
     </>
   )
 }

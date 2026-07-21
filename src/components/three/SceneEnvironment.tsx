@@ -123,10 +123,19 @@ function IndoorWalls({ size }: { size: number }) {
   )
 }
 
+/** Neutrale studio-vloer/lucht voor galerij-thumbnails (hoog contrast t.o.v. buizen). */
+const STUDIO_BACKGROUND = '#e8edf2'
+const STUDIO_FLOOR = '#c5ced8'
+
 interface SceneEnvironmentProps {
   environment: KlimrekEnvironment
   size?: number
   onClick?: (event: ThreeEvent<MouseEvent>) => void
+  /**
+   * Galerij-thumbnail: vlakke studio i.p.v. gras/kamer —
+   * beter contrast, minder “klein in het landschap”.
+   */
+  studio?: boolean
 }
 
 /**
@@ -139,8 +148,33 @@ interface SceneEnvironmentProps {
  * omgeving nooit ontkoppeld/opnieuw opgebouwd worden — anders kan de scène na
  * een switch zonder belichting (zwart) achterblijven.
  */
-export function SceneEnvironment({ environment, size = 50, onClick }: SceneEnvironmentProps) {
+export function SceneEnvironment({
+  environment,
+  size = 50,
+  onClick,
+  studio = false,
+}: SceneEnvironmentProps) {
   const indoor = environment === 'binnen'
+
+  if (studio) {
+    return (
+      <>
+        <color attach="background" args={[STUDIO_BACKGROUND]} />
+        <ambientLight intensity={0.95} color="#ffffff" />
+        <directionalLight position={[4, 9, 5]} intensity={1.35} color="#ffffff" />
+        <directionalLight position={[-5, 4, -2]} intensity={0.55} color="#dbe4f0" />
+        <mesh
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[0, -0.005, 0]}
+          receiveShadow
+          onClick={onClick}
+        >
+          <planeGeometry args={[size, size, 1, 1]} />
+          <meshStandardMaterial color={STUDIO_FLOOR} roughness={0.92} metalness={0} />
+        </mesh>
+      </>
+    )
+  }
 
   return (
     <>
@@ -151,6 +185,14 @@ export function SceneEnvironment({ environment, size = 50, onClick }: SceneEnvir
         intensity={indoor ? 0.9 : 1.1}
         color={indoor ? '#fff6ea' : '#ffffff'}
         castShadow
+        shadow-mapSize={[2048, 2048]}
+        shadow-camera-near={0.5}
+        shadow-camera-far={40}
+        shadow-camera-left={-14}
+        shadow-camera-right={14}
+        shadow-camera-top={14}
+        shadow-camera-bottom={-14}
+        shadow-bias={-0.0002}
       />
       <directionalLight
         position={indoor ? [-4, 4, -3] : [-4, 3, -3]}

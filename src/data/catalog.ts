@@ -102,7 +102,13 @@ export const FITTINGS: FittingCatalogItem[] = [
   {
     type: 'vierweg-kruisstuk',
     name: 'Vierweg kruisstuk',
-    description: 'Doorlopende staander + 4 zij-uitgangen (type 40)',
+    description: 'Doorlopende staander + 4 zij-uitgangen — 6 pijprichtingen (type 40)',
+    shopCategory: 'Kruisstukken',
+  },
+  {
+    type: 'vijfweg-kruisstuk',
+    name: 'Vijfweg kruisstuk',
+    description: 'Doorlopende staander + 3 zij-uitgangen — 5 pijprichtingen',
     shopCategory: 'Kruisstukken',
   },
   {

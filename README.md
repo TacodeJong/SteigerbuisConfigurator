@@ -1,48 +1,34 @@
-# Steigerbuis configurator
+# Steigerbuisontwerpen
 
-Webapp om een tuin-klimrek samen te stellen met steigerbuizen en buiskoppelingen. Configureer afmetingen, bekijk het resultaat in 3D en exporteer stuklijst, plattegrond en bouwinstructie.
+Webapp om steigerbuisconstructies te ontwerpen (frames, rekken, meubels en meer). Stel afmetingen in, bekijk het resultaat in 3D, en exporteer stuklijst, plattegrond en bouwinstructie. Optioneel: account, cloud-bibliotheek, galerij en betaalde exports.
+
+Live: **https://steigerbuisontwerpen.nl**
 
 ## Vereisten
 
-- [Node.js](https://nodejs.org/) (LTS aanbevolen)
-- npm (meestal meegeleverd met Node.js)
+- [Node.js](https://nodejs.org/) (LTS)
+- npm
 
-## Installatie
+## Lokaal draaien
 
 ```bash
 npm install
-```
-
-Kopieer optioneel `.env.example` naar `.env` als je de winkelwagen van Steigerbuisgroothandel wilt vullen (alleen tijdens lokale ontwikkeling):
-
-```bash
 cp .env.example .env
-```
-
-Vul daarna `STEIGERBUISGROOTHANDEL_EMAIL` en `STEIGERBUISGROOTHANDEL_PASSWORD` in.
-
-## Development server starten
-
-Start de app met:
-
-```bash
 npm run dev
 ```
 
-Open daarna in je browser:
+Open **http://localhost:5173**
 
-**http://localhost:5173**
+Zonder Supabase-keys in `.env` werkt de app in lokale demo-modus. Voor echte accounts en betalingen: zie [docs/SETUP-SUPABASE-MOLLIE.md](docs/SETUP-SUPABASE-MOLLIE.md).
 
-De dev server draait met hot reload. API-routes en de shop-proxy voor Steigerbuisgroothandel werken alleen via `npm run dev` (niet in een statische productie-build).
+## Productie-build
 
-Server stoppen: `Ctrl+C` in de terminal.
+```bash
+npm run build
+```
 
-## Overige commando's
+Upload de inhoud van `dist/` naar je static host (bijv. Strato). Bouw met de gewenste `VITE_*` waarden in `.env`.
 
-| Commando | Beschrijving |
-|----------|--------------|
-| `npm run build` | Productie-build naar `dist/` |
-| `npm run preview` | Lokaal preview van de productie-build |
-| `npm run lint` | Linting |
-| `npm run fetch-prices` | Leveranciersprijzen ophalen |
-| `npm run fetch-catalog` | Productcatalogus ophalen |
+## Koppeling-previews (BOM / PDF)
+
+Standaard JPEG-weergaven per koppelingstype staan in `public/fittings/` (optioneel ook in Supabase Storage). Regenereren: zie [docs/fitting-previews.md](docs/fitting-previews.md).

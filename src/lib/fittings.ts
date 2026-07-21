@@ -329,12 +329,14 @@ function classifyJunction(
         ])
       }
       if (branchArms.length >= 3) {
-        // Staander doorlopend + 3-4 zij-uitgangen (vierweg kruisstuk, type 40).
+        // Tel alle unieke pijprichtingen (doorloop-paar + zijarmen).
+        // 5 richtingen (3 zij) → vijfweg; 6 (4 zij) → vierweg (shop: 4-socket / type 40).
+        // Geen zesweg in catalogus → 4+ zij blijft vierweg.
         const sockets = branchArms.map(negate)
-        return fitting(id, 'vierweg-kruisstuk', pos, through, diameterMm, sockets[0], [
-          through,
-          ...sockets,
-        ])
+        const wayCount = dirs.length
+        const type: FittingType =
+          wayCount === 5 || branchArms.length === 3 ? 'vijfweg-kruisstuk' : 'vierweg-kruisstuk'
+        return fitting(id, type, pos, through, diameterMm, sockets[0], [through, ...sockets])
       }
     }
 
@@ -444,6 +446,7 @@ export const FITTING_TYPE_LABELS: Record<FittingType, string> = {
   '3-weg-hoek': 'Hoekstuk (3-weg)',
   'drieweg-kniestuk': 'Drieweg kniestuk',
   'vierweg-kruisstuk': 'Vierweg kruisstuk',
+  'vijfweg-kruisstuk': 'Vijfweg kruisstuk',
   scharnieroog: 'Scharnieroog',
   scharnierhuls: 'Scharnierhuls',
   'dubbelscharnier-90': 'Dubbelscharnier 90°',

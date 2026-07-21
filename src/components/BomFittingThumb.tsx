@@ -1,0 +1,509 @@
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type MouseEvent as ReactMouseEvent,
+} from 'react'
+import { createPortal } from 'react-dom'
+import { createRoot } from 'react-dom/client'
+import { Canvas, useThree } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import type { FittingType, MaterialId, PipeDiameter } from '../types'
+import { FITTINGS } from '../data/catalog'
+import { FITTING_TYPE_LABELS } from '../lib/fittings'
+import { buildFittingPreview } from '../lib/fittingPreviewModel'
+import {
+  fetchFittingPreviewDataUrl,
+  fittingPreviewCacheKey,
+  markFittingPreviewMissing,
+  markFittingPreviewResolved,
+  resolveFittingPreviewUrl,
+  resolveFittingPreviewUrlSync,
+  toPrintableImageSrc,
+} from '../lib/fittingPreviewAssets'
+import { fittingProductUrl } from '../lib/suppliers/productMap'
+import { FittingMesh } from './three/FittingMesh'
+import { AccessoryMesh } from './three/AccessoryMesh'
+
+/** In-memory JPEG/data-URL cache (static resolve + live capture). */
+const previewCache = new Map<string, string>()
+
+/** Max gelijktijdige WebGL-thumbs in de stuklijst (capture-once, daarna JPEG). */
+const MAX_ACTIVE_RENDERERS = 1
+let activeRenderers = 0
+const waitQueue: Array<() => void> = []
+
+export function fittingThumbCacheKey(
+  type: FittingType,
+  materialId: MaterialId,
+  diameter: PipeDiameter,
+): string {
+  // Diameter blijft in de live-cache-key; static catalogus negeert Ø (standaardweergave).
+  return `${fittingPreviewCacheKey(type, materialId)}:${diameter}`
+}
+
+function acquireSlot(): Promise<() => void> {
+  return new Promise((resolve) => {
+    const grant = () => {
+      activeRenderers += 1
+      let released = false
+      resolve(() => {
+        if (released) return
+        released = true
+        activeRenderers -= 1
+        waitQueue.shift()?.()
+      })
+    }
+    if (activeRenderers < MAX_ACTIVE_RENDERERS) grant()
+    else waitQueue.push(grant)
+  })
+}
+
+function CaptureOnce({
+  cacheKey,
+  onReady,
+}: {
+  cacheKey: string
+  onReady: (dataUrl: string) => void
+}) {
+  const gl = useThree((s) => s.gl)
+  const invalidate = useThree((s) => s.invalidate)
+
+  useEffect(() => {
+    let cancelled = false
+    let frame = 0
+    const maxFrames = 6
+
+    const tick = () => {
+      if (cancelled) return
+      invalidate()
+      frame += 1
+      if (frame < maxFrames) {
+        requestAnimationFrame(tick)
+        return
+      }
+      try {
+        const url = gl.domElement.toDataURL('image/jpeg', 0.9)
+        previewCache.set(cacheKey, url)
+        onReady(url)
+      } catch {
+        onReady('')
+      }
+    }
+
+    const id = requestAnimationFrame(tick)
+    return () => {
+      cancelled = true
+      cancelAnimationFrame(id)
+    }
+  }, [cacheKey, gl, invalidate, onReady])
+
+  return null
+}
+
+export function FittingPreviewScene({
+  type,
+  materialId,
+  diameterMm,
+}: {
+  type: FittingType
+  materialId: MaterialId
+  diameterMm: number
+}) {
+  const content = useMemo(() => buildFittingPreview(type, diameterMm), [type, diameterMm])
+  const hide = content.kind === 'accessories' ? new Set(content.hideSleeveIds ?? []) : null
+
+  return (
+    <>
+      <color attach="background" args={['#e8edf2']} />
+      <ambientLight intensity={0.95} color="#ffffff" />
+      <directionalLight position={[3, 5, 4]} intensity={1.25} color="#ffffff" />
+      <directionalLight position={[-4, 2, -2]} intensity={0.5} color="#dbe4f0" />
+      {content.kind === 'fitting' ? (
+        <FittingMesh fitting={content.fitting} materialId={materialId} pickable={false} />
+      ) : (
+        content.accessories.map((acc) => (
+          <AccessoryMesh
+            key={acc.id}
+            accessory={acc}
+            materialId={materialId}
+            pickable={false}
+            hideSleeve={hide?.has(acc.id)}
+          />
+        ))
+      )}
+    </>
+  )
+}
+
+const THUMB_SIZE_PX = 96
+const CAPTURE_TIMEOUT_MS = 6000
+
+/**
+ * JPEG data-URL van een koppeling-voorbeeld (static catalogus of live capture).
+ * Voor print: canvassen printen niet betrouwbaar — embed als &lt;img&gt;.
+ */
+export async function ensureFittingThumbDataUrl(
+  type: FittingType,
+  materialId: MaterialId,
+  diameter: PipeDiameter,
+): Promise<string | null> {
+  const cacheKey = fittingThumbCacheKey(type, materialId, diameter)
+  const cached = previewCache.get(cacheKey)
+  if (cached) return cached
+
+  const staticData = await fetchFittingPreviewDataUrl(type, materialId)
+  if (staticData) {
+    previewCache.set(cacheKey, staticData)
+    return staticData
+  }
+
+  const staticUrl = await resolveFittingPreviewUrl(type, materialId)
+  if (staticUrl) {
+    const printable = toPrintableImageSrc(staticUrl)
+    previewCache.set(cacheKey, printable)
+    return printable
+  }
+
+  const release = await acquireSlot()
+  try {
+    const again = previewCache.get(cacheKey)
+    if (again) return again
+
+    return await new Promise<string | null>((resolve) => {
+      let settled = false
+      const finish = (url: string | null) => {
+        if (settled) return
+        settled = true
+        window.clearTimeout(timeoutId)
+        queueMicrotask(() => {
+          root.unmount()
+          host.remove()
+        })
+        resolve(url)
+      }
+
+      const host = document.createElement('div')
+      host.setAttribute('aria-hidden', 'true')
+      host.style.cssText = `position:fixed;left:-10000px;top:0;width:${THUMB_SIZE_PX}px;height:${THUMB_SIZE_PX}px;pointer-events:none;opacity:0;overflow:hidden;`
+      document.body.appendChild(host)
+      const root = createRoot(host)
+
+      const timeoutId = window.setTimeout(() => {
+        finish(previewCache.get(cacheKey) ?? null)
+      }, CAPTURE_TIMEOUT_MS)
+
+      root.render(
+        <Canvas
+          frameloop="demand"
+          dpr={1}
+          shadows={false}
+          camera={{ position: [0.12, 0.09, 0.14], fov: 38, near: 0.01, far: 10 }}
+          gl={{
+            antialias: true,
+            preserveDrawingBuffer: true,
+            powerPreference: 'low-power',
+            alpha: false,
+          }}
+          style={{ width: THUMB_SIZE_PX, height: THUMB_SIZE_PX }}
+        >
+          <Suspense fallback={null}>
+            <FittingPreviewScene type={type} materialId={materialId} diameterMm={diameter} />
+            <CaptureOnce
+              cacheKey={cacheKey}
+              onReady={(url) => finish(url || null)}
+            />
+          </Suspense>
+        </Canvas>,
+      )
+    })
+  } finally {
+    release()
+  }
+}
+
+/** Unieke koppelingtypes uit een BOM → JPEG data-URLs voor print. */
+export async function captureFittingThumbsForPrint(
+  types: FittingType[],
+  materialId: MaterialId,
+  diameter: PipeDiameter,
+): Promise<Map<FittingType, string>> {
+  const unique = [...new Set(types)]
+  const map = new Map<FittingType, string>()
+  for (const type of unique) {
+    const url = await ensureFittingThumbDataUrl(type, materialId, diameter)
+    if (url) map.set(type, url)
+  }
+  return map
+}
+
+interface BomFittingThumbProps {
+  type: FittingType
+  materialId: MaterialId
+  diameter: PipeDiameter
+}
+
+/**
+ * Compacte 3D-herkenning per koppeling in de stuklijst.
+ * Inline: standaard JPEG uit catalogus/Storage, anders lazy WebGL → JPEG-cache.
+ * Klik: gedeelde detail-popover met orbit (één live Canvas).
+ */
+export function BomFittingThumb({ type, materialId, diameter }: BomFittingThumbProps) {
+  const cacheKey = fittingThumbCacheKey(type, materialId, diameter)
+  const wrapRef = useRef<HTMLButtonElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const titleId = useId()
+  const [src, setSrc] = useState<string | null>(() => {
+    const cached = previewCache.get(cacheKey)
+    if (cached) return cached
+    return resolveFittingPreviewUrlSync(type, materialId)
+  })
+  const [visible, setVisible] = useState(false)
+  const [hasSlot, setHasSlot] = useState(false)
+  const [failed, setFailed] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [staticChecked, setStaticChecked] = useState(() => {
+    if (previewCache.has(cacheKey)) return true
+    return resolveFittingPreviewUrlSync(type, materialId) != null
+  })
+
+  const catalog = FITTINGS.find((f) => f.type === type)
+  const label = FITTING_TYPE_LABELS[type] ?? catalog?.name ?? type
+  const shopUrl = fittingProductUrl(type, materialId, diameter)
+
+  useEffect(() => {
+    const cached = previewCache.get(cacheKey)
+    if (cached) {
+      setSrc(cached)
+      setFailed(false)
+      setStaticChecked(true)
+      return
+    }
+    const sync = resolveFittingPreviewUrlSync(type, materialId)
+    if (sync) {
+      previewCache.set(cacheKey, sync)
+      setSrc(sync)
+      setFailed(false)
+      setStaticChecked(true)
+      return
+    }
+    setSrc(null)
+    setStaticChecked(false)
+    let cancelled = false
+    void resolveFittingPreviewUrl(type, materialId).then((url) => {
+      if (cancelled) return
+      if (url) {
+        previewCache.set(cacheKey, url)
+        setSrc(url)
+        setFailed(false)
+      }
+      setStaticChecked(true)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [cacheKey, type, materialId])
+
+  useEffect(() => {
+    const el = wrapRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { rootMargin: '80px', threshold: 0.01 },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!staticChecked || src || failed || !visible) return
+
+    let cancelled = false
+    let release: (() => void) | null = null
+
+    void acquireSlot().then((r) => {
+      if (cancelled) {
+        r()
+        return
+      }
+      release = r
+      setHasSlot(true)
+    })
+
+    return () => {
+      cancelled = true
+      setHasSlot(false)
+      release?.()
+    }
+  }, [staticChecked, src, failed, visible])
+
+  const onReady = useCallback((url: string) => {
+    if (!url) {
+      setFailed(true)
+      setHasSlot(false)
+      return
+    }
+    setSrc(url)
+    setHasSlot(false)
+  }, [])
+
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    const onPointer = (e: PointerEvent) => {
+      const t = e.target as Node
+      if (dialogRef.current?.contains(t) || wrapRef.current?.contains(t)) return
+      setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    window.addEventListener('pointerdown', onPointer)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('pointerdown', onPointer)
+    }
+  }, [open])
+
+  const shouldRender = staticChecked && !src && !failed && visible && hasSlot
+
+  const stopRow = (e: ReactMouseEvent) => {
+    e.stopPropagation()
+  }
+
+  const popover =
+    open &&
+    createPortal(
+      <div className="bom-fitting-popover-root" role="presentation">
+        <div
+          ref={dialogRef}
+          className="bom-fitting-popover"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+        >
+          <div className="bom-fitting-popover-head">
+            <div>
+              <h3 id={titleId}>{label}</h3>
+              <p className="bom-fitting-type-code">
+                Typecode: <code>{type}</code>
+              </p>
+            </div>
+            <button
+              type="button"
+              className="bom-fitting-popover-close"
+              aria-label="Sluiten"
+              onClick={() => setOpen(false)}
+            >
+              ×
+            </button>
+          </div>
+          {catalog?.description && <p className="bom-fitting-desc">{catalog.description}</p>}
+          <div className="bom-fitting-popover-canvas">
+            <Canvas
+              dpr={[1, 1.5]}
+              shadows={false}
+              camera={{ position: [0.14, 0.11, 0.16], fov: 40, near: 0.01, far: 10 }}
+              gl={{ antialias: true, powerPreference: 'low-power', alpha: false }}
+              style={{ width: '100%', height: '100%' }}
+              onCreated={({ gl }) => {
+                gl.setClearColor('#e8edf2')
+              }}
+            >
+              <Suspense fallback={null}>
+                <FittingPreviewScene type={type} materialId={materialId} diameterMm={diameter} />
+                <OrbitControls
+                  makeDefault
+                  enablePan={false}
+                  minDistance={0.08}
+                  maxDistance={0.35}
+                  target={[0, 0, 0]}
+                />
+              </Suspense>
+            </Canvas>
+          </div>
+          <p className="bom-fitting-popover-hint">Sleep om te draaien — herken de vorm voor je bestelt.</p>
+          {shopUrl && (
+            <a
+              className="bom-fitting-shop-link"
+              href={shopUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={stopRow}
+            >
+              Bekijk in webshop
+            </a>
+          )}
+        </div>
+      </div>,
+      document.body,
+    )
+
+  return (
+    <>
+      <button
+        ref={wrapRef}
+        type="button"
+        className="bom-fitting-thumb"
+        aria-label={`3D-voorbeeld ${label}`}
+        title={`${label} — tik voor grotere 3D-weergave`}
+        onClick={(e) => {
+          stopRow(e)
+          setOpen((v) => !v)
+        }}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
+        {src ? (
+          <img
+            src={src}
+            alt=""
+            className="bom-fitting-thumb-img"
+            draggable={false}
+            onLoad={() => {
+              markFittingPreviewResolved(type, materialId, src)
+              previewCache.set(cacheKey, src)
+            }}
+            onError={() => {
+              markFittingPreviewMissing(type, materialId)
+              previewCache.delete(cacheKey)
+              setSrc(null)
+              setStaticChecked(true)
+            }}
+          />
+        ) : failed ? (
+          <span className="bom-fitting-thumb-fallback" aria-hidden>
+            3D
+          </span>
+        ) : shouldRender ? (
+          <Canvas
+            frameloop="demand"
+            dpr={1}
+            shadows={false}
+            camera={{ position: [0.12, 0.09, 0.14], fov: 38, near: 0.01, far: 10 }}
+            gl={{
+              antialias: true,
+              preserveDrawingBuffer: true,
+              powerPreference: 'low-power',
+              alpha: false,
+            }}
+            style={{ width: '100%', height: '100%' }}
+          >
+            <Suspense fallback={null}>
+              <FittingPreviewScene type={type} materialId={materialId} diameterMm={diameter} />
+              <CaptureOnce cacheKey={cacheKey} onReady={onReady} />
+            </Suspense>
+          </Canvas>
+        ) : (
+          <span className="bom-fitting-thumb-fallback bom-fitting-thumb-loading" aria-hidden>
+            …
+          </span>
+        )}
+      </button>
+      {popover}
+    </>
+  )
+}

@@ -1,11 +1,10 @@
-import type { BomResult, KlimrekConfig, MaterialId } from '../types'
+import type { BomResult, FittingType, KlimrekConfig, MaterialId } from '../types'
 import { FITTINGS, MATERIALS } from '../data/catalog'
 import { PRICED_SUPPLIERS } from '../data/supplierRegistry'
 import { FITTING_TYPE_LABELS } from './fittings'
 import { formatMm, formatMeters } from './bom'
 import { fillPrintWindow, openPrintDocument, openPrintPlaceholder } from './printDocument'
-import { steigerbuisGroothandelAgent } from './suppliers/agents/steigerbuisGroothandelAgent'
-import type { QuoteLine } from './suppliers/types'
+import { captureFittingThumbsForPrint } from '../components/BomFittingThumb'
 
 function esc(text: string): string {
   return text
@@ -19,14 +18,6 @@ function fittingLabel(type: BomResult['fittings'][number]['type']): string {
   return FITTING_TYPE_LABELS[type] ?? FITTINGS.find((f) => f.type === type)?.name ?? type
 }
 
-function skuByLineKey(lines: QuoteLine[]): Map<string, string> {
-  const map = new Map<string, string>()
-  for (const line of lines) {
-    if (line.sku) map.set(line.lineKey, line.sku)
-  }
-  return map
-}
-
 function printStyles(): string {
   return `
     * { box-sizing: border-box; }
@@ -35,12 +26,20 @@ function printStyles(): string {
     .meta { color: #444; font-size: 10pt; margin-bottom: 1rem; }
     h2 { font-size: 12pt; margin: 1rem 0 0.4rem; border-bottom: 1px solid #ccc; padding-bottom: 0.2rem; }
     table { width: 100%; border-collapse: collapse; margin-bottom: 0.5rem; }
-    th, td { text-align: left; padding: 0.35rem 0.5rem; border-bottom: 1px solid #e5e5e5; }
+    th, td { text-align: left; padding: 0.35rem 0.5rem; border-bottom: 1px solid #e5e5e5; vertical-align: middle; }
     th { font-size: 9pt; text-transform: uppercase; letter-spacing: 0.04em; color: #555; }
     td.num { text-align: right; white-space: nowrap; }
+    td.thumb { width: 52px; padding: 0.25rem 0.35rem; }
+    td.thumb img {
+      width: 44px; height: 44px; object-fit: cover; display: block;
+      border-radius: 4px; border: 1px solid #d8dde3; background: #e8edf2;
+    }
     .notes { margin: 1rem 0 0; padding-left: 1.2rem; font-size: 10pt; color: #444; }
     .footer { margin-top: 1.5rem; padding-top: 0.5rem; border-top: 1px solid #ccc; font-size: 9pt; color: #666; }
-    @media print { body { margin: 0.8cm 1cm; } }
+    @media print {
+      body { margin: 0.8cm 1cm; }
+      td.thumb img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
   `
 }
 
@@ -48,27 +47,21 @@ export interface PrintBomOptions {
   bom: BomResult
   config: KlimrekConfig
   materialId: MaterialId
-  /** Artikelnummers van een leverancier (optioneel). */
-  quoteLines?: QuoteLine[]
+  /** JPEG data-URLs per fitting type (3D-voorbeeld, print-vriendelijk). */
+  fittingThumbs?: Map<FittingType, string> | Record<string, string>
 }
 
-export function buildOrderListText(bom: BomResult, quoteLines?: QuoteLine[]): string {
-  const skus = quoteLines ? skuByLineKey(quoteLines) : new Map<string, string>()
+/** Bestellijst voor klembord: aantallen + namen/lengtes, zonder webshop-artikelnummers. */
+export function buildOrderListText(bom: BomResult): string {
   const rows: string[] = []
 
   for (const pipe of bom.pipes) {
-    const key = `pipe:${pipe.lengthMm}`
-    const sku = skus.get(key)
-    const skuPart = sku ? `\t${sku}` : ''
-    rows.push(`${pipe.quantity}×\tBuis ${formatMm(pipe.lengthMm)}${skuPart}`)
+    rows.push(`${pipe.quantity}×\tBuis ${formatMm(pipe.lengthMm)}`)
   }
 
   for (const fitting of bom.fittings) {
-    const key = `fitting:${fitting.type}:${fitting.label ?? ''}`
-    const sku = skus.get(key)
     const label = fittingLabel(fitting.type)
-    const skuPart = sku ? `\t${sku}` : ''
-    rows.push(`${fitting.quantity}×\t${label} (${fitting.label})${skuPart}`)
+    rows.push(`${fitting.quantity}×\t${label} (${fitting.label})`)
   }
 
   for (const plank of bom.planks ?? []) {
@@ -84,32 +77,53 @@ export function buildOrderListText(bom: BomResult, quoteLines?: QuoteLine[]): st
   return rows.join('\n')
 }
 
-export function buildBomHtml({ bom, config, materialId, quoteLines }: PrintBomOptions): string {
+function thumbFor(
+  fittingThumbs: PrintBomOptions['fittingThumbs'],
+  type: FittingType,
+): string | undefined {
+  if (!fittingThumbs) return undefined
+  if (fittingThumbs instanceof Map) return fittingThumbs.get(type)
+  return fittingThumbs[type]
+}
+
+/** Body-HTML voor stuklijst (zonder art.nr.; optionele koppeling-thumbs). */
+export function buildBomPrintBody({
+  bom,
+  config,
+  materialId,
+  fittingThumbs,
+}: PrintBomOptions): string {
   const material = MATERIALS.find((m) => m.id === materialId)
-  const skus = quoteLines ? skuByLineKey(quoteLines) : new Map<string, string>()
-  const hasSku = skus.size > 0
+  const hasThumbs =
+    !!fittingThumbs &&
+    (fittingThumbs instanceof Map ? fittingThumbs.size > 0 : Object.keys(fittingThumbs).length > 0)
   const date = new Date().toLocaleString('nl-NL', { dateStyle: 'long', timeStyle: 'short' })
 
   const pipeRows = bom.pipes
-    .map((pipe) => {
-      const sku = skus.get(`pipe:${pipe.lengthMm}`)
-      return `<tr>
+    .map(
+      (pipe) => `<tr>
         <td>Buis · ${esc(formatMm(pipe.lengthMm))}</td>
         <td class="num">${pipe.quantity}×</td>
-        ${hasSku ? `<td>${sku ? esc(sku) : '—'}</td>` : ''}
-      </tr>`
-    })
+      </tr>`,
+    )
     .join('')
 
   const fittingRows = bom.fittings
     .map((fitting) => {
-      const sku = skus.get(`fitting:${fitting.type}:${fitting.label ?? ''}`)
       const label = fittingLabel(fitting.type)
+      const thumb = thumbFor(fittingThumbs, fitting.type)
+      const thumbCell = hasThumbs
+        ? `<td class="thumb">${
+            thumb
+              ? `<img src="${thumb}" alt="${esc(label)}" width="44" height="44" />`
+              : ''
+          }</td>`
+        : ''
       return `<tr>
+        ${thumbCell}
         <td>${esc(label)}</td>
         <td>${esc(fitting.label)}</td>
         <td class="num">${fitting.quantity}×</td>
-        ${hasSku ? `<td>${sku ? esc(sku) : '—'}</td>` : ''}
       </tr>`
     })
     .join('')
@@ -137,14 +151,7 @@ export function buildBomHtml({ bom, config, materialId, quoteLines }: PrintBomOp
     (s) => `<a href="${esc(s.website)}">${esc(s.name)}</a>`,
   ).join(' · ')
 
-  return `<!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="utf-8" />
-  <title>Stuklijst — ${esc(material?.name ?? materialId)}</title>
-  <style>${printStyles()}</style>
-</head>
-<body>
+  return `
   <h1>Stuklijst</h1>
   <p class="meta">
     ${esc(date)}<br />
@@ -162,7 +169,7 @@ export function buildBomHtml({ bom, config, materialId, quoteLines }: PrintBomOp
   <h2>Steigerbuizen</h2>
   <table>
     <thead><tr>
-      <th>Lengte</th><th>Aantal</th>${hasSku ? '<th>Art.nr.</th>' : ''}
+      <th>Lengte</th><th>Aantal</th>
     </tr></thead>
     <tbody>${pipeRows}</tbody>
   </table>
@@ -172,7 +179,7 @@ export function buildBomHtml({ bom, config, materialId, quoteLines }: PrintBomOp
       ? `<h2>Buiskoppelingen</h2>
   <table>
     <thead><tr>
-      <th>Onderdeel</th><th>Positie</th><th>Aantal</th>${hasSku ? '<th>Art.nr.</th>' : ''}
+      ${hasThumbs ? '<th>Vorm</th>' : ''}<th>Onderdeel</th><th>Positie</th><th>Aantal</th>
     </tr></thead>
     <tbody>${fittingRows}</tbody>
   </table>`
@@ -196,8 +203,20 @@ export function buildBomHtml({ bom, config, materialId, quoteLines }: PrintBomOp
   <p class="footer">
     Gegenereerd met Steigerbuis configurator · Bestel bij een steigerbuisleverancier:
     ${supplierLinks}
-    ${hasSku ? ' · Artikelnummers van de gekozen leverancier' : ''}
-  </p>
+  </p>`
+}
+
+export function buildBomHtml({ bom, config, materialId, fittingThumbs }: PrintBomOptions): string {
+  const material = MATERIALS.find((m) => m.id === materialId)
+  return `<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <title>Stuklijst — ${esc(material?.name ?? materialId)}</title>
+  <style>${printStyles()}</style>
+</head>
+<body>
+${buildBomPrintBody({ bom, config, materialId, fittingThumbs })}
 </body>
 </html>`
 }
@@ -214,13 +233,19 @@ export async function printBomWithGroothandelSkus(
   const win = openPrintPlaceholder()
   if (!win) return false
   try {
-    const quote = await steigerbuisGroothandelAgent.quote(bom, {
-      diameter: config.diameter,
+    const fittingThumbs = await captureFittingThumbsForPrint(
+      bom.fittings.map((f) => f.type),
       materialId,
-    })
+      config.diameter,
+    )
     fillPrintWindow(
       win,
-      buildBomHtml({ bom, config, materialId, quoteLines: quote.lines }),
+      buildBomHtml({
+        bom,
+        config,
+        materialId,
+        fittingThumbs,
+      }),
     )
     return true
   } catch {
@@ -234,11 +259,7 @@ export async function copyGroothandelOrderList(
   config: KlimrekConfig,
   materialId: MaterialId,
 ): Promise<boolean> {
-  const quote = await steigerbuisGroothandelAgent.quote(bom, {
-    diameter: config.diameter,
-    materialId,
-  })
-  const text = buildOrderListText(bom, quote.lines)
+  const text = buildOrderListText(bom)
   const header = `Stuklijst — ${MATERIALS.find((m) => m.id === materialId)?.name ?? materialId} · Ø ${config.diameter} mm\n\n`
   try {
     await navigator.clipboard.writeText(header + text)

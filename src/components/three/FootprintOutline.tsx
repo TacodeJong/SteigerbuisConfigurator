@@ -38,7 +38,8 @@ export function FootprintOutline({ pipes, labelWidthMm, labelDepthMm }: Footprin
   const { minX, maxX, minZ, maxZ, w, d, widthMm, depthMm } = rect
   const y = LIFT_M
   const labelSize = Math.min(Math.max(Math.max(w, d) * 0.055, 0.09), 0.2)
-  // Config-overrides alleen voor configurator-preview; editor gebruikt echte envelope.
+  // Config-overrides alleen bij footprintLabels="config" (configurator);
+  // editor/galerij laten undefined → echte pipe-envelope.
   const widthLabelMm = labelWidthMm ?? widthMm
   const depthLabelMm = labelDepthMm ?? depthMm
 

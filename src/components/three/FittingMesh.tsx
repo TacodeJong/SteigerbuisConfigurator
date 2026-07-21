@@ -61,6 +61,8 @@ export function FittingMesh({ fitting, materialId, pickable = true, highlighted 
     group.traverse((obj) => {
       const mesh = obj as Mesh
       if (!mesh.isMesh) return
+      // Fittings werpen geen schaduw (zelfde als buizen); planken wel.
+      mesh.castShadow = false
       if (!pickable) {
         mesh.userData._raycast = mesh.raycast
         mesh.raycast = () => undefined
@@ -135,7 +137,8 @@ export function FittingMesh({ fitting, materialId, pickable = true, highlighted 
       }
 
       case 'drieweg-kniestuk':
-      case 'vierweg-kruisstuk': {
+      case 'vierweg-kruisstuk':
+      case 'vijfweg-kruisstuk': {
         // axes[0] = doorloop-as, rest = getekende (ondertekende) zij-uitgangen.
         const rawAxes = fitting.axes?.map((a) => new Vector3(...a)) ?? []
         const branches = rawAxes.length > 1 ? rawAxes.slice(1) : axisB ? [axisB] : []

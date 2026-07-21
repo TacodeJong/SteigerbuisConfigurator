@@ -10,7 +10,11 @@ export function useContainerSize<T extends HTMLElement = HTMLDivElement>() {
 
     const update = () => {
       const { width, height } = el.getBoundingClientRect()
-      setSize({ width, height })
+      // Rond af zodat subpixel-jitter geen overbodige Canvas-resizes triggert.
+      const next = { width: Math.round(width), height: Math.round(height) }
+      setSize((prev) =>
+        prev.width === next.width && prev.height === next.height ? prev : next,
+      )
     }
 
     update()

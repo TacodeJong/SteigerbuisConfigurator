@@ -176,19 +176,20 @@ export function PlankMountMesh({
     const holeX = outerR + wingLen * 0.72
     return ([-1, 1] as const).map((side) => (
       <group key={side} position={[0, wingCenterY, 0]}>
-        <mesh position={[side * wingCenterX, 0, 0]} raycast={() => undefined}>
+        <mesh position={[side * wingCenterX, 0, 0]} castShadow={false} raycast={() => undefined}>
           <boxGeometry args={[wingLen, wingT, wingW]} />
           <meshStandardMaterial {...bodyProps} />
         </mesh>
         <mesh
           position={[side * actualTip, 0, 0]}
           rotation={[0, side > 0 ? 0 : Math.PI, 0]}
+          castShadow={false}
           raycast={() => undefined}
         >
           <cylinderGeometry args={[wingW / 2, wingW / 2, wingT, 16, 1, false, -Math.PI / 2, Math.PI]} />
           <meshStandardMaterial {...bodyProps} />
         </mesh>
-        <mesh position={[side * holeX, 0, 0]} raycast={() => undefined}>
+        <mesh position={[side * holeX, 0, 0]} castShadow={false} raycast={() => undefined}>
           <cylinderGeometry args={[holeR, holeR, wingT * 1.25, 12]} />
           <meshStandardMaterial {...holeProps} />
         </mesh>

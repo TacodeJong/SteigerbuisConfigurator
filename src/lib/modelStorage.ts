@@ -54,7 +54,7 @@ function writeAll(models: SavedModel[]): void {
 }
 
 function sanitizeFileName(name: string): string {
-  const base = name.trim() || 'klimrek'
+  const base = name.trim() || 'ontwerp'
   return base.replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').slice(0, 60)
 }
 

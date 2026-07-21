@@ -6,7 +6,7 @@ import { DoubleSide, Mesh, Vector3 } from 'three'
 
 const FORWARD = new Vector3()
 import type { ScenePipe, Vec3 } from '../../types'
-import { keyboardModifiers, pointerModifiers } from '../../lib/pointerModifiers'
+import { keyboardModifiers, isToolPointer, pointerModifiers } from '../../lib/pointerModifiers'
 import {
   distance,
   hingeSnapKindLabel,
@@ -115,6 +115,7 @@ export function HingeDrawTool({
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     if (!active) return
+    if (!isToolPointer(event.nativeEvent)) return
     event.stopPropagation()
     const precise = pointerModifiers(event.nativeEvent).precise
     lastModifiers.current = precise

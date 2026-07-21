@@ -1,0 +1,25 @@
+# https://supabase.com/docs/guides/local-development/cli/config
+project_id = "steigerbuisontwerpen"
+
+[api]
+enabled = true
+
+[db]
+major_version = 15
+
+[auth]
+enabled = true
+site_url = "https://steigerbuisontwerpen.nl"
+additional_redirect_urls = [
+  "https://steigerbuisontwerpen.nl",
+  "http://localhost:5173",
+]
+enable_signup = true
+
+# Mollie calls this without a user JWT
+[functions.mollie-webhook]
+verify_jwt = false
+
+# Checkout requires the caller's Authorization header
+[functions.create-checkout]
+verify_jwt = true

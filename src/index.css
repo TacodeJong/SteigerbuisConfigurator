@@ -1,25 +1,43 @@
-:root {
-  --text: #5b5675;
-  --text-h: #2d1b4e;
-  --text-muted: #8b83a8;
-  --bg: #fffdf8;
-  --border: #e8dff5;
-  --code-bg: #f0f7ff;
-  --accent: #7c3aed;
-  --accent-2: #f97316;
-  --accent-3: #14b8a6;
-  --accent-4: #ec4899;
-  --accent-5: #eab308;
-  --accent-bg: rgba(124, 58, 237, 0.1);
-  --accent-border: rgba(124, 58, 237, 0.35);
-  --header-gradient: linear-gradient(120deg, #fef08a 0%, #fbcfe8 35%, #bae6fd 65%, #ddd6fe 100%);
-  --panel-gradient: linear-gradient(145deg, #ffffff 0%, #fef9ff 45%, #f0f9ff 100%);
-  --sky: #7dd3fc;
-  --grass: #86efac;
+:root,
+[data-theme='werkplaats'] {
+  --text: #3d4654;
+  --text-h: #1e1e1e;
+  --text-muted: #6b7582;
+  --bg: #eef3f6;
+  --surface: #ffffff;
+  --border: #d5dde4;
+  --code-bg: #f4f7f9;
+  --accent: #1a6b5c;
+  --accent-2: #c46a1b;
+  --accent-3: #2d6a4f;
+  --accent-4: #6e7a88;
+  --accent-5: #a8b4c0;
+  --accent-bg: rgba(26, 107, 92, 0.1);
+  --accent-border: rgba(26, 107, 92, 0.35);
+  --action: #c46a1b;
+  --action-text: #ffffff;
+  --header-border: #a8b4c0;
+  --header-gradient: #e8f0f4;
+  --panel-gradient: #ffffff;
+  --sky: #c5dce8;
+  --grass: #6b9b7a;
+  --shadow: rgba(30, 30, 30, 0.08);
+  --shadow-strong: rgba(30, 30, 30, 0.16);
+  --tab-active-bg: #1a6b5c;
+  --cta-bg: #c46a1b;
+  --cta-shadow: rgba(196, 106, 27, 0.28);
+  --body-wash-a: transparent;
+  --body-wash-b: transparent;
+  --center-wash: #e8f0f4;
+  --sidebar-wash: #f4f7f9;
+  --success-chip: #dcefe6;
+  --preview-ground: linear-gradient(180deg, #c5dce8 0%, #b7c9b0 55%, #8fad88 100%);
+  --bom-row-wash: #e8f0f4;
+  --tabs-surface: rgba(255, 255, 255, 0.92);
 
-  --sans: 'Nunito', 'Segoe UI', system-ui, sans-serif;
-  --heading: 'Nunito', 'Segoe UI', system-ui, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --sans: 'Barlow', 'Segoe UI', system-ui, sans-serif;
+  --heading: 'Barlow', 'Segoe UI', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
 
   font: 16px/1.5 var(--sans);
   color: var(--text);
@@ -29,12 +47,89 @@
   -webkit-font-smoothing: antialiased;
 }
 
+[data-theme='speels'] {
+  --text: #5b5675;
+  --text-h: #2d1b4e;
+  --text-muted: #8b83a8;
+  --bg: #fffdf8;
+  --surface: #ffffff;
+  --border: #e8dff5;
+  --code-bg: #f0f7ff;
+  --accent: #7c3aed;
+  --accent-2: #f97316;
+  --accent-3: #14b8a6;
+  --accent-4: #ec4899;
+  --accent-5: #eab308;
+  --accent-bg: rgba(124, 58, 237, 0.1);
+  --accent-border: rgba(124, 58, 237, 0.35);
+  --action: #7c3aed;
+  --action-text: #ffffff;
+  --header-border: #ec4899;
+  --header-gradient: linear-gradient(120deg, #fef08a 0%, #fbcfe8 35%, #bae6fd 65%, #ddd6fe 100%);
+  --panel-gradient: linear-gradient(145deg, #ffffff 0%, #fef9ff 45%, #f0f9ff 100%);
+  --sky: #7dd3fc;
+  --grass: #86efac;
+  --shadow: rgba(124, 58, 237, 0.1);
+  --shadow-strong: rgba(124, 58, 237, 0.28);
+  --tab-active-bg: linear-gradient(135deg, #7c3aed, #ec4899);
+  --cta-bg: linear-gradient(135deg, #7c3aed, #ec4899);
+  --cta-shadow: rgba(124, 58, 237, 0.25);
+  --body-wash-a: rgba(236, 72, 153, 0.08);
+  --body-wash-b: rgba(20, 184, 166, 0.1);
+  --center-wash: linear-gradient(180deg, #f0f7ff 0%, rgba(186, 230, 253, 0.35) 100%);
+  --sidebar-wash: linear-gradient(180deg, #f0f7ff 0%, rgba(254, 243, 199, 0.35) 100%);
+  --success-chip: linear-gradient(135deg, #d9f99d, #86efac);
+  --preview-ground: linear-gradient(180deg, #bae6fd 0%, #86efac 55%, #4ade80 100%);
+  --bom-row-wash: linear-gradient(90deg, rgba(254, 243, 199, 0.4), rgba(221, 214, 254, 0.35));
+  --tabs-surface: rgba(255, 255, 255, 0.75);
+
+  --sans: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --heading: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root,
+  [data-theme='werkplaats'] {
+    --text: #b0b8c2;
+    --text-h: #eef2f7;
+    --text-muted: #8a93a0;
+    --bg: #141820;
+    --surface: #1a2030;
+    --border: #2a3140;
+    --code-bg: #1a2030;
+    --accent: #3d9b88;
+    --accent-2: #e08a3c;
+    --accent-3: #52b788;
+    --accent-4: #8a96a3;
+    --accent-5: #6e7a88;
+    --accent-bg: rgba(61, 155, 136, 0.14);
+    --accent-border: rgba(61, 155, 136, 0.4);
+    --action: #d4883a;
+    --header-border: #3a4555;
+    --header-gradient: #1a2030;
+    --panel-gradient: #1a2030;
+    --sky: #2a3d4a;
+    --grass: #3d6b4f;
+    --shadow: rgba(0, 0, 0, 0.35);
+    --shadow-strong: rgba(0, 0, 0, 0.5);
+    --tab-active-bg: #3d9b88;
+    --cta-bg: #d4883a;
+    --cta-shadow: rgba(212, 136, 58, 0.35);
+    --center-wash: #1a2030;
+    --sidebar-wash: #1a2030;
+    --success-chip: rgba(82, 183, 136, 0.25);
+    --preview-ground: linear-gradient(180deg, #2a3d4a 0%, #2d4a38 55%, #1e3a2a 100%);
+    --bom-row-wash: rgba(42, 61, 74, 0.45);
+    --tabs-surface: rgba(26, 32, 48, 0.92);
+  }
+
+  [data-theme='speels'] {
     --text: #c4bdd9;
     --text-h: #f5f0ff;
     --text-muted: #9d94b8;
     --bg: #1a1428;
+    --surface: #221a38;
     --border: #3d3358;
     --code-bg: #221a38;
     --accent: #a78bfa;
@@ -44,10 +139,25 @@
     --accent-5: #facc15;
     --accent-bg: rgba(167, 139, 250, 0.15);
     --accent-border: rgba(167, 139, 250, 0.45);
+    --action: #a78bfa;
+    --header-border: #f472b6;
     --header-gradient: linear-gradient(120deg, #422006 0%, #4a1942 35%, #1e3a5f 65%, #312e81 100%);
     --panel-gradient: linear-gradient(145deg, #221a38 0%, #2a1f42 50%, #1a2540 100%);
     --sky: #38bdf8;
     --grass: #4ade80;
+    --shadow: rgba(167, 139, 250, 0.12);
+    --shadow-strong: rgba(167, 139, 250, 0.35);
+    --tab-active-bg: linear-gradient(135deg, #a78bfa, #f472b6);
+    --cta-bg: linear-gradient(135deg, #a78bfa, #f472b6);
+    --cta-shadow: rgba(167, 139, 250, 0.3);
+    --body-wash-a: rgba(244, 114, 182, 0.08);
+    --body-wash-b: rgba(45, 212, 191, 0.08);
+    --center-wash: linear-gradient(180deg, #221a38 0%, rgba(30, 58, 95, 0.45) 100%);
+    --sidebar-wash: linear-gradient(180deg, #221a38 0%, rgba(66, 32, 6, 0.35) 100%);
+    --success-chip: linear-gradient(135deg, rgba(74, 222, 128, 0.3), rgba(45, 212, 191, 0.25));
+    --preview-ground: linear-gradient(180deg, #1e3a5f 0%, #14532d 55%, #166534 100%);
+    --bom-row-wash: linear-gradient(90deg, rgba(66, 32, 6, 0.35), rgba(49, 46, 129, 0.35));
+    --tabs-surface: rgba(34, 26, 56, 0.85);
   }
 }
 
@@ -69,15 +179,15 @@ body {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 0% 0%, rgba(236, 72, 153, 0.08), transparent 40%),
-    radial-gradient(circle at 100% 20%, rgba(20, 184, 166, 0.1), transparent 35%),
+    radial-gradient(circle at 0% 0%, var(--body-wash-a), transparent 40%),
+    radial-gradient(circle at 100% 20%, var(--body-wash-b), transparent 35%),
     var(--bg);
 }
 
 h1 {
   font-family: var(--heading);
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-h);
   margin: 0;
   letter-spacing: -0.02em;
@@ -85,7 +195,7 @@ h1 {
 
 h2 {
   font-family: var(--heading);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-h);
 }
 

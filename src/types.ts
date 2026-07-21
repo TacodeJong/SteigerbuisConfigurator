@@ -22,6 +22,7 @@ export type FittingType =
   | '3-weg-hoek'
   | 'drieweg-kniestuk'
   | 'vierweg-kruisstuk'
+  | 'vijfweg-kruisstuk'
   | 'scharnieroog'
   | 'scharnierhuls'
   | 'dubbelscharnier-90'

@@ -22,7 +22,7 @@ function addFitting(fittings: BomFitting[], type: BomFitting['type'], quantity: 
 }
 
 /**
- * Berekent de stuklijst voor een rechthoekig klimrek.
+ * Berekent de stuklijst voor een rechthoekig frame (configurator-startpunt).
  * Buizen zijn altijd gewone buizen op maat — gegroepeerd per lengte.
  */
 export function calculateKlimrekBom(config: KlimrekConfig): BomResult {
