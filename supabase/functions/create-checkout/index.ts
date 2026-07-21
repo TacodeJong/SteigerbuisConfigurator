@@ -247,11 +247,13 @@ Deno.serve(async (req) => {
     const planSlug = (body.plan?.trim() || 'paid_monthly').toLowerCase()
     const discountCode = body.discount_code?.trim() || null
     // Pay-per-use only (Betaalde functies). open_from_disk / publish / fork = plan features.
+    // Keep in sync with client GATED_FEATURE_IDS (incl. full_pdf).
     const PAY_PER_USE_KEYS = new Set([
       'full_print',
       'copy_order_list',
       'bom_print',
       'download_model',
+      'full_pdf',
     ])
     const featureKey =
       typeof body.feature === 'string' && PAY_PER_USE_KEYS.has(body.feature.trim())
