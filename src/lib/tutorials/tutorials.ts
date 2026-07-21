@@ -226,6 +226,8 @@ export async function adminUpdateTutorial(
     description?: string | null
     sort_order?: number
     is_published?: boolean
+    thumbnail_path?: string | null
+    thumbnail_url?: string | null
   },
 ): Promise<Tutorial> {
   const supabase = requireSupabase()
@@ -240,6 +242,8 @@ export async function adminUpdateTutorial(
   }
   if (patch.sort_order !== undefined) updates.sort_order = patch.sort_order
   if (patch.is_published !== undefined) updates.is_published = patch.is_published
+  if (patch.thumbnail_path !== undefined) updates.thumbnail_path = patch.thumbnail_path
+  if (patch.thumbnail_url !== undefined) updates.thumbnail_url = patch.thumbnail_url
 
   const { data, error } = await supabase
     .from('tutorials')
@@ -250,6 +254,48 @@ export async function adminUpdateTutorial(
 
   if (error) throw error
   return data as Tutorial
+}
+
+/**
+ * Replace the thumbnail for an existing tutorial (overwrite storage + DB).
+ * Generated frames are stored as JPEG; custom uploads keep their extension.
+ * Cache-busts thumbnail_url so browsers pick up the new image on the same path.
+ */
+export async function adminReplaceTutorialThumbnail(
+  tutorial: Tutorial,
+  thumbnailFile: File,
+): Promise<Tutorial> {
+  const supabase = requireSupabase()
+  assertImageFile(thumbnailFile)
+
+  const idBase = tutorial.storage_path.replace(/\.[^.]+$/, '') || tutorial.id
+  const thumbMeta = extensionForImage(thumbnailFile)
+  const thumbnailPath = `${idBase}.${thumbMeta.ext}`
+  const oldPath = tutorial.thumbnail_path?.trim() || null
+
+  const { error: uploadError } = await supabase.storage
+    .from(TUTORIALS_BUCKET)
+    .upload(thumbnailPath, thumbnailFile, {
+      cacheControl: '3600',
+      upsert: true,
+      contentType: thumbMeta.contentType,
+    })
+  if (uploadError) throw uploadError
+
+  if (oldPath && oldPath !== thumbnailPath) {
+    const { error: removeError } = await supabase.storage.from(TUTORIALS_BUCKET).remove([oldPath])
+    if (removeError) {
+      console.warn('tutorial old thumbnail remove', removeError.message)
+    }
+  }
+
+  const baseUrl = tutorialPublicUrl(thumbnailPath)
+  const thumbnailUrl = baseUrl ? `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}v=${Date.now()}` : null
+
+  return adminUpdateTutorial(tutorial.id, {
+    thumbnail_path: thumbnailPath,
+    thumbnail_url: thumbnailUrl,
+  })
 }
 
 export async function adminDeleteTutorial(tutorial: Tutorial): Promise<void> {
