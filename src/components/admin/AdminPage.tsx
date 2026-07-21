@@ -4,6 +4,7 @@ import { useAuth } from '../../lib/auth/session'
 import { fetchAdminDashboardStats, type AdminDashboardStats } from '../../lib/admin/stats'
 import {
   fetchAdminVisitAnalytics,
+  formatVisitRouteLabel,
   type AdminVisitAnalytics,
   type AdminVisitBreakdownRow,
   type AdminVisitLocationRow,
@@ -289,20 +290,39 @@ function AdminVisitBreakdowns({ data }: { data: AdminVisitAnalytics | null }) {
   if (!data) return null
 
   return (
-    <section style={{ marginTop: '1.25rem' }}>
-      <h3 style={{ margin: '0 0 0.35rem', fontSize: '0.98rem' }}>Herkomst & apparaat</h3>
-      <p className="muted" style={{ margin: '0 0 0.85rem', fontSize: '0.82rem' }}>
-        Locatie is grof (browser-timezone / taalregio), geen IP. Oude bezoeken zonder dimensies
-        vallen onder Onbekend.
-      </p>
-      <div className="admin-analytics-breakdowns">
-        <AdminBreakdownTable title="Browsers" rows={data.browsers} />
-        <AdminBreakdownTable title="Besturingssystemen" rows={data.oses} />
-        <AdminBreakdownTable title="Referrers" rows={data.referrers} empty="Nog geen referrer-data." />
-        <AdminLocationTable rows={data.locations} />
-        <AdminUtmTable rows={data.utm} />
-      </div>
-    </section>
+    <>
+      <section style={{ marginTop: '1.25rem' }}>
+        <h3 style={{ margin: '0 0 0.65rem', fontSize: '0.98rem' }}>{'Populaire pagina\'s'}</h3>
+        <div className="admin-analytics-breakdowns">
+          <AdminBreakdownTable
+            title="Populaire routes"
+            rows={data.topRoutes}
+            formatLabel={formatVisitRouteLabel}
+            empty="Nog geen route-data in deze periode."
+          />
+          <AdminBreakdownTable
+            title="Populaire paden"
+            rows={data.topPaths}
+            empty="Nog geen pad-data in deze periode."
+            mono
+          />
+        </div>
+      </section>
+      <section style={{ marginTop: '1.25rem' }}>
+        <h3 style={{ margin: '0 0 0.35rem', fontSize: '0.98rem' }}>Herkomst & apparaat</h3>
+        <p className="muted" style={{ margin: '0 0 0.85rem', fontSize: '0.82rem' }}>
+          Locatie is grof (browser-timezone / taalregio), geen IP. Oude bezoeken zonder dimensies
+          vallen onder Onbekend.
+        </p>
+        <div className="admin-analytics-breakdowns">
+          <AdminBreakdownTable title="Browsers" rows={data.browsers} />
+          <AdminBreakdownTable title="Besturingssystemen" rows={data.oses} />
+          <AdminBreakdownTable title="Referrers" rows={data.referrers} empty="Nog geen referrer-data." />
+          <AdminLocationTable rows={data.locations} />
+          <AdminUtmTable rows={data.utm} />
+        </div>
+      </section>
+    </>
   )
 }
 
@@ -310,10 +330,14 @@ function AdminBreakdownTable({
   title,
   rows,
   empty = 'Nog geen data in deze periode.',
+  formatLabel,
+  mono = false,
 }: {
   title: string
   rows: AdminVisitBreakdownRow[]
   empty?: string
+  formatLabel?: (key: string) => string
+  mono?: boolean
 }) {
   const maxVisits = Math.max(1, ...rows.map((r) => r.visits))
   return (
@@ -334,20 +358,28 @@ function AdminBreakdownTable({
             </tr>
           </thead>
           <tbody>
-            {rows.map((row) => (
-              <tr key={row.key}>
-                <td>{row.key}</td>
-                <td>{row.visits}</td>
-                <td>{row.uniques}</td>
-                <td className="admin-analytics-bar-col">
-                  <span
-                    className="admin-analytics-bar"
-                    style={{ width: `${Math.round((row.visits / maxVisits) * 100)}%` }}
-                    title={`${row.visits} visits`}
-                  />
-                </td>
-              </tr>
-            ))}
+            {rows.map((row) => {
+              const label = formatLabel ? formatLabel(row.key) : row.key
+              return (
+                <tr key={row.key}>
+                  <td
+                    title={row.key !== label ? row.key : undefined}
+                    style={mono ? { fontFamily: 'ui-monospace, monospace', wordBreak: 'break-all' } : undefined}
+                  >
+                    {label}
+                  </td>
+                  <td>{row.visits}</td>
+                  <td>{row.uniques}</td>
+                  <td className="admin-analytics-bar-col">
+                    <span
+                      className="admin-analytics-bar"
+                      style={{ width: `${Math.round((row.visits / maxVisits) * 100)}%` }}
+                      title={`${row.visits} visits`}
+                    />
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       )}

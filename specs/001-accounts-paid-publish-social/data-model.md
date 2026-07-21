@@ -162,7 +162,7 @@ Anonymous tracking events for dashboard analytics.
 
 **Privacy**: no raw IP storage. Location is approximate; missing/ambiguous → “Onbekend”. Rows before dimension columns show as Onbekend in breakdowns.
 
-**RLS**: anon/authenticated insert allowed; direct SELECT blocked. Admin reads aggregates via `admin_visit_analytics(p_days)` (totals, series, browsers, oses, referrers, utm, locations).
+**RLS**: anon/authenticated insert allowed; direct SELECT blocked. Admin reads aggregates via `admin_visit_analytics(p_days)` (totals, series, browsers, oses, referrers, utm, locations, top_routes, top_paths — each top list ≤20 by visits).
 
 ## tutorials
 

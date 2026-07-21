@@ -77,6 +77,28 @@ export interface AdminVisitAnalytics {
   referrers: AdminVisitBreakdownRow[]
   utm: AdminVisitUtmRow[]
   locations: AdminVisitLocationRow[]
+  topRoutes: AdminVisitBreakdownRow[]
+  topPaths: AdminVisitBreakdownRow[]
+}
+
+/** Friendly NL labels for known app route keys stored in page_visits.route. */
+const ROUTE_LABELS_NL: Record<string, string> = {
+  app: 'Configurator',
+  gallery: 'Galerij',
+  tutorials: 'Tutorials',
+  favourites: 'Favorieten',
+  feed: 'Feed',
+  model: 'Model',
+  profile: 'Profiel',
+  upgrade: 'Upgrade',
+  admin: 'Admin',
+  privacy: 'Privacy',
+  terms: 'Voorwaarden',
+}
+
+export function formatVisitRouteLabel(routeKey: string): string {
+  const key = routeKey.trim().toLowerCase()
+  return ROUTE_LABELS_NL[key] ?? routeKey
 }
 
 function normalizeCount(value: unknown): number {
@@ -198,6 +220,8 @@ function emptyAnalytics(rangeDays: AdminVisitRange): AdminVisitAnalytics {
     referrers: [],
     utm: [],
     locations: [],
+    topRoutes: [],
+    topPaths: [],
   }
 }
 
@@ -369,5 +393,7 @@ export async function fetchAdminVisitAnalytics(rangeDays: AdminVisitRange): Prom
         uniques: normalizeCount(loc.uniques),
       }
     }),
+    topRoutes: mapBreakdown(row.top_routes),
+    topPaths: mapBreakdown(row.top_paths),
   }
 }
