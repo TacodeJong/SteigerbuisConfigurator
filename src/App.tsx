@@ -148,13 +148,16 @@ function AppShell() {
       requireLogin('Log in om een bestand te importeren.')
       return
     }
+    if (isNavMobile && !navCollapsed) setNavCollapsed(true)
+    // Plan feature open_from_disk: locked → abonnementen, niet de cloud-bibliotheek.
+    if (!diskImportOk) {
+      navigate({ name: 'upgrade' })
+      return
+    }
     if (route.name !== 'app') navigate({ name: 'app' })
     ensureEditor()
-    // Open library so locked users see greyed control + abonnement-CTA (not hidden).
-    setOpenModelsFocus('browse')
-    setOpenModelsTick((t) => t + 1)
+    // Alleen file-picker (via SceneEditor); geen ModelStore “Opgeslagen modellen”.
     setDiskImportTick((t) => t + 1)
-    if (isNavMobile && !navCollapsed) setNavCollapsed(true)
   }
 
   const dismissWelcome = () => {

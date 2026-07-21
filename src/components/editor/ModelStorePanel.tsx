@@ -346,12 +346,14 @@ export function ModelStoreDialog({
       return
     }
     if (!openFromDiskOk) {
-      showSubscriptionRequired('Openen van schijf.')
+      // Geen file-picker; CTA zichtbaar in dialoog of naar abonnementen.
+      if (open) showSubscriptionRequired('Openen van schijf.')
+      else navigate({ name: 'upgrade' })
       return
     }
     const t = window.setTimeout(() => fileInputRef.current?.click(), 0)
     return () => window.clearTimeout(t)
-  }, [diskImportRequest, openFromDiskOk, user])
+  }, [diskImportRequest, openFromDiskOk, user, open])
 
   const requireLogin = (reason: string) => {
     setAuthReason(reason)
