@@ -138,6 +138,36 @@ export async function adminListPlanAssignmentEvents(
   return (data ?? []) as AdminPlanAssignmentEvent[]
 }
 
+/** Extract PostgREST / Postgres message (+ details/hint) from thrown RPC errors. */
+export function extractAssignErrorMessage(err: unknown, fallback = 'Toewijzen mislukt'): string {
+  if (err == null) return fallback
+  if (typeof err === 'string' && err.trim()) return err.trim()
+
+  if (typeof err === 'object') {
+    const o = err as {
+      message?: unknown
+      details?: unknown
+      hint?: unknown
+      code?: unknown
+      error_description?: unknown
+    }
+    const parts = [o.message, o.details, o.hint]
+      .filter((x): x is string => typeof x === 'string' && x.trim().length > 0)
+      .map((x) => x.trim())
+    if (parts.length > 0) {
+      const joined = parts.join(' — ')
+      const code = typeof o.code === 'string' && o.code ? ` [${o.code}]` : ''
+      return `${joined}${code}`
+    }
+    if (typeof o.error_description === 'string' && o.error_description.trim()) {
+      return o.error_description.trim()
+    }
+  }
+
+  if (err instanceof Error && err.message.trim()) return err.message.trim()
+  return fallback
+}
+
 export function mapAssignRpcError(message: string): string {
   const m = message.toLowerCase()
   if (m.includes('admin_required')) return 'Geen beheerdersrechten.'
@@ -145,5 +175,16 @@ export function mapAssignRpcError(message: string): string {
   if (m.includes('plan_not_found') || m.includes('invalid_plan')) {
     return 'Ongeldig of onbekend plan.'
   }
-  return message
+  if (m.includes('paid_fields_immutable')) {
+    return 'Profielvelden geblokkeerd door beveiligingstrigger (paid_fields_immutable). Probeer opnieuw na de laatste database-migratie.'
+  }
+  if (m.includes('admin_field_immutable')) {
+    return 'Admin-vlag mag niet via de client worden gewijzigd.'
+  }
+  return message || 'Toewijzen mislukt'
+}
+
+/** NL mapping of assign/lookup RPC failures for admin UI. */
+export function formatAssignError(err: unknown, fallback = 'Toewijzen mislukt'): string {
+  return mapAssignRpcError(extractAssignErrorMessage(err, fallback))
 }

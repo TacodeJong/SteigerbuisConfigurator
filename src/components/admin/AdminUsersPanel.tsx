@@ -4,7 +4,7 @@ import {
   adminListPlanAssignmentEvents,
   adminListUsersForAssign,
   adminLookupUserSubscription,
-  mapAssignRpcError,
+  formatAssignError,
   type AdminPlanAssignmentEvent,
   type AdminUserForAssign,
   type AdminUserSubscriptionLookup,
@@ -53,9 +53,7 @@ export function AdminUsersPanel() {
   }
 
   useEffect(() => {
-    void reload().catch((err) =>
-      setError(err instanceof Error ? mapAssignRpcError(err.message) : 'Laden mislukt'),
-    )
+    void reload().catch((err) => setError(formatAssignError(err, 'Laden mislukt')))
   }, [])
 
   const runLookup = async (nextEmail = email) => {
@@ -72,7 +70,7 @@ export function AdminUsersPanel() {
       if (!row.found) setError('Gebruiker niet gevonden.')
     } catch (err) {
       setLookup(null)
-      setError(err instanceof Error ? mapAssignRpcError(err.message) : 'Opzoeken mislukt')
+      setError(formatAssignError(err, 'Opzoeken mislukt'))
     } finally {
       setBusy(false)
     }
@@ -128,7 +126,7 @@ export function AdminUsersPanel() {
       await reload()
       if (result.email) await runLookup(result.email)
     } catch (err) {
-      setError(err instanceof Error ? mapAssignRpcError(err.message) : 'Toewijzen mislukt')
+      setError(formatAssignError(err, 'Toewijzen mislukt'))
     } finally {
       setBusy(false)
     }
@@ -158,9 +156,7 @@ export function AdminUsersPanel() {
               if (e.key === 'Enter') {
                 e.preventDefault()
                 void reload(query).catch((err) =>
-                  setError(
-                    err instanceof Error ? mapAssignRpcError(err.message) : 'Zoeken mislukt',
-                  ),
+                  setError(formatAssignError(err, 'Zoeken mislukt')),
                 )
               }
             }}
@@ -173,9 +169,7 @@ export function AdminUsersPanel() {
             disabled={busy}
             onClick={() =>
               void reload(query).catch((err) =>
-                setError(
-                  err instanceof Error ? mapAssignRpcError(err.message) : 'Zoeken mislukt',
-                ),
+                setError(formatAssignError(err, 'Zoeken mislukt')),
               )
             }
           >
