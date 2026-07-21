@@ -47,7 +47,7 @@ export const GATED_FEATURE_DESCRIPTIONS: Record<GatedFeatureId, string> = {
   full_print:
     'Volledige footprint-print en plattegrond in de bouwinstructie. Uit = gratis. Eenmalige unlock: per cloud-model.',
   copy_order_list:
-    'Bestellijst naar klembord kopiëren (SKU’s). Uit = gratis. Eenmalige unlock: per cloud-model.',
+    'Bestellijst naar klembord kopiëren (aantallen + namen). Uit = gratis. Eenmalige unlock: per cloud-model.',
   bom_print:
     'Stuklijst printen. Standaard gratis; aan = betaalpoort. Eenmalige unlock: per cloud-model.',
   download_model:

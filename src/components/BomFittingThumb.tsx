@@ -9,6 +9,7 @@ import {
   type MouseEvent as ReactMouseEvent,
 } from 'react'
 import { createPortal } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import type { FittingType, MaterialId, PipeDiameter } from '../types'
@@ -26,6 +27,14 @@ const previewCache = new Map<string, string>()
 const MAX_ACTIVE_RENDERERS = 1
 let activeRenderers = 0
 const waitQueue: Array<() => void> = []
+
+export function fittingThumbCacheKey(
+  type: FittingType,
+  materialId: MaterialId,
+  diameter: PipeDiameter,
+): string {
+  return `${THUMB_CACHE_VERSION}:${type}:${materialId}:${diameter}`
+}
 
 function acquireSlot(): Promise<() => void> {
   return new Promise((resolve) => {
@@ -121,6 +130,94 @@ function FittingPreviewScene({
   )
 }
 
+const THUMB_SIZE_PX = 96
+const CAPTURE_TIMEOUT_MS = 6000
+
+/**
+ * JPEG data-URL van een koppeling-voorbeeld (zelfde cache als BomFittingThumb).
+ * Voor print: canvassen printen niet betrouwbaar — embed als &lt;img&gt;.
+ */
+export async function ensureFittingThumbDataUrl(
+  type: FittingType,
+  materialId: MaterialId,
+  diameter: PipeDiameter,
+): Promise<string | null> {
+  const cacheKey = fittingThumbCacheKey(type, materialId, diameter)
+  const cached = previewCache.get(cacheKey)
+  if (cached) return cached
+
+  const release = await acquireSlot()
+  try {
+    const again = previewCache.get(cacheKey)
+    if (again) return again
+
+    return await new Promise<string | null>((resolve) => {
+      let settled = false
+      const finish = (url: string | null) => {
+        if (settled) return
+        settled = true
+        window.clearTimeout(timeoutId)
+        queueMicrotask(() => {
+          root.unmount()
+          host.remove()
+        })
+        resolve(url)
+      }
+
+      const host = document.createElement('div')
+      host.setAttribute('aria-hidden', 'true')
+      host.style.cssText = `position:fixed;left:-10000px;top:0;width:${THUMB_SIZE_PX}px;height:${THUMB_SIZE_PX}px;pointer-events:none;opacity:0;overflow:hidden;`
+      document.body.appendChild(host)
+      const root = createRoot(host)
+
+      const timeoutId = window.setTimeout(() => {
+        finish(previewCache.get(cacheKey) ?? null)
+      }, CAPTURE_TIMEOUT_MS)
+
+      root.render(
+        <Canvas
+          frameloop="demand"
+          dpr={1}
+          shadows={false}
+          camera={{ position: [0.12, 0.09, 0.14], fov: 38, near: 0.01, far: 10 }}
+          gl={{
+            antialias: true,
+            preserveDrawingBuffer: true,
+            powerPreference: 'low-power',
+            alpha: false,
+          }}
+          style={{ width: THUMB_SIZE_PX, height: THUMB_SIZE_PX }}
+        >
+          <Suspense fallback={null}>
+            <FittingPreviewScene type={type} materialId={materialId} diameterMm={diameter} />
+            <CaptureOnce
+              cacheKey={cacheKey}
+              onReady={(url) => finish(url || null)}
+            />
+          </Suspense>
+        </Canvas>,
+      )
+    })
+  } finally {
+    release()
+  }
+}
+
+/** Unieke koppelingtypes uit een BOM → JPEG data-URLs voor print. */
+export async function captureFittingThumbsForPrint(
+  types: FittingType[],
+  materialId: MaterialId,
+  diameter: PipeDiameter,
+): Promise<Map<FittingType, string>> {
+  const unique = [...new Set(types)]
+  const map = new Map<FittingType, string>()
+  for (const type of unique) {
+    const url = await ensureFittingThumbDataUrl(type, materialId, diameter)
+    if (url) map.set(type, url)
+  }
+  return map
+}
+
 interface BomFittingThumbProps {
   type: FittingType
   materialId: MaterialId
@@ -133,7 +230,7 @@ interface BomFittingThumbProps {
  * Klik: gedeelde detail-popover met orbit (één live Canvas).
  */
 export function BomFittingThumb({ type, materialId, diameter }: BomFittingThumbProps) {
-  const cacheKey = `${THUMB_CACHE_VERSION}:${type}:${materialId}:${diameter}`
+  const cacheKey = fittingThumbCacheKey(type, materialId, diameter)
   const wrapRef = useRef<HTMLButtonElement>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
   const titleId = useId()
