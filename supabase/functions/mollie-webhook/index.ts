@@ -201,7 +201,7 @@ Deno.serve(async (req) => {
   // Pay-per-use only. open_from_disk / publish / fork are subscription plan features.
   const featureKey =
     typeof metadata.feature === 'string' &&
-    ['full_print', 'copy_order_list', 'bom_print', 'download_model', 'full_pdf'].includes(
+    ['full_print', 'copy_order_list', 'bom_print', 'viewport_print', 'download_model', 'full_pdf'].includes(
       metadata.feature,
     )
       ? String(metadata.feature)

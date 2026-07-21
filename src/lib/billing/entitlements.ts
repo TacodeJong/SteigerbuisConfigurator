@@ -84,6 +84,8 @@ export function planFeaturesCoveringGate(feature: GatedFeatureId): string[] {
       return ['copy_order_list']
     case 'bom_print':
       return ['full_print', 'copy_order_list']
+    case 'viewport_print':
+      return ['full_print', 'copy_order_list']
     case 'download_model':
       return ['download_model', 'cloud_save']
     case 'full_pdf':
@@ -168,6 +170,14 @@ export function canPrintBomList(
   options?: GatedAccessOptions,
 ): boolean {
   return canAccessGatedFeature('bom_print', profile, gates, options)
+}
+
+export function canPrintViewport(
+  profile: Profile | null | undefined,
+  gates?: FeatureGates | null,
+  options?: GatedAccessOptions,
+): boolean {
+  return canAccessGatedFeature('viewport_print', profile, gates, options)
 }
 
 export function canDownloadModel(

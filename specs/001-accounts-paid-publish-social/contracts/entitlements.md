@@ -7,7 +7,7 @@ Server MUST enforce gated cloud actions via RPCs/RLS; print/download gates are c
 | Layer | Where configured | What |
 |-------|------------------|------|
 | Subscription | Beheer → **Abonnementen** (`subscription_plans.features`) | `cloud_save`, `open_from_disk`, `publish`, `fork`, (+ print/copy/download flags while subscribed), `unlimited_saves`, `max_private_models` |
-| Pay-per-use | Beheer → **Betaalde functies** (`feature_gates` + `feature_prices`) | `full_print`, `copy_order_list`, `bom_print`, `download_model`, `full_pdf` |
+| Pay-per-use | Beheer → **Betaalde functies** (`feature_gates` + `feature_prices`) | `full_print`, `copy_order_list`, `bom_print`, `viewport_print`, `download_model`, `full_pdf` |
 
 `export_once` is **not** a plan card; it is fallback pricing + legacy `export_pack`.
 
@@ -16,6 +16,7 @@ Server MUST enforce gated cloud actions via RPCs/RLS; print/download gates are c
 | Design / 3D / price indication | allow | allow | allow | allow |
 | Simple BOM view | allow | allow | allow | allow |
 | Stuklijst printen | allow³ | allow³ | allow | allow |
+| 3D-weergave printen | allow³ | allow³ | allow | allow |
 | Bestellijst kopiëren naar klembord | deny / unlock³ | deny / unlock³ · of model-grant | allow (`copy_order_list`) | if `copy_order_list` |
 | Cloud save | deny → login | if count &lt; `max_private_models` | typically no (`max=0`) | per plan max (null = ∞) |
 | Openen van schijf | deny → login | deny → **abonnement** | deny | if `open_from_disk` (or `cloud_save`) |
@@ -31,7 +32,7 @@ Server MUST enforce gated cloud actions via RPCs/RLS; print/download gates are c
 
 ¹ Save/Import entry points require login (FR-018).  
 ² Anti-leak: non-entitled MUST NOT get floorplan SVG / hole tables via bouwinstructie.  
-³ Admin-configurable via `app_settings.feature_gates` (`full_print`, `copy_order_list`, `bom_print`, `download_model`, `full_pdf`). Default: plattegrond + bestellijst + volledige PDF paid; stuklijst + download free. Gate off → allow everyone; gate on → Paid subscription **or** durable grant **or** `export_pack` (print/copy only — not `full_pdf`).
+³ Admin-configurable via `app_settings.feature_gates` (`full_print`, `copy_order_list`, `bom_print`, `viewport_print`, `download_model`, `full_pdf`). Default: plattegrond + bestellijst + volledige PDF paid; stuklijst + 3D-weergave + download free. Gate off → allow everyone; gate on → Paid subscription **or** durable grant **or** `export_pack` (print/copy only — not `full_pdf`).
 
 **`max_private_models`**: from assigned plan, else default (`is_default` / Gratis). Client: `resolvePrivateModelLimit`.
 

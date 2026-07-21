@@ -21,6 +21,7 @@ import {
   canPrintBomList,
   canPrintFullFootprint,
   canPrintFullPdf,
+  canPrintViewport,
 } from '../lib/billing/entitlements'
 import {
   defaultPlanPrices,
@@ -143,6 +144,7 @@ export function BomList({
   const footprintOk = canPrintFullFootprint(profile, gates, accessOpts('full_print'))
   const copyOkEntitled = canCopyOrderList(profile, gates, accessOpts('copy_order_list'))
   const bomPrintOk = canPrintBomList(profile, gates, accessOpts('bom_print'))
+  const viewportPrintOk = canPrintViewport(profile, gates, accessOpts('viewport_print'))
   const fullPdfOk = canPrintFullPdf(profile, gates, accessOpts('full_pdf'))
 
   const featurePriceLabel = (feature: GatedFeatureId) =>
@@ -249,12 +251,12 @@ export function BomList({
 
   const handlePrint3dView = () => {
     setGateMsg(null)
-    if (!bomPrintOk) {
+    if (!viewportPrintOk) {
       if (!user) {
         requireAccountForPaid()
         return
       }
-      setGateMsg(`3D-weergave printen vereist ${paywallHint('bom_print')}.`)
+      setGateMsg(`3D-weergave printen vereist ${paywallHint('viewport_print')}.`)
       return
     }
     const ok = printViewportCapture({ title: modelTitle })
@@ -295,16 +297,19 @@ export function BomList({
     }
   }
 
-  const showUpgradeLink = !footprintOk || !copyOkEntitled || !bomPrintOk || !fullPdfOk
+  const showUpgradeLink =
+    !footprintOk || !copyOkEntitled || !bomPrintOk || !viewportPrintOk || !fullPdfOk
   const lockedFeatureForCta: GatedFeatureId | null = !fullPdfOk
     ? 'full_pdf'
     : !copyOkEntitled
       ? 'copy_order_list'
       : !footprintOk
         ? 'full_print'
-        : !bomPrintOk
-          ? 'bom_print'
-          : null
+        : !viewportPrintOk
+          ? 'viewport_print'
+          : !bomPrintOk
+            ? 'bom_print'
+            : null
 
   return (
     <div className="sidebar-panels bom-panel">
@@ -381,15 +386,15 @@ export function BomList({
           )}
           <button
             type="button"
-            className={`bom-action-btn secondary${bomPrintOk ? '' : ' bom-action-locked'}`}
+            className={`bom-action-btn secondary${viewportPrintOk ? '' : ' bom-action-locked'}`}
             onClick={handlePrint3dView}
             title={
-              bomPrintOk
+              viewportPrintOk
                 ? '3D-weergave printen (huidige camerastand, met omgeving)'
-                : `${paywallHint('bom_print')}: 3D-weergave printen`
+                : `${paywallHint('viewport_print')}: 3D-weergave printen`
             }
           >
-            {bomPrintOk ? (
+            {viewportPrintOk ? (
               '3D-weergave printen'
             ) : (
               <>

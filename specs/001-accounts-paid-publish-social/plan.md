@@ -11,7 +11,7 @@ Auth + cloud libraries + **configurable** entitlements via `subscription_plans` 
 
 - Model mutations only via RPCs; `public_profiles`; webhook idempotency.
 - Plan cards on signup/upgrade (**no** `export_once` / Betaal-per-keer card); `max_private_models` drives save caps.
-- **Split**: Abonnementen = plan features (`open_from_disk`, `publish`, `fork`, …); Betaalde functies = pay-per-use (`full_print`, `copy_order_list`, `bom_print`, `download_model`) + optional prices; lock icon + greyed UI.
+- **Split**: Abonnementen = plan features (`open_from_disk`, `publish`, `fork`, …); Betaalde functies = pay-per-use (`full_print`, `copy_order_list`, `bom_print`, `viewport_print`, `download_model`, `full_pdf`) + optional prices; lock icon + greyed UI.
 - Grants: `model_feature_grants` per cloud model; `account_feature_grants` only for `download_model` without model id.
 - Gallery soft-hide via `gallery_models` when owner loses paid entitlement.
 - Admin: `AdminPage` tabs (dashboard, plans, Betaalde functies, discounts, payments/Mollie, features, tutorials).

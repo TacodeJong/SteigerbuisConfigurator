@@ -247,11 +247,12 @@ Deno.serve(async (req) => {
     const planSlug = (body.plan?.trim() || 'paid_monthly').toLowerCase()
     const discountCode = body.discount_code?.trim() || null
     // Pay-per-use only (Betaalde functies). open_from_disk / publish / fork = plan features.
-    // Keep in sync with client GATED_FEATURE_IDS (incl. full_pdf).
+    // Keep in sync with client GATED_FEATURE_IDS (incl. full_pdf, viewport_print).
     const PAY_PER_USE_KEYS = new Set([
       'full_print',
       'copy_order_list',
       'bom_print',
+      'viewport_print',
       'download_model',
       'full_pdf',
     ])
@@ -348,7 +349,7 @@ Deno.serve(async (req) => {
         .eq('id', userData.user.id)
         .maybeSingle()
 
-      if (profile?.export_pack && ['full_print', 'copy_order_list', 'bom_print'].includes(featureKey)) {
+      if (profile?.export_pack && ['full_print', 'copy_order_list', 'bom_print', 'viewport_print'].includes(featureKey)) {
         return json(400, {
           error: 'already_entitled',
           message: 'Betaal per keer dekt deze functie al account-breed.',
@@ -372,7 +373,7 @@ Deno.serve(async (req) => {
           .maybeSingle()
         const features = Array.isArray(subPlan?.features) ? (subPlan!.features as string[]) : []
         const covered =
-          featureKey === 'bom_print'
+          featureKey === 'bom_print' || featureKey === 'viewport_print'
             ? features.includes('full_print') || features.includes('copy_order_list')
             : featureKey === 'download_model'
               ? features.includes('download_model') ||
@@ -380,7 +381,8 @@ Deno.serve(async (req) => {
                 subPlan == null
               : featureKey === 'full_pdf'
                 ? features.includes('full_pdf')
-                : features.includes(featureKey) || (subPlan == null && featureKey !== 'bom_print')
+                : features.includes(featureKey) ||
+                  (subPlan == null && featureKey !== 'bom_print' && featureKey !== 'viewport_print')
         if (covered) {
           return json(400, {
             error: 'already_entitled',
@@ -602,6 +604,7 @@ Deno.serve(async (req) => {
       full_print: 'Plattegrond / bouwinstructie',
       copy_order_list: 'Bestellijst kopiëren naar klembord',
       bom_print: 'Stuklijst printen',
+      viewport_print: '3D-weergave printen',
       download_model: 'Downloaden van modellen',
       full_pdf: 'Volledige PDF (3D + stuklijst + plattegrond)',
     }

@@ -101,6 +101,30 @@ assert.equal(
   true,
 )
 
+// viewport_print: free by default; when gated, export_pack / model grant / paid cover
+assert.equal(canAccessGatedFeature('viewport_print', free, DEFAULT_FEATURE_GATES), true)
+assert.equal(
+  canAccessGatedFeature('viewport_print', free, {
+    ...DEFAULT_FEATURE_GATES,
+    viewport_print: true,
+  }),
+  false,
+)
+assert.equal(
+  canAccessGatedFeature('viewport_print', exportOnly, {
+    ...DEFAULT_FEATURE_GATES,
+    viewport_print: true,
+  }),
+  true,
+)
+assert.equal(
+  canAccessGatedFeature('viewport_print', downgraded, {
+    ...DEFAULT_FEATURE_GATES,
+    viewport_print: true,
+  }, { hasModelGrant: true }),
+  true,
+)
+
 // Gate off → free for everyone
 assert.equal(
   canCopyOrderList(free, { ...DEFAULT_FEATURE_GATES, copy_order_list: false }),
