@@ -13,6 +13,7 @@ export type GatedFeatureId =
   | 'copy_order_list'
   | 'bom_print'
   | 'download_model'
+  | 'full_pdf'
 
 /**
  * `true` = requires payment (subscription covering feature OR durable grant OR
@@ -26,14 +27,16 @@ export const GATED_FEATURE_IDS: readonly GatedFeatureId[] = [
   'copy_order_list',
   'bom_print',
   'download_model',
+  'full_pdf',
 ] as const
 
-/** Defaults: plattegrond + bestellijst paid; stuklijst + download free. */
+/** Defaults: plattegrond + bestellijst + volledige PDF paid; stuklijst + download free. */
 export const DEFAULT_FEATURE_GATES: FeatureGates = {
   full_print: true,
   copy_order_list: true,
   bom_print: false,
   download_model: false,
+  full_pdf: true,
 }
 
 export const GATED_FEATURE_LABELS: Record<GatedFeatureId, string> = {
@@ -41,6 +44,7 @@ export const GATED_FEATURE_LABELS: Record<GatedFeatureId, string> = {
   copy_order_list: 'Bestellijst kopiëren naar klembord',
   bom_print: 'Stuklijst printen',
   download_model: 'Downloaden van modellen',
+  full_pdf: 'Volledige PDF (3D + stuklijst + plattegrond)',
 }
 
 export const GATED_FEATURE_DESCRIPTIONS: Record<GatedFeatureId, string> = {
@@ -52,6 +56,8 @@ export const GATED_FEATURE_DESCRIPTIONS: Record<GatedFeatureId, string> = {
     'Stuklijst printen. Standaard gratis; aan = betaalpoort. Eenmalige unlock: per cloud-model.',
   download_model:
     'Model als .steigerbuis.json downloaden (↓ en download bij opslaan). Standaard gratis; aan = abonnement of unlock per cloud-model.',
+  full_pdf:
+    'Eén printbaar document met 3D-weergave (huidige camerastand + omgeving), stuklijst (zonder art.nr.) en plattegrond. Standaard betaald. Eenmalige unlock: per cloud-model.',
 }
 
 export function defaultFeatureGates(): FeatureGates {
@@ -75,6 +81,7 @@ export const FALLBACK_PAID_FEATURES = [
   'full_print',
   'copy_order_list',
   'download_model',
+  'full_pdf',
 ] as const
 
 /** Account-wide export_pack covers print/copy only. */

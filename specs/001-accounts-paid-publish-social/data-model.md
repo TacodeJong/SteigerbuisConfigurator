@@ -41,7 +41,7 @@ Limited columns for gallery/attribution; no `is_admin` / paid / subscription lea
 | price_cents | int | ≥0; free must be 0 |
 | currency | text | `eur` |
 | interval | text nullable | `month` for subscriptions; null otherwise |
-| features | jsonb array | `cloud_save`, `open_from_disk`, `publish`, `fork`, `full_print`, `copy_order_list`, `download_model`, `unlimited_saves` |
+| features | jsonb array | `cloud_save`, `open_from_disk`, `publish`, `fork`, `full_print`, `copy_order_list`, `download_model`, `full_pdf`, `unlimited_saves` |
 | max_private_models | int nullable | null = unlimited; 0 = no cloud quota; n = cap |
 | is_active | boolean | inactive plans hidden from upgrade cards |
 | is_default | boolean | **exactly one** true (signup/fallback) |
@@ -79,8 +79,8 @@ Key/value JSON (e.g. `mollie_mode`: `"test"` \| `"live"`; free-limit sync helper
 
 | Key | Value shape | Notes |
 |-----|-------------|-------|
-| `feature_gates` | `{ full_print, copy_order_list, bom_print, download_model: boolean }` | Pay-per-use only. `true` = requires subscription covering feature **or** durable grant **or** `export_pack` (print/copy). Defaults: plattegrond + bestellijst on; stuklijst + download off. **Not** for `open_from_disk` / `publish` / `fork` (those are plan features). Public read; admin write via Betaalde functies tab. |
-| `feature_prices` | `{ full_print?, copy_order_list?, bom_print?, download_model?: number\|null }` | Optional one-shot price in **cents** per gated feature. `null`/missing → checkout falls back to `export_once` / `price_export_once_cents`. |
+| `feature_gates` | `{ full_print, copy_order_list, bom_print, download_model, full_pdf: boolean }` | Pay-per-use only. `true` = requires subscription covering feature **or** durable grant **or** `export_pack` (print/copy). Defaults: plattegrond + bestellijst + volledige PDF on; stuklijst + download off. **Not** for `open_from_disk` / `publish` / `fork` (those are plan features). Public read; admin write via Betaalde functies tab. |
+| `feature_prices` | `{ full_print?, copy_order_list?, bom_print?, download_model?, full_pdf?: number\|null }` | Optional one-shot price in **cents** per gated feature. `null`/missing → checkout falls back to `export_once` / `price_export_once_cents`. |
 
 ## model_feature_grants
 
@@ -91,7 +91,7 @@ Durable pay-per-feature unlocks scoped to one cloud model. Independent of subscr
 | id | uuid PK | |
 | user_id | uuid FK → profiles | buyer |
 | model_id | uuid FK → models | cloud model |
-| feature_key | text | `full_print` \| `copy_order_list` \| `bom_print` \| `download_model` |
+| feature_key | text | `full_print` \| `copy_order_list` \| `bom_print` \| `download_model` \| `full_pdf` |
 | payment_id | text nullable | Mollie payment id |
 | amount_cents | int nullable | charged amount |
 | created_at | timestamptz | |

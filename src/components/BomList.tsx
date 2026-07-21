@@ -13,12 +13,14 @@ import { isSameBomHighlight } from '../lib/bomHighlight'
 import { formatMm, formatMeters } from '../lib/bom'
 import { copyGroothandelOrderList, printBomWithGroothandelSkus } from '../lib/bomPrint'
 import { printFloorplan } from '../lib/buildPrint'
+import { printFullPdf } from '../lib/fullPdfPrint'
 import { printViewportCapture } from '../lib/viewportCapture'
 import { useAuth } from '../lib/auth/session'
 import {
   canCopyOrderList,
   canPrintBomList,
   canPrintFullFootprint,
+  canPrintFullPdf,
 } from '../lib/billing/entitlements'
 import {
   defaultPlanPrices,
@@ -141,6 +143,7 @@ export function BomList({
   const footprintOk = canPrintFullFootprint(profile, gates, accessOpts('full_print'))
   const copyOkEntitled = canCopyOrderList(profile, gates, accessOpts('copy_order_list'))
   const bomPrintOk = canPrintBomList(profile, gates, accessOpts('bom_print'))
+  const fullPdfOk = canPrintFullPdf(profile, gates, accessOpts('full_pdf'))
 
   const featurePriceLabel = (feature: GatedFeatureId) =>
     formatEuroFromCents(resolveFeaturePriceCents(feature, featurePrices, prices.exportOnceCents))
@@ -262,14 +265,46 @@ export function BomList({
     }
   }
 
-  const showUpgradeLink = !footprintOk || !copyOkEntitled || !bomPrintOk
-  const lockedFeatureForCta: GatedFeatureId | null = !copyOkEntitled
-    ? 'copy_order_list'
-    : !footprintOk
-      ? 'full_print'
-      : !bomPrintOk
-        ? 'bom_print'
-        : null
+  const handlePrintFullPdf = async () => {
+    if (!scene) return
+    setGateMsg(null)
+    if (!fullPdfOk) {
+      if (!user) {
+        requireAccountForPaid()
+        return
+      }
+      setGateMsg(`Volledige PDF vereist ${paywallHint('full_pdf')}.`)
+      return
+    }
+    setPrintBusy(true)
+    try {
+      const ok = await printFullPdf({
+        bom,
+        config,
+        materialId: effectiveMaterialId,
+        scene,
+        title: modelTitle,
+      })
+      if (!ok) {
+        setGateMsg(
+          'Kon de volledige PDF niet maken. Controleer of het 3D-venster zichtbaar is en of pop-ups zijn toegestaan.',
+        )
+      }
+    } finally {
+      setPrintBusy(false)
+    }
+  }
+
+  const showUpgradeLink = !footprintOk || !copyOkEntitled || !bomPrintOk || !fullPdfOk
+  const lockedFeatureForCta: GatedFeatureId | null = !fullPdfOk
+    ? 'full_pdf'
+    : !copyOkEntitled
+      ? 'copy_order_list'
+      : !footprintOk
+        ? 'full_print'
+        : !bomPrintOk
+          ? 'bom_print'
+          : null
 
   return (
     <div className="sidebar-panels bom-panel">
@@ -363,6 +398,30 @@ export function BomList({
               </>
             )}
           </button>
+          {scene && (
+            <button
+              type="button"
+              className={`bom-action-btn secondary${fullPdfOk ? '' : ' bom-action-locked'}`}
+              onClick={() => void handlePrintFullPdf()}
+              disabled={printBusy}
+              title={
+                fullPdfOk
+                  ? 'Volledige PDF: 3D-weergave, stuklijst en plattegrond'
+                  : `${paywallHint('full_pdf')}: volledige PDF`
+              }
+            >
+              {printBusy && fullPdfOk ? (
+                'Bezig…'
+              ) : fullPdfOk ? (
+                'Volledige PDF'
+              ) : (
+                <>
+                  Volledige PDF
+                  <PaidLockIcon />
+                </>
+              )}
+            </button>
+          )}
         </div>
         {gateMsg && (
           <p className="bom-gate-msg no-print">

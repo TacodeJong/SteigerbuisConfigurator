@@ -86,6 +86,8 @@ export function planFeaturesCoveringGate(feature: GatedFeatureId): string[] {
       return ['full_print', 'copy_order_list']
     case 'download_model':
       return ['download_model', 'cloud_save']
+    case 'full_pdf':
+      return ['full_pdf']
     default:
       return []
   }
@@ -174,6 +176,14 @@ export function canDownloadModel(
   options?: GatedAccessOptions,
 ): boolean {
   return canAccessGatedFeature('download_model', profile, gates, options)
+}
+
+export function canPrintFullPdf(
+  profile: Profile | null | undefined,
+  gates?: FeatureGates | null,
+  options?: GatedAccessOptions,
+): boolean {
+  return canAccessGatedFeature('full_pdf', profile, gates, options)
 }
 
 /**

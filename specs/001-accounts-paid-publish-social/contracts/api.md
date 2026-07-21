@@ -22,7 +22,7 @@ Client talks to Supabase Auth + Postgres (RLS) and RPCs / Edge Functions.
 
 ## Billing
 
-- Edge `create-checkout` — authenticated; one_time = payment checkout, subscription = customer/mandate + subscription create (optional checkout URL on first mandate step). Optional body `feature` (+ `model_id`) → pay-per-use unlock for `full_print` \| `copy_order_list` \| `bom_print` \| `download_model` only (`plan=feature_unlock`; amount from `feature_prices` or `export_once` fallback). With `model_id` → `model_feature_grants`; `download_model` without `model_id` → `account_feature_grants`. Never sells `open_from_disk` / `publish` / `fork` as one-shots.
+- Edge `create-checkout` — authenticated; one_time = payment checkout, subscription = customer/mandate + subscription create (optional checkout URL on first mandate step). Optional body `feature` (+ `model_id`) → pay-per-use unlock for `full_print` \| `copy_order_list` \| `bom_print` \| `download_model` \| `full_pdf` (`plan=feature_unlock`; amount from `feature_prices` or `export_once` fallback). With `model_id` → `model_feature_grants`; `download_model` without `model_id` → `account_feature_grants`. Never sells `open_from_disk` / `publish` / `fork` as one-shots.
 - Edge `mollie-webhook` — idempotent entitlement apply + recurring status sync (`test`/`live` key via `mollie_mode`). For pay-per-use: upsert `model_feature_grants` or `account_feature_grants` (download without model). Account-wide legacy `export_once` still sets `export_pack`.
 - Edge `cancel-subscription` — cancels Mollie subscription (if present) and syncs profile; fallback RPC `cancel_my_subscription`
 - Plan switch helpers (client + checkout for target subscription slug)

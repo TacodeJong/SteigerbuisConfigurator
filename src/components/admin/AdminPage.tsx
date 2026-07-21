@@ -86,6 +86,7 @@ const ALL_FEATURE_FLAGS: PlanFeatureFlag[] = [
   'full_print',
   'copy_order_list',
   'download_model',
+  'full_pdf',
   'unlimited_saves',
 ]
 
@@ -1592,12 +1593,9 @@ function AdminDiscounts() {
 }
 
 function emptyPriceDrafts(): Record<GatedFeatureId, string> {
-  return {
-    full_print: '',
-    copy_order_list: '',
-    bom_print: '',
-    download_model: '',
-  }
+  const drafts = {} as Record<GatedFeatureId, string>
+  for (const id of GATED_FEATURE_IDS) drafts[id] = ''
+  return drafts
 }
 
 function AdminPaidFeatures() {
@@ -1612,12 +1610,11 @@ function AdminPaidFeatures() {
     void fetchFeatureGates().then(setGates)
     void fetchFeaturePrices().then((p) => {
       setFeaturePrices(p)
-      setPriceDrafts({
-        full_print: p.full_print != null ? String(p.full_print) : '',
-        copy_order_list: p.copy_order_list != null ? String(p.copy_order_list) : '',
-        bom_print: p.bom_print != null ? String(p.bom_print) : '',
-        download_model: p.download_model != null ? String(p.download_model) : '',
-      })
+      const drafts = emptyPriceDrafts()
+      for (const id of GATED_FEATURE_IDS) {
+        drafts[id] = p[id] != null ? String(p[id]) : ''
+      }
+      setPriceDrafts(drafts)
     })
   }, [])
 

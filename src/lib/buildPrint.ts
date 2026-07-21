@@ -463,13 +463,22 @@ export interface FloorplanPrintOptions {
 }
 
 export function printFloorplan({ scene, config, materialId }: FloorplanPrintOptions): boolean {
+  return openPrintWindow('Plattegrond', buildFloorplanPrintBody({ scene, config, materialId }))
+}
+
+/** Body-HTML voor plattegrond (herbruikbaar in gecombineerde PDF). */
+export function buildFloorplanPrintBody({
+  scene,
+  config,
+  materialId,
+}: FloorplanPrintOptions): string {
   const material = MATERIALS.find((m) => m.id === materialId)
   const footprint = computeFootprint(scene.pipes)
   const date = new Date().toLocaleString('nl-NL', { dateStyle: 'long', timeStyle: 'short' })
   const svg = buildFloorplanSvg(scene, config)
 
   // Alleen tekening + korte meta/legenda — geen gaten-/maattabellen (die horen in bouwinstructie).
-  const body = `
+  return `
   <h1>Plattegrond</h1>
   <p class="meta">
     ${esc(date)}<br />
@@ -485,8 +494,6 @@ export function printFloorplan({ scene, config, materialId }: FloorplanPrintOpti
   </p>
   <div class="floorplan-wrap">${svg}</div>
   <p class="footer">Legenda: oranje cirkel = gat, donkerblauwe stip = staander, lichtblauwe lijn = liggende buis, paars = maatstukken tussen middelpunten, groene stippellijn = diagonaal, donkergroen stippel = footprint.</p>`
-
-  return openPrintWindow('Plattegrond', body)
 }
 
 export interface BuildInstructionPrintOptions {

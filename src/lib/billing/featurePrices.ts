@@ -16,6 +16,7 @@ export function defaultFeaturePrices(): FeaturePrices {
     copy_order_list: null,
     bom_print: null,
     download_model: null,
+    full_pdf: null,
   }
 }
 

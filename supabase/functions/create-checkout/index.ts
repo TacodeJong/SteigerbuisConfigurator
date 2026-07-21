@@ -378,7 +378,9 @@ Deno.serve(async (req) => {
               ? features.includes('download_model') ||
                 features.includes('cloud_save') ||
                 subPlan == null
-              : features.includes(featureKey) || (subPlan == null && featureKey !== 'bom_print')
+              : featureKey === 'full_pdf'
+                ? features.includes('full_pdf')
+                : features.includes(featureKey) || (subPlan == null && featureKey !== 'bom_print')
         if (covered) {
           return json(400, {
             error: 'already_entitled',
@@ -601,6 +603,7 @@ Deno.serve(async (req) => {
       copy_order_list: 'Bestellijst kopiëren naar klembord',
       bom_print: 'Stuklijst printen',
       download_model: 'Downloaden van modellen',
+      full_pdf: 'Volledige PDF (3D + stuklijst + plattegrond)',
     }
     const description = isFeatureUnlock && featureKey
       ? grantScope === 'account'

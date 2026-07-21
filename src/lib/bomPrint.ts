@@ -86,7 +86,13 @@ function thumbFor(
   return fittingThumbs[type]
 }
 
-export function buildBomHtml({ bom, config, materialId, fittingThumbs }: PrintBomOptions): string {
+/** Body-HTML voor stuklijst (zonder art.nr.; optionele koppeling-thumbs). */
+export function buildBomPrintBody({
+  bom,
+  config,
+  materialId,
+  fittingThumbs,
+}: PrintBomOptions): string {
   const material = MATERIALS.find((m) => m.id === materialId)
   const hasThumbs =
     !!fittingThumbs &&
@@ -145,14 +151,7 @@ export function buildBomHtml({ bom, config, materialId, fittingThumbs }: PrintBo
     (s) => `<a href="${esc(s.website)}">${esc(s.name)}</a>`,
   ).join(' · ')
 
-  return `<!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="utf-8" />
-  <title>Stuklijst — ${esc(material?.name ?? materialId)}</title>
-  <style>${printStyles()}</style>
-</head>
-<body>
+  return `
   <h1>Stuklijst</h1>
   <p class="meta">
     ${esc(date)}<br />
@@ -204,7 +203,20 @@ export function buildBomHtml({ bom, config, materialId, fittingThumbs }: PrintBo
   <p class="footer">
     Gegenereerd met Steigerbuis configurator · Bestel bij een steigerbuisleverancier:
     ${supplierLinks}
-  </p>
+  </p>`
+}
+
+export function buildBomHtml({ bom, config, materialId, fittingThumbs }: PrintBomOptions): string {
+  const material = MATERIALS.find((m) => m.id === materialId)
+  return `<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <title>Stuklijst — ${esc(material?.name ?? materialId)}</title>
+  <style>${printStyles()}</style>
+</head>
+<body>
+${buildBomPrintBody({ bom, config, materialId, fittingThumbs })}
 </body>
 </html>`
 }

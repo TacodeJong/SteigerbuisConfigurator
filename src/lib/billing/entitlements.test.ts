@@ -70,6 +70,37 @@ assert.equal(
   false,
 )
 
+// full_pdf: paid by default; model grant unlocks; export_pack does not cover
+assert.equal(canAccessGatedFeature('full_pdf', free, DEFAULT_FEATURE_GATES), false)
+assert.equal(canAccessGatedFeature('full_pdf', exportOnly, DEFAULT_FEATURE_GATES), false)
+assert.equal(
+  canAccessGatedFeature('full_pdf', paid, DEFAULT_FEATURE_GATES, {
+    plans: [
+      {
+        slug: 'paid_monthly',
+        features: [
+          'cloud_save',
+          'full_print',
+          'copy_order_list',
+          'download_model',
+          'full_pdf',
+        ],
+      },
+    ],
+  }),
+  true,
+)
+assert.equal(
+  canAccessGatedFeature('full_pdf', downgraded, DEFAULT_FEATURE_GATES, {
+    hasModelGrant: true,
+  }),
+  true,
+)
+assert.equal(
+  canAccessGatedFeature('full_pdf', free, { ...DEFAULT_FEATURE_GATES, full_pdf: false }),
+  true,
+)
+
 // Gate off → free for everyone
 assert.equal(
   canCopyOrderList(free, { ...DEFAULT_FEATURE_GATES, copy_order_list: false }),

@@ -24,6 +24,7 @@ export type PlanFeatureFlag =
   | 'full_print'
   | 'copy_order_list'
   | 'download_model'
+  | 'full_pdf'
   | 'unlimited_saves'
 
 export const DEFAULT_PLAN_FEATURES: Record<'paid_monthly' | 'export_once', PlanFeatureFlag[]> = {
@@ -35,6 +36,7 @@ export const DEFAULT_PLAN_FEATURES: Record<'paid_monthly' | 'export_once', PlanF
     'full_print',
     'copy_order_list',
     'download_model',
+    'full_pdf',
   ],
   export_once: ['full_print', 'copy_order_list'],
 }
@@ -48,6 +50,7 @@ export const FEATURE_FLAG_LABELS: Record<PlanFeatureFlag, string> = {
   full_print: 'Volledige print/plattegrond',
   copy_order_list: 'Bestellijst kopiëren naar klembord',
   download_model: 'Downloaden van modellen',
+  full_pdf: 'Volledige PDF (3D + stuklijst + plattegrond)',
   unlimited_saves: 'Onbeperkt cloud-modellen',
 }
 
@@ -132,6 +135,7 @@ const FEATURE_FLAGS: PlanFeatureFlag[] = [
   'full_print',
   'copy_order_list',
   'download_model',
+  'full_pdf',
   'unlimited_saves',
 ]
 
