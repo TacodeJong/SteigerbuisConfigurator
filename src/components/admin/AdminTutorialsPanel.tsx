@@ -4,6 +4,7 @@ import {
   adminListTutorials,
   adminUpdateTutorial,
   adminUploadTutorial,
+  tutorialThumbSrc,
   tutorialVideoSrc,
   type Tutorial,
 } from '../../lib/tutorials/tutorials'
@@ -14,6 +15,7 @@ export function AdminTutorialsPanel() {
   const { isLocalStub } = useAuth()
   const configured = isSupabaseConfigured()
   const fileRef = useRef<HTMLInputElement>(null)
+  const thumbRef = useRef<HTMLInputElement>(null)
 
   const [items, setItems] = useState<Tutorial[]>([])
   const [loading, setLoading] = useState(true)
@@ -25,6 +27,7 @@ export function AdminTutorialsPanel() {
   const [sortOrder, setSortOrder] = useState(0)
   const [publish, setPublish] = useState(true)
   const [file, setFile] = useState<File | null>(null)
+  const [thumbFile, setThumbFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
   const [busyId, setBusyId] = useState<string | null>(null)
@@ -61,8 +64,10 @@ export function AdminTutorialsPanel() {
     setError(null)
     setInfo(null)
     try {
+      const usedCustomThumb = Boolean(thumbFile)
       await adminUploadTutorial({
         file,
+        thumbnailFile: thumbFile,
         title,
         description,
         sort_order: sortOrder,
@@ -74,8 +79,10 @@ export function AdminTutorialsPanel() {
       setSortOrder(0)
       setPublish(true)
       setFile(null)
+      setThumbFile(null)
       if (fileRef.current) fileRef.current.value = ''
-      setInfo('Video geüpload')
+      if (thumbRef.current) thumbRef.current.value = ''
+      setInfo(usedCustomThumb ? 'Video geüpload (eigen thumbnail)' : 'Video geüpload (thumbnail automatisch)')
       await reload()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload mislukt')
@@ -117,7 +124,13 @@ export function AdminTutorialsPanel() {
   }
 
   async function remove(t: Tutorial) {
-    if (!window.confirm(`Tutorial “${t.title}” verwijderen? Dit wist ook het videobestand.`)) return
+    if (
+      !window.confirm(
+        `Tutorial “${t.title}” verwijderen? Dit wist ook het videobestand en de thumbnail.`,
+      )
+    ) {
+      return
+    }
     setBusyId(t.id)
     setError(null)
     setInfo(null)
@@ -136,8 +149,9 @@ export function AdminTutorialsPanel() {
     <section className="admin-section">
       <h2>Tutorials</h2>
       <p className="muted">
-        Upload uitlegvideo’s (MP4/WebM). Gepubliceerde video’s verschijnen onder{' '}
-        <strong>Uitleg</strong> in de navigatie
+        Upload uitlegvideo’s (MP4/WebM). Thumbnail wordt automatisch uit de video gehaald; je kunt
+        optioneel een eigen afbeelding (JPEG/PNG/WebP) uploaden. Gepubliceerde video’s verschijnen
+        onder <strong>Uitleg</strong> in de navigatie
         {isLocalStub || !configured ? ' · lokale demo (geen upload zonder Supabase)' : ''}.
       </p>
 
@@ -203,6 +217,21 @@ export function AdminTutorialsPanel() {
               </span>
             )}
           </label>
+          <label className="admin-textarea-label">
+            Thumbnail (optioneel)
+            <input
+              ref={thumbRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
+              disabled={uploading}
+              onChange={(e) => setThumbFile(e.target.files?.[0] ?? null)}
+            />
+            <span className="muted admin-field-hint">
+              {thumbFile
+                ? `${thumbFile.name} · overschrijft automatische frame`
+                : 'Geen bestand: frame rond 1s uit de video'}
+            </span>
+          </label>
           <div className="admin-form-actions">
             <button type="submit" className="bom-action-btn" disabled={uploading || !file || !title.trim()}>
               {uploading ? 'Uploaden…' : 'Video uploaden'}
@@ -262,7 +291,8 @@ function TutorialAdminRow({
   const [title, setTitle] = useState(tutorial.title)
   const [description, setDescription] = useState(tutorial.description ?? '')
   const [sortOrder, setSortOrder] = useState(tutorial.sort_order)
-  const src = tutorialVideoSrc(tutorial)
+  const thumb = tutorialThumbSrc(tutorial)
+  const videoSrc = tutorialVideoSrc(tutorial)
 
   useEffect(() => {
     setTitle(tutorial.title)
@@ -273,8 +303,10 @@ function TutorialAdminRow({
   return (
     <li className="admin-list-item admin-tutorial-item">
       <div className="admin-tutorial-item-main">
-        {src ? (
-          <video className="admin-tutorial-thumb" src={src} muted playsInline preload="metadata" />
+        {thumb ? (
+          <img className="admin-tutorial-thumb" src={thumb} alt="" />
+        ) : videoSrc ? (
+          <video className="admin-tutorial-thumb" src={videoSrc} muted playsInline preload="metadata" />
         ) : (
           <div className="admin-tutorial-thumb admin-tutorial-thumb--empty" aria-hidden />
         )}
@@ -317,9 +349,7 @@ function TutorialAdminRow({
           type="button"
           className="bom-action-btn secondary"
           disabled={busy}
-          onClick={() =>
-            onSave({ title, description, sort_order: sortOrder })
-          }
+          onClick={() => onSave({ title, description, sort_order: sortOrder })}
         >
           Opslaan
         </button>

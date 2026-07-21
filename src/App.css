@@ -5063,6 +5063,7 @@
   border-radius: 6px;
   background: var(--border);
   flex-shrink: 0;
+  display: block;
 }
 .admin-tutorial-thumb--empty {
   display: block;

@@ -15,7 +15,7 @@ Auth + cloud libraries + **configurable** entitlements via `subscription_plans` 
 - Grants: `model_feature_grants` per cloud model; `account_feature_grants` only for `download_model` without model id.
 - Gallery soft-hide via `gallery_models` when owner loses paid entitlement.
 - Admin: `AdminPage` tabs (dashboard, plans, Betaalde functies, discounts, payments/Mollie, features, tutorials).
-- Tutorials: `tutorials` table + Storage bucket; public Uitleg page + `AdminTutorialsPanel`.
+- Tutorials: `tutorials` table + Storage bucket; public Uitleg page + `AdminTutorialsPanel`; auto or custom thumbnail (`thumbnail_path` / `thumbnail_url`).
 
 ## Technical Context
 

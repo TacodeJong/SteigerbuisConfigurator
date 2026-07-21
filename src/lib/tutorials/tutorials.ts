@@ -1,4 +1,5 @@
 import { getSupabase, isSupabaseConfigured } from '../auth/supabaseClient'
+import { generateVideoThumbnail } from './videoThumbnail'
 
 export const TUTORIALS_BUCKET = 'tutorials'
 
@@ -8,6 +9,8 @@ export interface Tutorial {
   description: string | null
   storage_path: string
   public_url: string | null
+  thumbnail_path: string | null
+  thumbnail_url: string | null
   mime_type: string | null
   duration_seconds: number | null
   sort_order: number
@@ -18,7 +21,7 @@ export interface Tutorial {
 }
 
 const SELECT_COLS =
-  'id, title, description, storage_path, public_url, mime_type, duration_seconds, sort_order, is_published, created_at, updated_at, created_by'
+  'id, title, description, storage_path, public_url, thumbnail_path, thumbnail_url, mime_type, duration_seconds, sort_order, is_published, created_at, updated_at, created_by'
 
 function requireSupabase() {
   const supabase = getSupabase()
@@ -38,6 +41,13 @@ export function tutorialPublicUrl(storagePath: string): string {
 export function tutorialVideoSrc(t: Tutorial): string {
   if (t.public_url?.trim()) return t.public_url.trim()
   return tutorialPublicUrl(t.storage_path)
+}
+
+/** Poster/thumb URL: prefer stored thumbnail_url, else derive from thumbnail_path. */
+export function tutorialThumbSrc(t: Tutorial): string {
+  if (t.thumbnail_url?.trim()) return t.thumbnail_url.trim()
+  if (t.thumbnail_path?.trim()) return tutorialPublicUrl(t.thumbnail_path.trim())
+  return ''
 }
 
 /** Published tutorials for the user-facing Uitleg page. */
@@ -72,6 +82,8 @@ export async function adminListTutorials(): Promise<Tutorial[]> {
 
 export interface TutorialUploadInput {
   file: File
+  /** Optional custom thumb; if omitted, a frame is generated from the video. */
+  thumbnailFile?: File | null
   title: string
   description?: string | null
   sort_order?: number
@@ -89,19 +101,42 @@ function assertVideoFile(file: File): void {
   }
 }
 
+function assertImageFile(file: File): void {
+  const mime = file.type.toLowerCase()
+  const okMime = mime === 'image/jpeg' || mime === 'image/png' || mime === 'image/webp'
+  const name = file.name.toLowerCase()
+  const okExt =
+    name.endsWith('.jpg') ||
+    name.endsWith('.jpeg') ||
+    name.endsWith('.png') ||
+    name.endsWith('.webp')
+  if (!okMime && !okExt) {
+    throw new Error('Thumbnail: alleen JPEG, PNG of WebP')
+  }
+}
+
 function extensionForFile(file: File): string {
   const name = file.name.toLowerCase()
   if (name.endsWith('.webm') || file.type === 'video/webm') return 'webm'
   return 'mp4'
 }
 
+function extensionForImage(file: File | Blob, fallbackName?: string): { ext: string; contentType: string } {
+  const mime = (file.type || '').toLowerCase()
+  const name = (file instanceof File ? file.name : fallbackName || '').toLowerCase()
+  if (mime === 'image/png' || name.endsWith('.png')) return { ext: 'png', contentType: 'image/png' }
+  if (mime === 'image/webp' || name.endsWith('.webp')) return { ext: 'webp', contentType: 'image/webp' }
+  return { ext: 'jpg', contentType: 'image/jpeg' }
+}
+
 /**
- * Upload video to Storage + insert metadata row.
- * Progress is approximate (Storage JS client has no byte-level callback; we pulse 0→0.9→1).
+ * Upload video (+ thumbnail) to Storage + insert metadata row.
+ * Progress is approximate (Storage JS client has no byte-level callback; we pulse 0→1).
  */
 export async function adminUploadTutorial(input: TutorialUploadInput): Promise<Tutorial> {
   const supabase = requireSupabase()
   assertVideoFile(input.file)
+  if (input.thumbnailFile) assertImageFile(input.thumbnailFile)
 
   const title = input.title.trim()
   if (!title) throw new Error('Titel is verplicht')
@@ -116,24 +151,47 @@ export async function adminUploadTutorial(input: TutorialUploadInput): Promise<T
   const ext = extensionForFile(input.file)
   const id = crypto.randomUUID()
   const storagePath = `${id}.${ext}`
-  const mime =
-    input.file.type ||
-    (ext === 'webm' ? 'video/webm' : 'video/mp4')
+  const mime = input.file.type || (ext === 'webm' ? 'video/webm' : 'video/mp4')
 
-  input.onProgress?.(0.15)
+  let thumbBlob: Blob
+  let thumbMeta: { ext: string; contentType: string }
+  if (input.thumbnailFile) {
+    thumbBlob = input.thumbnailFile
+    thumbMeta = extensionForImage(input.thumbnailFile)
+  } else {
+    input.onProgress?.(0.1)
+    thumbBlob = await generateVideoThumbnail(input.file)
+    thumbMeta = { ext: 'jpg', contentType: 'image/jpeg' }
+  }
+  const thumbnailPath = `${id}.${thumbMeta.ext}`
 
-  const { error: uploadError } = await supabase.storage
-    .from(TUTORIALS_BUCKET)
-    .upload(storagePath, input.file, {
-      cacheControl: '3600',
-      upsert: false,
-      contentType: mime,
-    })
+  input.onProgress?.(0.2)
+
+  const { error: uploadError } = await supabase.storage.from(TUTORIALS_BUCKET).upload(storagePath, input.file, {
+    cacheControl: '3600',
+    upsert: false,
+    contentType: mime,
+  })
 
   if (uploadError) throw uploadError
+  input.onProgress?.(0.65)
+
+  const { error: thumbUploadError } = await supabase.storage
+    .from(TUTORIALS_BUCKET)
+    .upload(thumbnailPath, thumbBlob, {
+      cacheControl: '3600',
+      upsert: false,
+      contentType: thumbMeta.contentType,
+    })
+
+  if (thumbUploadError) {
+    await supabase.storage.from(TUTORIALS_BUCKET).remove([storagePath])
+    throw thumbUploadError
+  }
   input.onProgress?.(0.85)
 
   const publicUrl = tutorialPublicUrl(storagePath)
+  const thumbnailUrl = tutorialPublicUrl(thumbnailPath)
 
   const { data, error } = await supabase
     .from('tutorials')
@@ -142,6 +200,8 @@ export async function adminUploadTutorial(input: TutorialUploadInput): Promise<T
       description: input.description?.trim() || null,
       storage_path: storagePath,
       public_url: publicUrl || null,
+      thumbnail_path: thumbnailPath,
+      thumbnail_url: thumbnailUrl || null,
       mime_type: mime,
       sort_order: input.sort_order ?? 0,
       is_published: input.is_published ?? false,
@@ -151,8 +211,7 @@ export async function adminUploadTutorial(input: TutorialUploadInput): Promise<T
     .single()
 
   if (error) {
-    // Best-effort cleanup of orphaned object
-    await supabase.storage.from(TUTORIALS_BUCKET).remove([storagePath])
+    await supabase.storage.from(TUTORIALS_BUCKET).remove([storagePath, thumbnailPath])
     throw error
   }
 
@@ -199,10 +258,11 @@ export async function adminDeleteTutorial(tutorial: Tutorial): Promise<void> {
   const { error: rowError } = await supabase.from('tutorials').delete().eq('id', tutorial.id)
   if (rowError) throw rowError
 
-  if (tutorial.storage_path) {
-    const { error: storageError } = await supabase.storage
-      .from(TUTORIALS_BUCKET)
-      .remove([tutorial.storage_path])
+  const paths = [tutorial.storage_path, tutorial.thumbnail_path].filter(
+    (p): p is string => Boolean(p?.trim()),
+  )
+  if (paths.length > 0) {
+    const { error: storageError } = await supabase.storage.from(TUTORIALS_BUCKET).remove(paths)
     if (storageError) {
       console.warn('tutorial storage remove', storageError.message)
     }

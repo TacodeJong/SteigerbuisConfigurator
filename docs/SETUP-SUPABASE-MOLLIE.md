@@ -121,15 +121,16 @@ Na `db push` van de pricing/korting-migratie:
 
 Migratie `20260721150000_tutorials.sql` maakt:
 
-- Tabel `public.tutorials` (titel, beschrijving, `storage_path` / `public_url`, volgorde, `is_published`, …)
-- Storage-bucket **`tutorials`** (public read, max ~100 MB, MIME `video/mp4` + `video/webm`)
+- Tabel `public.tutorials` (titel, beschrijving, `storage_path` / `public_url`, `thumbnail_path` / `thumbnail_url`, volgorde, `is_published`, …)
+- Storage-bucket **`tutorials`** (public read, max ~100 MB, MIME video + jpeg/png/webp thumbs)
 - RLS: iedereen mag **published** rijen lezen; insert/update/delete alleen `is_admin`
 - Storage-policies: download voor iedereen; upload/update/delete alleen admin
+- Migratie `20260721260000_tutorial_thumbnails.sql` voegt thumb-kolommen toe en breidt bucket-MIME uit
 
 Na `npx supabase db push` zou de bucket automatisch bestaan. Controleer in Dashboard → Storage → `tutorials`. Als de bucket ontbreekt (handmatige SQL zonder storage-deel):
 
 1. Storage → **New bucket** → naam `tutorials`, **Public** aan.
-2. File size limit ≥ 100 MB; allowed MIME: `video/mp4`, `video/webm`.
+2. File size limit ≥ 100 MB; allowed MIME: `video/mp4`, `video/webm`, `image/jpeg`, `image/png`, `image/webp`.
 3. Policies zoals in de migratie (select publiek; write via `is_current_user_admin()`).
 
 Users: drawer **Ontdekken** → **Uitleg** (`?view=tutorials`). Admin: Beheer → tab **Tutorials**.

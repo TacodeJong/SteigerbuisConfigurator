@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import {
   listPublishedTutorials,
+  tutorialThumbSrc,
   tutorialVideoSrc,
   type Tutorial,
 } from '../../lib/tutorials/tutorials'
@@ -52,12 +53,14 @@ export function TutorialsPage() {
       <ul className="tutorials-grid">
         {items.map((t) => {
           const src = tutorialVideoSrc(t)
+          const poster = tutorialThumbSrc(t) || undefined
           return (
             <li key={t.id} className="tutorial-card">
               {src ? (
                 <video
                   className="tutorial-video"
                   src={src}
+                  poster={poster}
                   controls
                   playsInline
                   preload="metadata"

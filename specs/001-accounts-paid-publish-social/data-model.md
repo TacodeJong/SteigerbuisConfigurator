@@ -172,12 +172,14 @@ Anonymous tracking events for dashboard analytics.
 | title / description | text | |
 | storage_path | text | path in Storage bucket `tutorials` |
 | public_url | text nullable | |
+| thumbnail_path | text nullable | image object in same bucket (`{id}.jpg`/`.png`/`.webp`) |
+| thumbnail_url | text nullable | cached public thumb URL |
 | mime_type / duration_seconds | | mp4/webm |
 | sort_order | int | |
 | is_published | boolean | anon sees only published |
 | created_by | uuid nullable | admin uploader |
 
-**RLS**: public SELECT published; admin full CRUD. Storage: public read; admin write (~100 MB).
+**RLS**: public SELECT published; admin full CRUD. Storage: public read; admin write (~100 MB). Bucket MIME: `video/mp4`, `video/webm`, `image/jpeg`, `image/png`, `image/webp`.
 
 ## mollie webhook idempotency
 

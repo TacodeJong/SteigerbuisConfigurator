@@ -151,7 +151,7 @@ Logged-in users (free or Paid) can favourite published models and follow other u
 - **FR-026**: Non-self profile reads MUST use `public_profiles` (id, display_name, bio only) — no leak of `is_admin` / paid / subscription fields.
 - **FR-027**: Mollie webhook MUST be idempotent (processed payment ids / discount redemption tracking).
 - **FR-028**: Product MUST expose privacy + terms pages and basic SEO meta (title, description, canonical, Open Graph) for steigerbuisontwerpen.nl.
-- **FR-029**: System MUST support instructional **tutorials** (video metadata + Storage bucket `tutorials`): public page lists published items; only admins upload/publish/unpublish/delete.
+- **FR-029**: System MUST support instructional **tutorials** (video metadata + Storage bucket `tutorials`): public page lists published items; only admins upload/publish/unpublish/delete. Upload MUST store a **thumbnail** (`thumbnail_path` / `thumbnail_url`): auto-generated from a video frame (~1s) unless the admin supplies JPEG/PNG/WebP. Public and admin UIs MUST show the thumb; delete removes video + thumb.
 - **FR-030**: Admin dashboard MUST show visitor analytics (total visits, unique visitors, and timeline chart with 7/30/90 day range filters) from privacy-friendly event tracking without PII. Breakdowns MUST include browser, OS, referrer host (or Direct), optional UTM source/medium/campaign, and coarse location via browser timezone and/or inferred country code — never raw IP.
 
 ### Key Entities
